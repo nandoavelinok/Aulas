@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica de Programação com Portugol - Curso Completo</title>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Curso completo e prático de Lógica de Programação com Portugol. Do zero ao programador, com exercícios, fluxogramas e 50 projetos práticos.">
+    <meta name="author" content="Nando Kissanga">
+    <meta name="keywords" content="portugol, lógica de programação, curso, algoritmos, pseudocódigo, programação, Angola">
+    
+    <!-- Open Graph / Redes Sociais -->
+    <meta property="og:title" content="Lógica de Programação com Portugol - Curso Completo">
+    <meta property="og:description" content="Do zero ao programador — guia prático para iniciantes.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_PT">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lógica de Programação com Portugol - Curso Completo">
+    <meta name="twitter:description" content="Do zero ao programador — guia prático para iniciantes.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ce1126;
+            --primary-dark: #8b0000;
+            --secondary: #1a1a1a;
+            --accent: #ffcd00;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --bg: #faf7f2;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #5a5a5a;
+            --border: #e8e2d5;
+            --shadow: 0 2px 10px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+            --radius: 14px;
+            --transition: all 0.25s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary: #ff5252;
+            --accent: #ffd54f;
+            --success: #4db6ac;
+            --bg: #121212;
+            --card: #1c1c1c;
+            --text: #f0ece2;
+            --text-light: #a8a29e;
+            --border: #2e2e2e;
+            --shadow: 0 2px 10px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 12px;
+            transition: var(--transition);
+            min-height: 100vh;
+            font-size: 15px;
+        }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%; z-index: 1000;
+        }
+
+        .theme-toggle {
+            position: fixed; top: 12px; right: 12px;
+            background: var(--card); border: 1.5px solid var(--border);
+            color: var(--text); width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; font-size: 1.1em;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 100; box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .theme-toggle:hover { transform: rotate(20deg); }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 24px 22px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        header {
+            text-align: center;
+            padding: 12px 0 24px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 24px;
+        }
+        header .badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 3px 12px;
+            border-radius: 16px;
+            font-size: 0.72em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        header h1 {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        header h1 .emoji { font-size: 1em; }
+        header .subtitle {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+        header .greeting {
+            margin-top: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95em;
+        }
+
+        .toc {
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.04), rgba(255, 205, 0, 0.04));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            margin-bottom: 26px;
+        }
+        .toc h2 {
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            padding: 0;
+        }
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: block;
+            font-size: 0.9em;
+            transition: var(--transition);
+        }
+        .toc a .num {
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        .toc a:hover {
+            background: var(--primary);
+            color: white;
+            padding-left: 14px;
+        }
+        .toc a:hover .num { color: var(--accent); }
+
+        h2 {
+            font-size: 1.35em;
+            font-weight: 700;
+            margin: 28px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+        h3 {
+            color: var(--text);
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        h4 {
+            color: var(--text);
+            font-size: 0.98em;
+            margin: 12px 0 6px;
+            font-weight: 600;
+        }
+        p { margin: 8px 0; }
+        ul, ol { padding-left: 22px; margin: 8px 0; }
+        li { margin: 4px 0; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 16px 18px;
+            margin: 14px 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+        .card.green { border-left-color: var(--success); }
+        .card.yellow { border-left-color: var(--accent); }
+        .card.black { border-left-color: var(--secondary); }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(206,17,38,0.04), rgba(255,205,0,0.04));
+            border: 1.5px solid var(--border);
+            padding: 16px 18px;
+            border-radius: var(--radius);
+            margin: 14px 0;
+        }
+
+        .formula-block {
+            background: var(--bg);
+            border: 1.5px dashed var(--primary);
+            padding: 14px;
+            border-radius: var(--radius);
+            margin: 12px 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+        [data-theme="dark"] .formula-block { background: #0a0a0a; }
+
+        .chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            margin: 20px 0;
+            background: var(--bg);
+            padding: 18px;
+            border-radius: var(--radius);
+        }
+
+        .exercise {
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 14px 0;
+            transition: var(--transition);
+        }
+        .exercise:hover { border-color: var(--primary); }
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.98em;
+        }
+        .exercise-number {
+            background: var(--secondary);
+            color: var(--accent);
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+        .exercise-question {
+            margin-bottom: 12px;
+            font-size: 0.93em;
+            line-height: 1.6;
+        }
+        .answer-input-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .answer-input {
+            flex: 1 1 120px;
+            min-width: 0;
+            padding: 9px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9em;
+            background: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+        }
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--secondary);
+            border-color: var(--accent);
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.88em;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct {
+            background: rgba(42, 157, 143, 0.12);
+            border-left: 3px solid var(--success);
+            color: var(--success);
+        }
+        .feedback.incorrect {
+            background: rgba(206, 17, 38, 0.10);
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 24px 20px;
+            border-radius: var(--radius);
+            margin-top: 30px;
+            text-align: center;
+        }
+        .footer h3 { color: var(--accent); margin-bottom: 10px; font-size: 1.05em; }
+        .footer p { font-size: 0.9em; margin: 6px 0; color: #d4d4d4; }
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin: 14px 0;
+            text-align: left;
+        }
+        .contact-item {
+            background: rgba(255,255,255,0.06);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88em;
+        }
+        .contact-item strong { color: var(--accent); }
+        .iban-box {
+            background: rgba(0,0,0,0.4);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92em;
+            letter-spacing: 1px;
+            border: 1px dashed var(--accent);
+            margin-top: 10px;
+            word-break: break-all;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .iban-text {
+            flex: 1;
+            min-width: 200px;
+        }
+        .copy-btn {
+            background: var(--accent);
+            color: var(--secondary);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: var(--transition);
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 16px; right: 16px;
+            background: var(--primary);
+            color: white;
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: var(--shadow-lg);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+
+        .table-wrap { overflow-x: auto; margin: 10px 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+        }
+        th {
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 9px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:last-child td { border-bottom: none; }
+
+        /* Classes adicionais para o conteúdo */
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section:last-of-type { border-bottom: none; }
+
+        .aula-tag {
+            background: linear-gradient(135deg, rgba(206,17,38,0.08), rgba(255,205,0,0.08));
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-bottom: 16px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .svg-center {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .exercicios, .desafio {
+            background: linear-gradient(135deg, rgba(42,157,143,0.05), rgba(255,205,0,0.05));
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            margin: 16px 0;
+        }
+
+        .desafio {
+            border-left: 4px solid var(--warning);
+        }
+
+        .box {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 0.9em;
+        }
+        .box.warn {
+            background: rgba(244,162,97,0.12);
+            border-left: 3px solid var(--warning);
+        }
+        .box.tip {
+            background: rgba(42,157,143,0.12);
+            border-left: 3px solid var(--success);
+        }
+        .box.info {
+            background: rgba(206,17,38,0.08);
+            border-left: 3px solid var(--primary);
+        }
+
+        .final-slide {
+            background: linear-gradient(135deg, var(--secondary), #2a2a2a);
+            color: white;
+            padding: 32px 24px;
+            border-radius: var(--radius);
+            margin-top: 32px;
+            text-align: center;
+        }
+        .final-slide h2 {
+            color: var(--accent);
+            border-bottom: none;
+            justify-content: center;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .contact-card {
+            background: rgba(255,255,255,0.08);
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .contact-card .ic {
+            font-size: 1.8em;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .contact-card strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .contact-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Nova classe .rule-tag */
+        .rule-tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        /* Animações SVG */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes copyFeedback {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .anim-bounce { animation: bounce 2s ease-in-out infinite; display: inline-block; }
+        .anim-pulse { animation: pulse 2s ease-in-out infinite; }
+        .anim-blink { animation: blink 1.5s ease-in-out infinite; }
+        .anim-spin { animation: spin 8s linear infinite; transform-origin: center; }
+        .anim-float { animation: float 3s ease-in-out infinite; }
+        .copy-success { animation: copyFeedback 0.4s ease; }
+
+        /* Code blocks */
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 14px 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            margin: 12px 0;
+            border-left: 4px solid var(--primary);
+        }
+        pre code {
+            display: block;
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        code {
+            background: rgba(206,17,38,0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+        }
+
+        /* Destaque de sintaxe em Portugol */
+        .kw { color: #569cd6; }
+        .tp { color: #4ec9b0; }
+        .str { color: #ce9178; }
+        .num { color: #b5cea8; }
+        .com { color: #6a9955; font-style: italic; }
+        .fn { color: #dcdcaa; }
+
+        /* MathML */
+        math {
+            font-size: 1.15em;
+            display: inline-block;
+            margin: 8px 0;
+        }
+
+        /* Diagrama interativo - Canvas simulado com SVG */
+        .interactive-diagram {
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 14px 0;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 24px;
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+
+        /* Destaque para dicas rápidas */
+        .quick-tip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin: 4px 2px;
+        }
+
+        /* Lista de projetos melhorada */
+        .project-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .project-list li {
+            background: rgba(42, 157, 143, 0.06);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border-left: 3px solid var(--success);
+            margin: 0;
+            transition: var(--transition);
+        }
+        .project-list li:hover {
+            background: rgba(42, 157, 143, 0.15);
+            transform: translateX(2px);
+        }
+        .project-list li .num {
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 8px; font-size: 14px; }
+            .container { padding: 18px 14px; border-radius: 10px; }
+            header h1 { font-size: 1.5em; }
+            h2 { font-size: 1.15em; margin-top: 22px; }
+            .card, .example-box, .exercise { padding: 14px; }
+            .formula-block { padding: 10px; font-size: 0.9em; }
+            .btn { padding: 8px 12px; font-size: 0.82em; }
+            .answer-input { flex: 1 1 100%; }
+            .theme-toggle { width: 36px; height: 36px; font-size: 1em; }
+            .footer { padding: 18px 14px; }
+            .project-list { grid-template-columns: 1fr; }
+            .iban-box { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+
+        @media (min-width: 481px) and (max-width: 640px) {
+            .toc ul { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .contact-cards { grid-template-columns: 1fr 1fr; }
+            .project-list { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (min-width: 641px) {
+            .toc ul { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .contact-cards { grid-template-columns: 1fr 1fr 1fr; }
+            .project-list { grid-template-columns: 1fr 1fr; }
+        }
+
+        mjx-container { overflow-x: auto; max-width: 100%; }
+
+        /* Toast de notificação */
+        .toast {
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar entre modo claro e escuro" title="Alternar tema">🌙</button>
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo da página" title="Voltar ao topo">⬆️</button>
+<div class="toast" id="toast">✅ IBAN copiado!</div>
+
+<div class="container">
+
+    <header>
+        <span class="badge">CURSO COMPLETO 2026</span>
+        <h1><span class="emoji">💻</span> Lógica de Programação com Portugol</h1>
+        <p class="subtitle">Do zero ao programador — guia prático para iniciantes</p>
+        <p class="greeting">Bem-vindo à sua jornada na programação! 🚀</p>
+    </header>
+
+    <!-- ================= SUMÁRIO ================= -->
+    <section class="toc">
+        <h2>∑ Sumário</h2>
+        <ul>
+            <li><a href="#intro"><span class="num">1</span>🛤️ Introdução ao Portugol</a></li>
+            <li><a href="#logica"><span class="num">2</span>🧠 Lógica Proposicional</a></li>
+            <li><a href="#declaracao"><span class="num">3</span>💻 Declaração de Algoritmo</a></li>
+            <li><a href="#condicao"><span class="num">4</span>🔀 Condição e Escolha</a></li>
+            <li><a href="#repeticao"><span class="num">5</span>🔄 Estruturas de Repetição</a></li>
+            <li><a href="#vetor"><span class="num">6</span>📚 Vetores e Matrizes</a></li>
+            <li><a href="#funcao"><span class="num">7</span>🧩 Funções e Procedimentos</a></li>
+            <li><a href="#biblioteca"><span class="num">8</span>📖 Bibliotecas</a></li>
+            <li><a href="#fluxograma"><span class="num">9</span>📊 Fluxogramas</a></li>
+            <li><a href="#linguagem"><span class="num">10</span>🌍 Linguagens de Programação</a></li>
+            <li><a href="#projetos"><span class="num">11</span>🚀 Projetos para Aula</a></li>
+            <li><a href="#agradecimento"><span class="num">💝</span>❤️ Agradecimento</a></li>
+        </ul>
+    </section>
+
+<!-- ================= CAPÍTULO 1 ================= -->
+    <section id="intro" class="section">
+        <h2>🛤️ Introdução ao Portugol</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> O que é Portugol, instalação, primeiros passos e conceitos fundamentais.</div>
+
+        <div class="svg-center">
+            <svg width="260" height="100" viewBox="0 0 260 100" aria-hidden="true" role="presentation">
+                <text x="20" y="60" font-size="38" class="anim-bounce">🇵🇹</text>
+                <text x="100" y="60" font-size="30" class="anim-pulse">➡️</text>
+                <text x="160" y="60" font-size="38" class="anim-bounce" style="animation-delay:.3s">💻</text>
+                <text x="130" y="90" text-anchor="middle" font-size="11" fill="#64748b">Programar na nossa língua!</text>
+            </svg>
+        </div>
+
+        <h3>🤔 O que é o Portugol?</h3>
+        <p>O <strong>Portugol</strong> é uma ferramenta educacional de programação baseada em <strong>pseudocódigo em português</strong>. Diferente das linguagens tradicionais (Python, Java, C++), utiliza comandos no nosso idioma, permitindo focar no <strong>raciocínio lógico</strong> sem se preocupar inicialmente com a sintaxe rígida do inglês.</p>
+
+        <div class="card">
+            <strong>🎯 Analogia prática:</strong>
+            <p>Pense em Portugol como <strong>andar de bicicleta com rodinhas</strong> 🚴. Você aprende a equilibrar, pedalar e virar sem se preocupar com o trânsito. Quando tirar as rodinhas (migrar para Python/C++), você já sabe andar!</p>
+        </div>
+
+        <h3>🎯 Por que começar com Portugol?</h3>
+        <ul>
+            <li>✅ <strong>Comandos em português:</strong> <code>escreva</code>, <code>leia</code>, <code>se</code>, <code>entao</code>, <code>para</code></li>
+            <li>✅ <strong>Sintaxe simplificada:</strong> menos erros de digitação, mais foco na lógica</li>
+            <li>✅ <strong>Ambiente visual:</strong> o interpretador mostra a execução passo a passo e o valor das variáveis em tempo real</li>
+            <li>✅ <strong>Base sólida:</strong> tudo que aprender aqui serve para qualquer linguagem depois</li>
+        </ul>
+
+<!-- NOVA SECÇÃO: INSTALAÇÃO E ACESSO MULTIPLATAFORMA -->
+<h3>🚀 Primeiros Passos: Como usar o Portugol em qualquer dispositivo</h3>
+<p>A ferramenta mais utilizada no mundo lusófono para aprender lógica de programação é o <strong>Portugol Studio</strong>, desenvolvido pela UNIVALI. Dependendo do seu dispositivo, escolha a melhor forma de acesso abaixo:</p>
+
+<!-- SECÇÃO PC -->
+<h4>💻 1. PC (Windows, Linux ou macOS) – <em>Experiência Oficial e Completa</em></h4>
+<div class="box info">
+    <strong>⚠️ Pré-requisito importante:</strong> O Portugol Studio é desenvolvido em Java. Você precisa ter o <strong>Java (JDK ou JRE)</strong> instalado no seu computador antes de instalar o programa.
+</div>
+<ol style="margin-top: 12px;">
+    <li>Aceda ao site oficial: <a href="https://lite.acad.univali.br/portugol/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">lite.acad.univali.br/portugol</a></li>
+    <li>Clique em <strong>"Download"</strong> e escolha a versão correspondente ao seu sistema operacional.</li>
+    <li>Execute o instalador e siga as instruções na tela (avançar, aceitar termos e concluir).</li>
+    <li>Abra o Portugol Studio. Na primeira execução, ele pode demorar alguns segundos a carregar devido à inicialização do ambiente Java.</li>
+</ol>
+
+<!-- SECÇÃO WEB -->
+<h4>🌐 2. Web (Navegador) – <em>Sem Instalação</em></h4>
+<p>Se não puder ou não quiser instalar software no seu computador (ideal também para Chromebooks), existe uma alternativa de código aberto que replica fielmente a experiência do Portugol Studio:</p>
+<ul>
+    <li><strong>Portugol Webstudio:</strong> Uma IDE que roda diretamente no navegador, sem necessidade de instalar Java ou qualquer outro programa.</li>
+    <li><strong>Como aceder:</strong> Visite <a href="https://portugol.dev/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">portugol.dev</a>.</li>
+    <li><strong>Vantagens:</strong> Permite editar e executar múltiplos códigos, suporta ficheiros <code>.por</code> e guarda o seu trabalho localmente no navegador. Funciona em qualquer sistema operativo.</li>
+</ul>
+
+<!-- SECÇÃO MOBILE -->
+<h4>📱 3. Mobile (Telemóvel e Tablet) – <em>Para Prática em Movimento</em></h4>
+<p>Embora <strong>não exista uma versão oficial</strong> da UNIVALI para dispositivos móveis, a comunidade criou soluções para quem precisa de praticar lógica de programação em movimento:</p>
+<ul>
+    <li><strong>Android:</strong> Existem aplicações como o <strong>"Portugol Mobile"</strong> (disponível na Google Play Store), inspirado no Portugol Studio, que permite escrever e testar pseudocódigos no telemóvel ou tablet de forma prática.</li>
+    <li><strong>iOS (iPhone/iPad):</strong> As aplicações nativas são limitadas. A melhor opção é utilizar a versão <strong>Web</strong> (<a href="https://portugol.dev/" target="_blank" rel="noopener">portugol.dev</a>) através do Safari ou Chrome, que se adapta a ecrãs menores.</li>
+    <li><strong>⚠️ Nota importante:</strong> As aplicações móveis são excelentes "quebra-galhos" para estudar lógica e algoritmos. No entanto, para trabalhos académicos formais, entregas de projetos ou funcionalidades avançadas, recomenda-se sempre o uso da versão para PC ou Web.</li>
+</ul>
+        <!-- NOVA SECÇÃO: INTERFACE -->
+        <h3>🖥️ Conhecendo a Interface</h3>
+        <p>Ao abrir o Portugol Studio, você verá três áreas principais:</p>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Área</th><th>Função</th></tr>
+                <tr><td>📝 <strong>Editor de Código</strong> (Centro)</td><td>Onde você escreve os seus programas. Tem cores para facilitar a leitura.</td></tr>
+                <tr><td>💻 <strong>Console</strong> (Base)</td><td>Onde o programa "fala" com você (mostra os resultados dos <code>escreva</code>) e onde você digita as respostas (<code>leia</code>).</td></tr>
+                <tr><td>📦 <strong>Painel de Variáveis</strong> (Direita)</td><td>Mostra em tempo real o nome e o valor de todas as variáveis enquanto o programa executa.</td></tr>
+            </table>
+        </div>
+
+        <!-- NOVA SECÇÃO: PRIMEIRO PROGRAMA -->
+        <h3>👶 O Seu Primeiro Programa: "Olá, Mundo!"</h3>
+        <p>Tradição na programação: o primeiro programa apenas exibe uma mensagem na tela. No Portugol Studio, clique em <strong>"Novo Arquivo"</strong> e cole o seguinte código:</p>
+
+<pre><code><span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="fn">escreva</span>(<span class="str">"Hello Gás! Esse é meu primeiro programa. 🚀"</span>)
+    }
+}</code></pre>
+        <div class="box tip">
+            <strong>💡 Como testar:</strong> Clique no botão verde <strong>▶ Executar</strong> (ou pressione <code>F9</code>). A mensagem aparecerá na parte inferior da tela (Console).
+        </div>
+
+        <h3>🧠 O que é Lógica de Programação?</h3>
+        <p>É a técnica de <strong>encadear pensamentos e instruções</strong> em uma sequência coerente para atingir um objetivo. Dominar essa lógica significa saber organizar ideias para que a máquina as compreenda e processe corretamente.</p>
+
+        <h3>📦 Conceitos Fundamentais</h3>
+        <ul>
+            <li><strong>🏷️ Variáveis:</strong> "caixinhas" na memória que armazenam dados (números, textos, lógicos). Ex: <code>idade</code>, <code>nome</code>.</li>
+            <li><strong>🧮 Operadores aritméticos:</strong> <code>+</code> (soma), <code>-</code> (subtração), <code>*</code> (multiplicação), <code>/</code> (divisão), <code>%</code> (resto da divisão).</li>
+            <li><strong>⚖️ Operadores relacionais:</strong> <code>==</code> (igual), <code>!=</code> (diferente), <code>&gt;</code> (maior), <code>&lt;</code> (menor), <code>&gt;=</code> (maior ou igual), <code>&lt;=</code> (menor ou igual).</li>
+        </ul>
+
+        <div class="example-box">
+            <h4>🍳 Algoritmo da vida real: fazer um café</h4>
+            <ol>
+                <li>Pegar uma xícara ☕</li>
+                <li>Colocar o pó de café no filtro</li>
+                <li>Adicionar água quente 💧</li>
+                <li>Adicionar açúcar (opcional) 🍬</li>
+                <li>Mexer com a colher 🥄</li>
+                <li>Servir e beber 😋</li>
+            </ol>
+            <p style="margin-top:8px;font-size:.88em;color:var(--text-light)">👉 Cada passo é uma instrução. Se a ordem mudar (ex: beber antes de mexer), o resultado muda ou dá erro!</p>
+        </div>
+
+        <!-- EXERCÍCIOS EXPANDIDOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação (Nível Iniciante)</h3>
+            <ol>
+                <li>💬 <strong>Reflexão:</strong> O que mais gostou e entendeu sobre o Portugol até agora?</li>
+                <li>🪥 <strong>Algoritmo do dia a dia:</strong> Escreva um algoritmo (em português, passo a passo) para <strong>escovar os dentes</strong> ou <strong>fazer um ovo mexido</strong>. Seja detalhista!</li>
+                <li>🔣 <strong>Classificação:</strong> Identifique quais dos seguintes símbolos são operadores <em>aritméticos</em> e quais são <em>relacionais</em>: <code>+</code>, <code>==</code>, <code>*</code>, <code>&lt;</code>, <code>/</code>, <code>!=</code>, <code>&gt;=</code>.</li>
+                <li>🧮 <strong>Matemática no código:</strong> Qual será o resultado das seguintes expressões? 
+                    <br>a) <code>10 + 5 * 2</code> (Dica: a multiplicação vem primeiro!)
+                    <br>b) <code>(10 + 5) * 2</code>
+                    <br>c) <code>15 % 4</code> (Qual é o resto da divisão?)
+                </li>
+                <li>⚖️ <strong>Verdadeiro ou Falso?</strong> Avalie as expressões relacionais:
+                    <br>a) <code>5 > 3</code> 
+                    <br>b) <code>10 == 10</code> 
+                    <br>c) <code>7 != 7</code> 
+                    <br>d) <code>20 <= 15</code>
+                </li>
+                <li>📦 <strong>Identificação de Variáveis:</strong> Dê um nome adequado (em português, sem espaços) para as "caixinhas" que guardariam: 
+                    <br>a) O nome de um aluno.
+                    <br>b) O preço de um produto.
+                    <br>c) Se um usuário está logado ou não.
+                </li>
+            </ol>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!-- ================= CAPÍTULO 2 ================= -->
+    <section id="logica" class="section">
+        <h2>🧠 Lógica Proposicional</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Conectivos lógicos, tabelas-verdade, precedência e aplicação prática no código.</div>
+
+        <div class="svg-center">
+            <svg width="240" height="90" viewBox="0 0 240 90" aria-hidden="true" role="presentation">
+                <text x="30" y="50" font-size="36" class="anim-pulse">🧠</text>
+                <text x="100" y="50" font-size="26" class="anim-blink">⚡</text>
+                <text x="150" y="50" font-size="36" class="anim-pulse" style="animation-delay:.5s">💡</text>
+                <text x="120" y="80" text-anchor="middle" font-size="11" fill="#64748b">O computador só entende: Verdadeiro (1) ou Falso (0)</text>
+            </svg>
+        </div>
+
+        <h3>📚 O que é uma Proposição?</h3>
+        <p>Uma <strong>proposição</strong> é qualquer afirmação que pode ser classificada de forma inequívoca como <strong>verdadeira (V)</strong> ou <strong>falsa (F)</strong>. Na lógica clássica, são representadas por letras minúsculas como <code>p</code>, <code>q</code> e <code>r</code>.</p>
+
+        <div class="card green">
+            <strong>✅ Exemplos de proposições:</strong>
+            <ul>
+                <li>"Angola está em África" → <strong>V</strong> 🌍</li>
+                <li>"2 + 2 = 5" → <strong>F</strong> ❌</li>
+                <li>"O número 10 é par" → <strong>V</strong> 🔢</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left-color:#ef4444">
+            <strong>❌ NÃO são proposições (no contexto da lógica clássica):</strong>
+            <ul>
+                <li>"Que horas são?" (Pergunta / Interrogação)</li>
+                <li>"Feche a porta!" (Ordem / Imperativo)</li>
+                <li>"x + 2 = 5" (Sentença aberta: depende do valor de x)</li>
+                <li>"Que dia lindo!" (Exclamação / Opinião subjetiva)</li>
+            </ul>
+        </div>
+
+        <div class="box info">
+            <strong>💻 A Ponte para a Programação:</strong> 
+            Na programação, uma condição como <code>idade >= 18</code> é uma proposição! O computador avalia essa expressão e ela se torna <strong>Verdadeira</strong> ou <strong>Falsa</strong> naquele momento exato, permitindo que o programa tome decisões.
+        </div>
+
+        <h3>🔗 Conectivos Lógicos</h3>
+        <p>Usamos conectivos para unir proposições simples e formar <strong>proposições compostas</strong>. Veja como eles funcionam e como são escritos no Portugol:</p>
+        
+        <div class="table-wrap">
+            <table>
+                <tr><th>Conectivo</th><th>Símbolo Matemático</th><th>Sintaxe no Portugol</th><th>Regra de Ouro</th><th>Exemplo Prático</th></tr>
+                <tr>
+                    <td><strong>Conjunção</strong></td>
+                    <td><code>∧</code></td>
+                    <td><code>e</code></td>
+                    <td>V se <strong>ambos</strong> forem V</td>
+                    <td>"É sábado <strong>e</strong> chove" 🌧️</td>
+                </tr>
+                <tr>
+                    <td><strong>Disjunção</strong></td>
+                    <td><code>∨</code></td>
+                    <td><code>ou</code></td>
+                    <td>V se <strong>pelo menos um</strong> for V</td>
+                    <td>"Vou de 🚌 <strong>ou</strong> de 🚇"</td>
+                </tr>
+                <tr>
+                    <td><strong>Negação</strong></td>
+                    <td><code>¬</code> ou <code>~</code></td>
+                    <td><code>nao</code></td>
+                    <td>Inverte o valor (V ↔ F)</td>
+                    <td>"<strong>Não</strong> estou com fome" 🙅</td>
+                </tr>
+            </table>
+        </div>
+        <p style="font-size:0.9em; color:var(--text-light); margin-top:8px;">*Nota: Implicação (→) e Bi-implicação (↔) são mais usadas em matemática pura. No dia a dia da programação, focamos 99% do tempo em <strong>E</strong>, <strong>OU</strong> e <strong>NÃO</strong>.</p>
+
+        <h3>📊 Tabela-Verdade (O Mapa da Lógica)</h3>
+        <p>Para <strong>n</strong> variáveis, temos <strong>2ⁿ</strong> combinações possíveis. Para 2 variáveis (p e q), temos 2² = 4 linhas:</p>
+        
+        <div class="formula-block">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                <mrow>
+                    <mtext>Total de Linhas</mtext>
+                    <mo>=</mo>
+                    <msup><mn>2</mn><mi>n</mi></msup>
+                    <mo>=</mo>
+                    <msup><mn>2</mn><mn>2</mn></msup>
+                    <mo>=</mo>
+                    <mn>4</mn>
+                </mrow>
+            </math>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <tr><th>p</th><th>q</th><th>p <strong>e</strong> q (∧)</th><th>p <strong>ou</strong> q (∨)</th><th><strong>nao</strong> p (¬)</th></tr>
+                <tr><td>V</td><td>V</td><td><strong>V</strong></td><td><strong>V</strong></td><td>F</td></tr>
+                <tr><td>V</td><td>F</td><td>F</td><td><strong>V</strong></td><td>F</td></tr>
+                <tr><td>F</td><td>V</td><td>F</td><td><strong>V</strong></td><td><strong>V</strong></td></tr>
+                <tr><td>F</td><td>F</td><td>F</td><td>F</td><td><strong>V</strong></td></tr>
+            </table>
+        </div>
+
+        <div class="box tip">
+            <strong>💡 Macetes de Memorização:</strong>
+            <ul style="margin-top:6px">
+                <li><strong>E (∧):</strong> Pense em "Exigente" — só fica feliz se <em>os dois</em> estiverem verdadeiros.</li>
+                <li><strong>OU (∨):</strong> Pense em "Generoso" — basta <em>um</em> estar verdadeiro para ele aceitar.</li>
+                <li><strong>NÃO (¬):</strong> Pense no "Espelho" — inverte tudo o que vê.</li>
+            </ul>
+        </div>
+
+        <!-- NOVA SECÇÃO: PRECEDÊNCIA -->
+        <h3>⚠️ Precedência de Operadores (Muito Importante!)</h3>
+        <p>Assim como na matemática a multiplicação vem antes da soma, na lógica existe uma ordem de resolução. Se não usarmos parênteses, o computador segue esta ordem:</p>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Ordem</th><th>Operador</th><th>Exemplo</th></tr>
+                <tr><td><strong>1º</strong> (Maior prioridade)</td><td>Parênteses <code>()</code></td><td>O que está dentro é resolvido primeiro</td></tr>
+                <tr><td><strong>2º</strong></td><td>Negação <code>nao</code></td><td><code>nao V</code> vira <code>F</code></td></tr>
+                <tr><td><strong>3º</strong></td><td>Conjunção <code>e</code></td><td>Resolvido antes do "ou"</td></tr>
+                <tr><td><strong>4º</strong> (Menor prioridade)</td><td>Disjunção <code>ou</code></td><td>Resolvido por último</td></tr>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <h4>🔍 Exemplo de Avaliação Passo a Passo</h4>
+            <p>Vamos avaliar a expressão: <code>nao (5 > 3) ou (2 == 2 e 1 != 1)</code></p>
+            <ol style="font-family: 'JetBrains Mono', monospace; font-size: 0.9em; line-height: 1.8;">
+                <li>1. Resolver parênteses e relações: <code>nao (V) ou (V e F)</code></li>
+                <li>2. Resolver o "e" dentro do 2º parênteses: <code>nao (V) ou (F)</code></li>
+                <li>3. Resolver a negação "nao": <code>F ou F</code></li>
+                <li>4. Resolver o "ou" final: <strong>F (Falso)</strong></li>
+            </ol>
+        </div>
+
+        <h3>💻 Da Lógica para o Código (Portugol)</h3>
+        <p>Veja como uma regra de negócio do mundo real se transforma em lógica de programação:</p>
+        <pre><code><span class="com">// Regra: Para entrar na festa, precisa ter 18 anos ou mais E ter convite.</span>
+<span class="tp">inteiro</span> idade = <span class="num">20</span>
+<span class="tp">logico</span> tem_convite = <span class="kw">verdadeiro</span>
+
+<span class="com">// A condição abaixo será avaliada como VERDADEIRA</span>
+<span class="kw">se</span> (idade &gt;= <span class="num">18</span> <span class="kw">e</span> tem_convite == <span class="kw">verdadeiro</span>) {
+    <span class="fn">escreva</span>(<span class="str">"Pode entrar na festa! 🎉"</span>)
+}</code></pre>
+
+        <!-- EXERCÍCIOS EXPANDIDOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            <ol>
+                <li>💬 <strong>Reflexão:</strong> Por que você acha que os computadores precisam que tudo seja reduzido a "Verdadeiro" ou "Falso"?</li>
+                <li>🔣 <strong>Identificação:</strong> Quais das frases abaixo são proposições lógicas? 
+                    <br>a) "O sol é uma estrela." 
+                    <br>b) "Faça o exercício 3." 
+                    <br>c) "7 é um número primo."
+                </li>
+                <li>🔄 <strong>Tradução para o Portugol:</strong> Escreva a expressão lógica (usando <code>e</code>, <code>ou</code>, <code>nao</code>) para as situações:
+                    <br>a) Um aluno é aprovado se a média for maior ou igual a 14 E a frequência for maior ou igual a 75%.
+                    <br>b) Um sistema de login aceita o usuário se o email estiver correto OU o número de telefone estiver correto.
+                </li>
+                <li>🧮 <strong>Avaliação Passo a Passo:</strong> Resolva as expressões abaixo (considere V=Verdadeiro, F=Falso):
+                    <br>a) <code>V e F ou V</code>
+                    <br>b) <code>nao (V e F) ou (F e V)</code>
+                    <br>c) <code>(10 > 5) e (3 == 3) ou nao (2 < 1)</code>
+                </li>
+                <li>🐱 <strong>Negação:</strong> Escreva a negação lógica de "Todos os gatos são animais de estimação". (Dica: A negação de "todos" é "pelo menos um não").</li>
+                <li>📊 <strong>Tabela-Verdade:</strong> Construa a tabela-verdade completa para a expressão: <code>(p ou q) e (nao p)</code>.</li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: O Ano Bissexto</h3>
+            <p>Escreva uma expressão lógica completa que retorne <strong>verdadeiro</strong> se um ano for <strong>bissexto</strong> 📆. 
+            <br><em>Regra:</em> O ano deve ser divisível por 4, mas NÃO por 100, EXCETO se também for divisível por 400.</p>
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">👁️ Ver Resolução da Lógica</summary>
+                <div class="rule-tag" style="margin-top: 8px; display: block; text-align: center;">
+                    (ano % 4 == 0 e ano % 100 != 0) ou (ano % 400 == 0)
+                </div>
+            </details>
+        </div>
+
+        <div class="desafio" style="margin-top: 16px; border-left-color: var(--success);">
+            <h3>🔐 Desafio Bônus: Sistema de Segurança</h3>
+            <p>Crie a lógica para um cofre digital. Ele abre <strong>apenas se</strong>: 
+            <br>1. A senha numérica for igual a 1234 <strong>E</strong>
+            <br>2. A impressão digital for válida <strong>OU</strong> o código de emergência for "ALPHA".
+            <br><em>Tente escrever isso como uma única linha de condição lógica!</em></p>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <!-- ================= CAPÍTULO 3 ================= -->
+        <section id="declaracao" class="section">
+        <h2>💻 Declaração de Algoritmo</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Estrutura básica, regras de nomenclatura, tipos de dados, operadores e comandos de entrada/saída.</div>
+        
+        <div class="svg-center">
+        <svg width="260" height="90" viewBox="0 0 260 90" aria-hidden="true" role="presentation">
+        <text x="10" y="55" font-size="34" class="anim-bounce">📦</text>
+        <text x="80" y="55" font-size="34" class="anim-bounce" style="animation-delay:.2s">🏷️</text>
+        <text x="150" y="55" font-size="34" class="anim-bounce" style="animation-delay:.4s">💾</text>
+        <text x="130" y="80" text-anchor="middle" font-size="10" fill="#64748b">Variáveis = caixas com nome que guardam dados</text>
+        </svg>
+        </div>
+        
+        <h3>📋 A Anatomia de um Programa</h3>
+        <p>Todo algoritmo em Portugol segue uma estrutura rígida, como uma receita de bolo. Se faltar um ingrediente ou mudar a ordem, o programa não funciona.</p>
+        
+        <pre><code><span class="kw">programa</span> {
+        <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="com">// 1. DECLARAÇÃO: Avisamos o computador quais caixas vamos usar</span>
+        <span class="tp">inteiro</span> idade
+        <span class="tp">real</span> nota
+        <span class="tp">cadeia</span> nome
+        
+        <span class="com">// 2. PROCESSAMENTO E E/S: Comandos que fazem o programa funcionar</span>
+        <span class="fn">escreva</span>(<span class="str">"Digite seu nome: "</span>)
+        <span class="fn">leia</span>(nome)
+        <span class="fn">escreva</span>(<span class="str">"Olá, "</span>, nome, <span class="str">"!"</span>)
+        }
+        }</code></pre>
+        
+        <!-- NOVA SECÇÃO: NOMENCLATURA -->
+        <h3>🏷️ Regras de Ouro para Nomes de Variáveis</h3>
+        <p>O nome que você dá à "caixinha" deve ser claro, mas precisa seguir regras estritas do Portugol:</p>
+        <div class="table-wrap">
+        <table>
+        <tr><th>✅ Nomes Válidos</th><th>❌ Nomes Inválidos</th><th>Motivo do Erro</th></tr>
+        <tr><td><code>idadeAluno</code></td><td><code>1idade</code></td><td>Não pode começar com número</td></tr>
+        <tr><td><code>nota_final</code></td><td><code>nota final</code></td><td>Não pode ter espaços em branco</td></tr>
+        <tr><td><code>salario</code></td><td><code>inteiro</code></td><td>Não pode usar palavras reservadas da linguagem</td></tr>
+        <tr><td><code>pi</code></td><td><code>salário</code></td><td>Não deve usar acentos ou ç (use "salario")</td></tr>
+        </table>
+        </div>
+        <div class="box tip">
+        <strong>💡 Dica de Estilo:</strong> Use <em>camelCase</em> (ex: <code>precoProduto</code>) ou <em>snake_case</em> (ex: <code>preco_produto</code>) para nomes compostos. Seja consistente!
+        </div>
+        
+        <h3>📦 Tipos de Dados Primitivos</h3>
+        <p>O computador precisa saber <em>quanto espaço</em> reservar na memória. Por isso, declaramos o tipo:</p>
+        <div class="table-wrap">
+        <table>
+        <tr><th>Tipo</th><th>Descrição</th><th>Exemplo no Código</th></tr>
+        <tr><td><strong>inteiro</strong> 🔢</td><td>Números inteiros (sem vírgula)</td><td><code>12</code>, <code>-5</code>, <code>0</code>, <code>2026</code></td></tr>
+        <tr><td><strong>real</strong> 💰</td><td>Números com casas decimais (use ponto, não vírgula!)</td><td><code>12.5</code>, <code>3.14</code>, <code>-0.99</code></td></tr>
+        <tr><td><strong>caractere</strong> 🔤</td><td>Um <strong>único</strong> símbolo, letra ou número, entre <strong>aspas simples</strong></td><td><code>'A'</code>, <code>'7'</code>, <code>'@'</code></td></tr>
+        <tr><td><strong>cadeia</strong> 📄</td><td>Texto (sequência de caracteres), entre <strong>aspas duplas</strong></td><td><code>"Olá mundo"</code>, <code>"Angola"</code></td></tr>
+        <tr><td><strong>logico</strong> ⚖️</td><td>Apenas dois valores possíveis</td><td><code>verdadeiro</code>, <code>falso</code></td></tr>
+        </table>
+        </div>
+        
+        <h3>⌨️ Comandos de Entrada e Saída (E/S)</h3>
+        <ul>
+        <li>🖨️ <strong><code>escreva()</code>:</strong> Imprime na tela e mantém o cursor na <em>mesma linha</em>.</li>
+        <li>↩️ <strong><code>escreval()</code>:</strong> Imprime na tela e <em>pula uma linha</em> no final (o "l" é de "linha").</li>
+        <li>⌨️ <strong><code>leia(variavel)</code>:</strong> <strong>Pausa</strong> a execução do programa e espera o usuário digitar algo e pressionar Enter. O valor digitado é guardado na variável.</li>
+        </ul>
+        
+        <div class="box warn">
+        <strong>⚠️ O Erro Nº 1 dos Iniciantes: <code>=</code> vs <code>==</code></strong><br>
+        • <code>=</code> (um sinal) é <strong>ATRIBUIÇÃO</strong>: "Guarde este valor na variável". Ex: <code>idade = 18</code><br>
+        • <code>==</code> (dois sinais) é <strong>COMPARAÇÃO</strong>: "O valor da esquerda é igual ao da direita?". Ex: <code>se (idade == 18)</code>
+        </div>
+        
+        <h3>🧮 Operadores em Ação</h3>
+        <div class="table-wrap">
+        <table>
+        <tr><th>Categoria</th><th>Operadores</th><th>Exemplo Prático</th></tr>
+        <tr><td><strong>Aritméticos</strong></td><td><code>+  -  *  /  %  ^</code></td><td><code>10 % 3</code> resulta em <code>1</code> (resto da divisão)</td></tr>
+        <tr><td><strong>Relacionais</strong></td><td><code>&gt;  &lt;  ==  &gt;=  &lt;=  !=</code></td><td><code>5 != 5</code> resulta em <code>falso</code></td></tr>
+        <tr><td><strong>Lógicos</strong></td><td><code>e  ou  nao</code></td><td><code>(5 &gt; 3) e (2 &lt; 4)</code> resulta em <code>verdadeiro</code></td></tr>
+        </table>
+        </div>
+        
+        <h3>💻 Exemplo Completo — Conversor de Moeda</h3>
+        <p>Um programa puramente sequencial: Declara → Pede dados → Calcula → Mostra resultado.</p>
+        <pre><code><span class="kw">programa</span> {
+        <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">cadeia</span> nome
+        <span class="tp">real</span> valor_dolar, taxa_cambio, valor_aoa
+        
+        <span class="fn">escreva</span>(<span class="str">"Bem-vindo ao Conversor! Digite seu nome: "</span>)
+        <span class="fn">leia</span>(nome)
+        
+        <span class="fn">escreva</span>(<span class="str">"Digite o valor em Dólares (USD): "</span>)
+        <span class="fn">leia</span>(valor_dolar)
+        
+        <span class="fn">escreva</span>(<span class="str">"Digite a taxa de câmbio atual (ex: 830.5): "</span>)
+        <span class="fn">leia</span>(taxa_cambio)
+        
+        <span class="com">// Processamento (Atribuição do resultado do cálculo)</span>
+        valor_aoa = valor_dolar * taxa_cambio
+        
+        <span class="fn">escreval</span>(<span class="str">"\n--- RECIBO ---"</span>)
+        <span class="fn">escreval</span>(<span class="str">"Cliente: "</span>, nome)
+        <span class="fn">escreval</span>(<span class="str">"Valor em USD: $ "</span>, valor_dolar)
+        <span class="fn">escreval</span>(<span class="str">"Valor em AOA: Kz "</span>, valor_aoa)
+        <span class="fn">escreva</span>(<span class="str">"Obrigado pela preferência!"</span>)
+        }
+        }</code></pre>
+        
+        <h3>📐 Fórmulas Matemáticas no Código</h3>
+        <p>Como traduzir fórmulas do papel para a sintaxe do Portugol:</p>
+        
+        <div class="example-box">
+        <h4>1. Área do Círculo (A = π × r²)</h4>
+        <div class="formula-block">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mrow><mi>A</mi><mo>=</mo><mi>π</mi><mo>·</mo><msup><mi>r</mi><mn>2</mn></msup></mrow>
+        </math>
+        </div>
+        <p><strong>No Portugol:</strong> <code>area = 3.14159 * (raio ^ 2)</code></p>
+        </div>
+        
+        <div class="example-box">
+        <h4>2. IMC (Peso / Altura²)</h4>
+        <div class="formula-block">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mrow><mtext>IMC</mtext><mo>=</mo><mfrac><mtext>peso</mtext><msup><mtext>altura</mtext><mn>2</mn></msup></mfrac></mrow>
+        </math>
+        </div>
+        <p><strong>No Portugol:</strong> <code>imc = peso / (altura ^ 2)</code></p>
+        </div>
+        
+        <!-- EXERCÍCIOS EXPANDIDOS -->
+        <div class="exercicios">
+        <h3>📝 Exercícios de Fixação</h3>
+        <ol>
+        <li>💬 <strong>Reflexão:</strong> Por que é importante declarar o tipo de uma variável antes de usá-la?</li>
+        <li>🏷️ <strong>Validação:</strong> Quais dos nomes abaixo são <strong>inválidos</strong> no Portugol? Corrija-os:
+        <br><code>2nome</code>, <code>salario_mensal</code>, <code>idade do aluno</code>, <code>real</code>, <code>notaFinal</code>.
+        </li>
+        <li>🔍 <strong>Rastreamento de Código (Teste de Mesa):</strong> Qual será a saída exata no console deste código?
+        <pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> a = <span class="num">5</span>
+        <span class="tp">inteiro</span> b = <span class="num">2</span>
+        a = a + <span class="num">3</span>
+        b = a * b
+        <span class="fn">escreva</span>(a, <span class="str">" e "</span>, b)</code></pre>
+        </li>
+        <li>🌡️ <strong>Prática:</strong> Escreva um algoritmo completo que leia uma temperatura em Celsius e a converta para Fahrenheit. (Fórmula: <code>F = C * 1.8 + 32</code>).</li>
+        <li>⚖️ <strong>Prática:</strong> Escreva um algoritmo que leia o peso e a altura de uma pessoa, calcule o IMC e exiba o valor numérico com uma mensagem.</li>
+        <li>🧮 <strong>Operador Módulo:</strong> Escreva um algoritmo que leia um número inteiro e diga se ele é par ou ímpar usando o operador <code>%</code>. (Dica: se o resto da divisão por 2 for 0, é par).</li>
+        </ol>
+        </div>
+        
+        <div class="desafio">
+        <h3>🚀 Desafio Integrador: O Relatório Completo</h3>
+        <p>Crie um algoritmo que solicite: <strong>nome</strong>, <strong>idade</strong>, <strong>peso</strong> e <strong>altura</strong> de uma pessoa.</p>
+        <p>O programa deve calcular o IMC e exibir um relatório formatado assim:</p>
+        <pre style="background: var(--bg); color: var(--text); border-left: 3px solid var(--accent);"><code>=== RELATÓRIO DE SAÚDE ===
+        Nome: Maria Silva
+        Idade: 25 anos
+        IMC: 22.5
+        Classificação: [A calcular]</code></pre>
+        <p><em>💡 Dica: Para a "Classificação" (Abaixo do peso, Normal, etc.), você precisará usar estruturas de condição. Tente pesquisar ou usar a lógica do Capítulo 2 para montar a condição, ou deixe como um "espaço em branco" por enquanto e foque no cálculo!</em></p>
+        </div>
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<!-- ================= CAPÍTULO 4 ================= -->
+    <section id="condicao" class="section">
+        <h2>🔀 Condição e Escolha</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Estruturas condicionais: se/senao, aninhamento e escolha/caso para tomada de decisões.</div>
+
+        <div class="svg-center">
+            <svg width="280" height="140" viewBox="0 0 280 140" role="img" aria-label="Diagrama de estrutura condicional mostrando um losango de decisão com caminhos Sim e Não">
+                <polygon points="140,10 195,45 140,80 85,45" fill="#fde68a" stroke="#f59e0b" stroke-width="2" class="anim-pulse"/>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-weight="bold">Condição?</text>
+                <line x1="85" y1="45" x2="45" y2="100" stroke="#10b981" stroke-width="2"/>
+                <line x1="195" y1="45" x2="235" y2="100" stroke="#ef4444" stroke-width="2"/>
+                <text x="30" y="125" font-size="28" class="anim-bounce">✅</text>
+                <text x="220" y="125" font-size="28" class="anim-bounce" style="animation-delay:.3s">❌</text>
+                <text x="45" y="90" font-size="10" fill="#10b981">Sim</text>
+                <text x="230" y="90" font-size="10" fill="#ef4444">Não</text>
+            </svg>
+        </div>
+
+        <p>Até agora, nossos programas eram <strong>sequenciais</strong> (faziam sempre a mesma coisa). Com as estruturas condicionais, o programa ganha a capacidade de <strong>tomar decisões</strong> e executar caminhos diferentes dependendo dos dados.</p>
+
+        <h3>🔀 Estrutura SE / SENÃO</h3>
+        <p>A estrutura básica permite executar um bloco de código se uma condição for verdadeira, e outro bloco (opcional) se for falsa.</p>
+<pre><code><span class="kw">se</span> (condicao_verdadeira) {
+    <span class="com">// instruções executadas APENAS se a condição for V ✅</span>
+} <span class="kw">senao</span> {
+    <span class="com">// instruções executadas APENAS se a condição for F ❌</span>
+}</code></pre>
+
+        <h4>🔗 Encadeando Condições: O "Senão Se"</h4>
+        <p>Quando há mais de duas possibilidades, usamos <code>senao se</code> para verificar novas condições em cascata. O computador para de verificar assim que encontra a primeira condição verdadeira.</p>
+<pre><code><span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">real</span> media
+        
+        <span class="fn">escreva</span>(<span class="str">"Digite a média do aluno: "</span>)
+        <span class="fn">leia</span>(media)
+        
+        <span class="kw">se</span> (media &gt;= <span class="num">14</span>) {
+            <span class="fn">escreva</span>(<span class="str">"APROVADO com Distinção ✅"</span>)
+        } <span class="kw">senao se</span> (media &gt;= <span class="num">10</span>) {
+            <span class="fn">escreva</span>(<span class="str">"APROVADO ✅"</span>)
+        } <span class="kw">senao se</span> (media &gt;= <span class="num">7</span>) {
+            <span class="fn">escreva</span>(<span class="str">"RECUPERAÇÃO 🟡"</span>)
+        } <span class="kw">senao</span> {
+            <span class="fn">escreva</span>(<span class="str">"REPROVADO ❌"</span>)
+        }
+    }
+}</code></pre>
+
+        <!-- NOVA SECÇÃO: ARMADILHAS -->
+        <div class="box warn">
+            <strong>⚠️ As 3 Armadilhas Mortais das Condicionais:</strong>
+            <ol style="margin-top: 8px; font-size: 0.95em;">
+                <li><strong>Encadeamento Matemático Inválido:</strong> <br>❌ <code>se (idade >= 18 e <= 65)</code> (O computador não entende "e <= 65" sozinho).<br>✅ <code>se (idade >= 18 e idade <= 65)</code> (Repita a variável!).</li>
+                <li><strong>Ponto e vírgula fantasma:</strong> <br>❌ <code>se (nota >= 10); { escreva("Aprovado") }</code> (O `;` encerra o `se` imediatamente, tornando o bloco `{}` sempre executado).</li>
+                <li><strong>Confundir Atribuição com Comparação:</strong> <br>❌ <code>se (idade = 18)</code> (Isso <em>atribui</em> 18 à idade e quase sempre dá erro de tipo).<br>✅ <code>se (idade == 18)</code> (Isso <em>compara</em>).</li>
+            </ol>
+        </div>
+
+        <h3>📌 Estrutura ESCOLHA / CASO</h3>
+        <p>Ideal para comparar uma <strong>mesma variável</strong> com múltiplos valores <strong>fixos e exatos</strong> (como menus, dias da semana, opções de cor).</p>
+<pre><code><span class="kw">escolha</span> (opcao) {
+    <span class="kw">caso</span> <span class="num">1</span>:
+        <span class="fn">escreva</span>(<span class="str">"Domingo 🌞"</span>)
+        <span class="kw">pare</span>  <span class="com">// Interrompe a execução do 'escolha'</span>
+    <span class="kw">caso</span> <span class="num">2</span>:
+        <span class="fn">escreva</span>(<span class="str">"Segunda-feira 🌙"</span>)
+        <span class="kw">pare</span>
+    <span class="kw">caso contrario</span>:
+        <span class="fn">escreva</span>(<span class="str">"Opção inválida ❌"</span>)
+}</code></pre>
+        <div class="box info">
+            <strong>💡 Limitação Importante no Portugol:</strong> A estrutura <code>escolha</code> só funciona de forma confiável com variáveis do tipo <strong>inteiro</strong>, <strong>caractere</strong> ou <strong>cadeia</strong>. <strong>Não use</strong> com variáveis <code>real</code> (devido a problemas de precisão decimal) nem para verificar intervalos (ex: <code>caso 10..20</code> não é padrão no Portugol Studio, use <code>se/senao se</code> para isso).
+        </div>
+
+        <h3>⚖️ Quando usar cada uma?</h3>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Estrutura</th><th>Quando usar</th><th>Exemplo Ideal</th></tr>
+                <tr><td><strong>SE / SENÃO</strong></td><td>Condições complexas, intervalos, múltiplas variáveis, operadores <code>&gt;</code>, <code>&lt;</code></td><td><code>se (idade >= 18 e tem_carta == verdadeiro)</code></td></tr>
+                <tr><td><strong>ESCOLHA / CASO</strong></td><td>Comparar <strong>uma única variável</strong> com valores fixos e exatos.</td><td>Menu de opções (1-Sacar, 2-Depositar)</td></tr>
+            </table>
+        </div>
+
+        <!-- EXERCÍCIOS CATEGORIZADOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            
+            <h4>🟢 Nível Básico</h4>
+            <ol>
+                <li>Escreva um algoritmo que leia um número inteiro e verifique se ele é <strong>múltiplo de 3</strong>. (Dica: use o operador <code>%</code>).</li>
+                <li>Receba um número de 1 a 12 e imprima o <strong>mês correspondente</strong> usando a estrutura <code>escolha/caso</code> 📅.</li>
+            </ol>
+
+            <h4>🟡 Nível Intermediário</h4>
+            <ol start="3">
+                <li>Verifique se uma pessoa pode <strong>doar sangue</strong>: a idade deve estar entre 16 e 69 anos (inclusive) <strong>E</strong> o peso deve ser ≥ 50kg 🩸. (Cuidado com a armadilha nº 1!).</li>
+                <li>Receba uma letra do usuário e verifique se ela é <strong>vogal ou consoante</strong>. Considere tanto letras maiúsculas quanto minúsculas 🔤.</li>
+            </ol>
+
+            <h4>🔴 Nível Avançado (Rastreamento)</h4>
+            <ol start="5">
+                <li><strong>Teste de Mesa:</strong> Sem executar no computador, qual será a saída exata deste código se o usuário digitar <code>8</code> para a variável <code>x</code>?
+<pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> x
+<span class="fn">leia</span>(x)
+<span class="kw">se</span> (x &gt; <span class="num">10</span>) {
+    <span class="fn">escreva</span>(<span class="str">"A"</span>)
+} <span class="kw">senao se</span> (x &gt; <span class="num">5</span>) {
+    <span class="fn">escreva</span>(<span class="str">"B"</span>)
+} <span class="kw">senao</span> {
+    <span class="fn">escreva</span>(<span class="str">"C"</span>)
+}</code></pre>
+                </li>
+                <li>Classifique um nadador por categoria baseada na idade: <strong>Infantil</strong> (5-10), <strong>Juvenil</strong> (11-17), <strong>Adulto</strong> (18-59), <strong>Sênior</strong> (60+). Se a idade for menor que 5, exiba "Idade não permitida" 🏊.</li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: Calculadora com Menu</h3>
+            <p>Crie um programa que exiba um menu usando <code>escreval</code>:</p>
+            <pre style="background: var(--bg); color: var(--text); border-left: 3px solid var(--accent); padding: 8px;"><code>--- CALCULADORA ---
+1) Soma
+2) Subtração
+3) Multiplicação
+4) Divisão
+5) Sair</code></pre>
+            <p>O programa deve ler a opção do usuário. Se for de 1 a 4, deve pedir <strong>dois números</strong>, realizar a operação usando <code>escolha/caso</code> e mostrar o resultado. Se for 5, encerra o programa.</p>
+            
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">💡 Dica de Ouro: Validação de Erros</summary>
+                <p style="margin-top: 8px; font-size: 0.95em;">
+                    No caso da divisão (opção 4), antes de dividir, verifique se o <strong>segundo número é igual a zero</strong>. Se for, exiba "Erro: Impossível dividir por zero!" em vez de fazer o cálculo. Isso evita que seu programa quebre!
+                </p>
+            </details>
+        </div>
+    </section>
+    
+    
+    
+    
+    <!-- ================= CAPÍTULO 5 ================= -->
+    <section id="repeticao" class="section">
+    <h2>🔄 Estruturas de Repetição (Laços)</h2>
+    <div class="aula-tag">🎯 <strong>Aula:</strong> Laços de repetição: para, enquanto e faca-enquanto para automatizar tarefas repetitivas.</div>
+    
+    <div class="svg-center">
+    <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true" role="presentation">
+    <g class="anim-spin">
+    <circle cx="60" cy="60" r="42" fill="none" stroke="#4f46e5" stroke-width="4" stroke-dasharray="16 8"/>
+    </g>
+    <text x="60" y="70" text-anchor="middle" font-size="32">🔄</text>
+    </svg>
+    </div>
+    
+    <p>Imagine ter de escrever <code>escreva("Olá")</code> 1000 vezes. Seria absurdo! As estruturas de repetição (ou <em>loops</em>) permitem que o computador execute um bloco de código múltiplas vezes, de forma rápida e automática, até que uma <strong>condição de parada</strong> seja atingida.</p>
+    
+    <h3>⚖️ Comparação e Analogias do Mundo Real</h3>
+    <div class="table-wrap">
+    <table>
+    <tr><th>Estrutura</th><th>Característica Principal</th><th>Analogia do Mundo Real</th><th>Quando usar</th></tr>
+    <tr>
+    <td><strong>PARA</strong> 🔢</td>
+    <td>Número <strong>definido</strong> de repetições (usa contador).</td>
+    <td>"Dar 10 voltas na pista de corrida." (Você sabe exatamente quantas).</td>
+    <td>Tabuadas, percorrer vetores, contagens fixas.</td>
+    </tr>
+    <tr>
+    <td><strong>ENQUANTO</strong> 🔁</td>
+    <td>Testa a condição <strong>ANTES</strong> de executar. Pode não executar nenhuma vez.</td>
+    <td>"Enquanto o balde não encher, continue a deitar água." (Testa antes de deitar).</td>
+    <td>Validações de dados, ler dados até encontrar um valor específico (sentinela).</td>
+    </tr>
+    <tr>
+    <td><strong>FAÇA-ENQUANTO</strong> 🔂</td>
+    <td>Executa <strong>PELO MENOS 1 VEZ</strong>, testa a condição <strong>DEPOIS</strong>.</td>
+    <td>"Prove a sopa. Enquanto não estiver boa, adicione sal e prove de novo." (Prova pelo menos uma vez).</td>
+    <td>Menus de opções que precisam aparecer ao menos uma vez para o usuário escolher.</td>
+    </tr>
+    </table>
+    </div>
+    
+    <h3>📝 Sintaxe e Exemplos Práticos</h3>
+    
+    <h4>1. Estrutura PARA 🔢</h4>
+    <p>Requer 3 elementos na declaração: <strong>inicialização</strong>, <strong>condição</strong> e <strong>incremento</strong>.</p>
+    <pre><code><span class="com">// Conta de 1 até 5</span>
+    <span class="kw">para</span> (<span class="tp">inteiro</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+    <span class="fn">escreva</span>(i, <span class="str">" "</span>)
+    }
+    <span class="com">// Resultado: 1 2 3 4 5</span></code></pre>
+    
+    <h4>2. Estrutura ENQUANTO 🔁</h4>
+    <p>A variável de controle <strong>deve</strong> ser declarada e inicializada <em>antes</em> do loop, e atualizada <em>dentro</em> dele.</p>
+    <pre><code><span class="tp">inteiro</span> i = <span class="num">1</span>          <span class="com">// 1. Inicialização</span>
+    <span class="kw">enquanto</span> (i &lt;= <span class="num">5</span>) {    <span class="com">// 2. Condição</span>
+    <span class="fn">escreva</span>(i, <span class="str">" "</span>)
+    i++                <span class="com">// 3. Incremento (⚠️ Obrigatório!)</span>
+    }</code></pre>
+    
+    <h4>3. Estrutura FAÇA-ENQUANTO 🔂</h4>
+    <pre><code><span class="tp">inteiro</span> opcao
+    <span class="kw">faca</span> {
+    <span class="fn">escreva</span>(<span class="str">"Menu: 1-Jogar 0-Sair\n"</span>)
+    <span class="fn">leia</span>(opcao)
+    } <span class="kw">enquanto</span> (opcao != <span class="num">0</span>) <span class="com">// Ponto e vírgula no final é obrigatório aqui!</span></code></pre>
+    
+    <!-- NOVA SECÇÃO: ARMADILHAS -->
+    <div class="box warn">
+    <strong>⚠️ As 3 Armadilhas Mortais dos Loops:</strong>
+    <ol style="margin-top: 8px; font-size: 0.95em;">
+    <li><strong>O Loop Infinito:</strong> Esquecer de atualizar a variável de controle (ex: esquecer o <code>i++</code>). O programa nunca para. <em>Solução no Portugol Studio: Clique no botão vermelho "Parar".</em></li>
+    <li><strong>Erro "Off-by-one" (Fora por um):</strong> Usar <code>&lt;</code> em vez de <code>&lt;=</code>. Se quiser contar até 5, <code>i < 5</code> para no 4. Use <code>i <= 5</code>.</li>
+    <li><strong>Variável não inicializada:</strong> No <code>enquanto</code>, se você não der um valor inicial a <code>i</code> antes do loop, o computador não sabe com o que comparar e dá erro.</li>
+    </ol>
+    </div>
+    
+    <h3>💻 Padrão de Projeto: O "Acumulador"</h3>
+    <p>Um dos usos mais poderosos dos loops é somar valores ao longo do tempo. Usamos uma variável (geralmente chamada <code>soma</code> ou <code>total</code>) que começa em 0 e vai recebendo novos valores.</p>
+    <pre><code><span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+    <span class="tp">inteiro</span>soma = <span class="num">0</span>      <span class="com">// Acumulador começa em 0</span>
+    <span class="tp">inteiro</span> numero
+    
+    <span class="fn">escreval</span>(<span class="str">"Digite números (0 para parar):"</span>)
+    
+    <span class="kw">enquanto</span> (<span class="kw">verdadeiro</span>) { <span class="com">// Loop infinito intencional, controlado por dentro</span>
+    <span class="fn">leia</span>(numero)
+    
+    <span class="kw">se</span> (numero == <span class="num">0</span>) {
+    <span class="kw">pare</span>          <span class="com">// Comando 'pare' interrompe o loop imediatamente</span>
+    }
+    
+    soma = soma + numero  <span class="com">// Acumula o valor</span>
+    }
+    
+    <span class="fn">escreval</span>(<span class="str">"A soma total foi: "</span>, soma)
+    }
+    }</code></pre>
+    
+    <!-- EXERCÍCIOS CATEGORIZADOS -->
+    <div class="exercicios">
+    <h3>📝 Exercícios de Fixação</h3>
+    
+    <h4>🟢 Nível Básico</h4>
+    <ol>
+    <li>Apresente os números <strong>pares</strong> de 2 a 20 usando a estrutura <strong>PARA</strong>.</li>
+    <li>Faça uma contagem regressiva de 10 até 0, e no final escreva "Fogo! 🚀".</li>
+    </ol>
+    
+    <h4>🟡 Nível Intermediário</h4>
+    <ol start="3">
+    <li>Peça ao usuário para digitar a sua idade. Use um loop <strong>ENQUANTO</strong> para validar a entrada: se a idade for menor que 0 ou maior que 120, peça novamente até que um valor válido seja inserido.</li>
+    <li>Leia números inteiros até que um número negativo seja inserido. Ao final, apresente a <strong>soma</strong> apenas dos números positivos digitados (use o padrão acumulador).</li>
+    </ol>
+    
+    <h4>🔴 Nível Avançado (Rastreamento)</h4>
+    <ol start="5">
+    <li><strong>Teste de Mesa:</strong> Sem executar no computador, qual será a saída exata deste código?
+    <pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> x = <span class="num">1</span>
+    <span class="kw">enquanto</span> (x &lt; <span class="num">4</span>) {
+    <span class="fn">escreva</span>(x, <span class="str">" "</span>)
+    x = x + <span class="num">2</span>
+    }
+    <span class="fn">escreva</span>(<span class="str">"Fim"</span>)</code></pre>
+    </li>
+    <li>Apresente os <strong>N</strong> primeiros termos da sequência de Fibonacci (0, 1, 1, 2, 3, 5, 8...), onde <strong>N</strong> é informado pelo usuário. 🌀</li>
+    </ol>
+    </div>
+    
+    <div class="desafio">
+    <h3>🚀 Desafio Principal: Sistema de Votação</h3>
+    <p>Crie um sistema de votação para 3 candidatos (A, B, C) e uma opção de "Voto Nulo".</p>
+    <p><strong>Requisitos:</strong></p>
+    <ul style="margin-left: 20px; margin-top: 8px;">
+    <li>Use um loop <code>faca-enquanto</code> para exibir o menu repetidamente até que o usuário digite <code>0</code> para "Encerrar Votação".</li>
+    <li>Valide a entrada: se o usuário digitar um número que não seja 0, 1, 2, 3 ou 4, exiba "Opção inválida" e <strong>não</strong> conte como voto.</li>
+    <li>Ao sair do loop, exiba um relatório com: Total de votos, quantidade de votos por candidato, e o <strong>nome do vencedor</strong> (quem teve mais votos).</li>
+    </ul>
+    
+    <details style="margin-top: 12px; cursor: pointer;">
+    <summary style="font-weight: 600; color: var(--primary);">💡 Dica para encontrar o vencedor</summary>
+    <p style="margin-top: 8px; font-size: 0.95em;">
+    Crie uma variável <code>vencedor</code> (cadeia) e uma variável <code>max_votos</code> (inteiro, começa em 0). Após contar todos os votos, use uma estrutura <code>se</code> para comparar: <br>
+    <code>se (votos_A > max_votos) { max_votos = votos_A; vencedor = "Candidato A" }</code> <br>
+    Repita a lógica para B e C. No final, a variável <code>vencedor</code> terá o nome correto!
+    </p>
+    </details>
+    </div>
+    </section>
+    
+    
+    
+    
+
+<!-- ================= CAPÍTULO 6 ================= -->
+    <section id="vetor" class="section">
+        <h2>📚 Vetores e Matrizes</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Estruturas de dados homogêneas para armazenar e processar múltiplos valores de forma organizada.</div>
+
+        <div class="svg-center">
+            <svg width="300" height="100" viewBox="0 0 300 100" role="img" aria-label="Representação visual de um vetor com 4 posições contendo frutas e seus índices">
+                <g class="anim-float">
+                    <rect x="10" y="20" width="55" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                    <text x="37" y="48" text-anchor="middle" font-size="20">🍎</text>
+                    <rect x="75" y="20" width="55" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                    <text x="102" y="48" text-anchor="middle" font-size="20">🍌</text>
+                    <rect x="140" y="20" width="55" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                    <text x="167" y="48" text-anchor="middle" font-size="20">🍇</text>
+                    <rect x="205" y="20" width="55" height="40" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                    <text x="232" y="48" text-anchor="middle" font-size="20">🍊</text>
+                </g>
+                <text x="37" y="85" text-anchor="middle" font-size="10" fill="#64748b">[0]</text>
+                <text x="102" y="85" text-anchor="middle" font-size="10" fill="#64748b">[1]</text>
+                <text x="167" y="85" text-anchor="middle" font-size="10" fill="#64748b">[2]</text>
+                <text x="232" y="85" text-anchor="middle" font-size="10" fill="#64748b">[3]</text>
+            </svg>
+        </div>
+
+        <p>Até agora, cada variável guardava <strong>um único valor</strong>. Mas e se precisarmos guardar as notas de 30 alunos? Criar 30 variáveis (`nota1`, `nota2`...) seria um pesadelo. É aqui que entram os <strong>Vetores</strong>.</p>
+        <p><strong>Vetor (Array):</strong> É uma única variável que armazena múltiplos valores do <strong>mesmo tipo</strong>, acessados individualmente por um <strong>índice</strong> (posição). 🏢 Analogia: Um edifício com apartamentos numerados. O nome do edifício é o nome do vetor, e o número do apartamento é o índice.</p>
+
+        <div class="card yellow">
+            <strong>⚠️ Regra de Ouro (Base Zero):</strong> Em Portugol (e na maioria das linguagens como Python, Java, C), a contagem dos índices começa em <strong>0</strong>! Ou seja, um vetor de tamanho 5 tem posições válidas de <code>0</code> a <code>4</code>.
+        </div>
+
+        <h3>📝 Declaração e Inicialização</h3>
+        <p>Existem duas formas principais de trabalhar com vetores:</p>
+<pre><code><span class="com">// FORMA 1: Declarar vazio e preencher depois (usando loop)</span>
+<span class="tp">inteiro</span> notas[<span class="num">5</span>]
+<span class="kw">para</span> (<span class="tp">inteiro</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    <span class="fn">escreva</span>(<span class="str">"Digite a nota: "</span>)
+    <span class="fn">leia</span>(notas[i])  <span class="com">// O 'i' muda de 0 a 4, acessando cada posição</span>
+}
+
+<span class="com">// FORMA 2: Declarar e inicializar diretamente (para dados fixos)</span>
+<span class="tp">cadeia</span> dias[<span class="num">7</span>] = {<span class="str">"Dom"</span>, <span class="str">"Seg"</span>, <span class="str">"Ter"</span>, <span class="str">"Qua"</span>, <span class="str">"Qui"</span>, <span class="str">"Sex"</span>, <span class="str">"Sab"</span>}</code></pre>
+
+        <h3>🏆 Algoritmo Clássico: Encontrar Maior e Menor</h3>
+        <p>Uma das tarefas mais comuns é varrer um vetor para encontrar extremos. O truque é assumir que o <strong>primeiro elemento</strong> é o maior (e o menor) inicialmente, e depois comparar com o resto.</p>
+<pre><code><span class="tp">inteiro</span> vet[<span class="num">5</span>] = {<span class="num">3</span>, <span class="num">7</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">4</span>}
+<span class="tp">inteiro</span> maior = vet[<span class="num">0</span>]  <span class="com">// Começa assumindo que a posição 0 é a maior</span>
+<span class="tp">inteiro</span> menor = vet[<span class="num">0</span>]
+
+<span class="com">// Começamos o loop do 1, pois o 0 já foi usado como referência</span>
+<span class="kw">para</span> (<span class="tp">inteiro</span> i = <span class="num">1</span>; i &lt; <span class="num">5</span>; i++) {
+    <span class="kw">se</span> (vet[i] &gt; maior) { 
+        maior = vet[i] 
+    }
+    <span class="kw">se</span> (vet[i] &lt; menor) { 
+        menor = vet[i] 
+    }
+}
+<span class="fn">escreval</span>(<span class="str">"Maior: "</span>, maior, <span class="str">" | Menor: "</span>, menor)</code></pre>
+
+        <div class="box warn">
+            <strong>💀 A Armadilha Mortal: "Index Out of Bounds"</strong><br>
+            Se você declarar <code>inteiro x[5]</code> e tentar acessar <code>x[5]</code> ou <code>x[-1]</code>, o programa dará <strong>erro de execução</strong> e fechará. Os únicos índices válidos são 0, 1, 2, 3 e 4. Sempre use <code>i &lt; tamanho</code> no loop, nunca <code>i &lt;= tamanho</code>.
+        </div>
+
+        <h3>🧮 Matrizes (Vetores Multidimensionais)</h3>
+        <p>Uma matriz é um "vetor de vetores", organizada em <strong>linhas e colunas</strong>, como uma planilha do Excel ou um tabuleiro de xadrez. 📊</p>
+        <p>Para percorrer uma matriz, precisamos de <strong>dois loops aninhados</strong> (um dentro do outro): um para as linhas e outro para as colunas.</p>
+
+<pre><code><span class="tp">inteiro</span> tabela[<span class="num">3</span>][<span class="num">3</span>]  <span class="com">// 3 linhas e 3 colunas</span>
+
+<span class="com">// Preenchendo a matriz com a tabuada do número da linha</span>
+<span class="kw">para</span> (<span class="tp">inteiro</span> linha = <span class="num">0</span>; linha &lt; <span class="num">3</span>; linha++) {
+    <span class="kw">para</span> (<span class="tp">inteiro</span> col = <span class="num">0</span>; col &lt; <span class="num">3</span>; col++) {
+        tabela[linha][col] = (linha + <span class="num">1</span>) * (col + <span class="num">1</span>)
+    }
+}</code></pre>
+
+        <div class="svg-center">
+            <svg width="280" height="180" viewBox="0 0 280 180" role="img" aria-label="Representação visual de uma matriz 3x3 com números de 1 a 9, mostrando linhas e colunas">
+                <text x="140" y="20" text-anchor="middle" font-size="12" font-weight="bold">Matriz 3×3 (tabela[linha][coluna])</text>
+                <!-- Linha 0 -->
+                <rect x="30" y="30" width="60" height="40" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                <text x="60" y="55" text-anchor="middle" font-size="14" font-weight="bold">1</text>
+                <rect x="100" y="30" width="60" height="40" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                <text x="130" y="55" text-anchor="middle" font-size="14" font-weight="bold">2</text>
+                <rect x="170" y="30" width="60" height="40" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+                <text x="200" y="55" text-anchor="middle" font-size="14" font-weight="bold">3</text>
+                <!-- Linha 1 -->
+                <rect x="30" y="75" width="60" height="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="60" y="100" text-anchor="middle" font-size="14" font-weight="bold">4</text>
+                <rect x="100" y="75" width="60" height="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="130" y="100" text-anchor="middle" font-size="14" font-weight="bold">5</text>
+                <rect x="170" y="75" width="60" height="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="200" y="100" text-anchor="middle" font-size="14" font-weight="bold">6</text>
+                <!-- Linha 2 -->
+                <rect x="30" y="120" width="60" height="40" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                <text x="60" y="145" text-anchor="middle" font-size="14" font-weight="bold">7</text>
+                <rect x="100" y="120" width="60" height="40" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                <text x="130" y="145" text-anchor="middle" font-size="14" font-weight="bold">8</text>
+                <rect x="170" y="120" width="60" height="40" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                <text x="200" y="145" text-anchor="middle" font-size="14" font-weight="bold">9</text>
+                
+                <!-- Labels -->
+                <text x="15" y="55" text-anchor="middle" font-size="10" fill="#64748b">L 0</text>
+                <text x="15" y="100" text-anchor="middle" font-size="10" fill="#64748b">L 1</text>
+                <text x="15" y="145" text-anchor="middle" font-size="10" fill="#64748b">L 2</text>
+                <text x="60" y="175" text-anchor="middle" font-size="10" fill="#64748b">C 0</text>
+                <text x="130" y="175" text-anchor="middle" font-size="10" fill="#64748b">C 1</text>
+                <text x="200" y="175" text-anchor="middle" font-size="10" fill="#64748b">C 2</text>
+            </svg>
+        </div>
+
+        <!-- EXERCÍCIOS CATEGORIZADOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            
+            <h4>🟢 Nível Básico</h4>
+            <ol>
+                <li>Declare um vetor de 5 números reais, peça para o usuário preenchê-lo e, em seguida, exiba apenas o <strong>primeiro</strong> e o <strong>último</strong> elemento.</li>
+                <li>Crie um vetor com 10 números inteiros. Preencha-o e exiba na tela <strong>apenas os números pares</strong> contidos nele.</li>
+            </ol>
+
+            <h4>🟡 Nível Intermediário</h4>
+            <ol start="3">
+                <li>Calcule a <strong>média</strong> de 5 números armazenados num vetor. Depois, faça um segundo loop para exibir apenas os valores que estão <strong>acima da média</strong> calculada.</li>
+                <li>Encontre não apenas o maior valor, mas também a <strong>posição (índice)</strong> onde ele se encontra num vetor de 8 números.</li>
+            </ol>
+
+            <h4>🔴 Nível Avançado (Rastreamento e Lógica)</h4>
+            <ol start="5">
+                <li><strong>Teste de Mesa:</strong> Qual será a saída exata deste código?
+<pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> v[<span class="num">4</span>] = {<span class="num">2</span>, <span class="num">4</span>, <span class="num">6</span>, <span class="num">8</span>}
+<span class="tp">inteiro</span> soma = <span class="num">0</span>
+<span class="kw">para</span> (<span class="tp">inteiro</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {
+    <span class="kw">se</span> (i % <span class="num">2</span> == <span class="num">0</span>) {
+        soma = soma + v[i]
+    }
+}
+<span class="fn">escreva</span>(soma)</code></pre>
+                </li>
+                <li><strong>Desafio de Lógica:</strong> Crie um vetor com 10 números. Exiba o vetor original e, em seguida, exiba o <strong>vetor invertido</strong> (o último elemento passa a ser o primeiro, etc.) 🔄. <em>(Dica: use um loop que comece no índice 9 e vá até 0, decrementando).</em></li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: Sistema de Notas da Turma</h3>
+            <p>Crie um programa que gerencie uma turma de <strong>5 alunos</strong> (use 5 para facilitar os testes, mas a lógica serve para 50).</p>
+            <p><strong>Requisitos:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li>Use <strong>dois vetores paralelos</strong>: um <code>cadeia</code> para os <code>nomes</code> e um <code>real</code> para as <code>medias</code>. O aluno na posição <code>i</code> do vetor de nomes deve corresponder à média na posição <code>i</code> do vetor de médias.</li>
+                <li>Preencha ambos os vetores através de um loop.</li>
+                <li>Calcule e exiba a <strong>média geral da turma</strong>.</li>
+                <li>Percorra o vetor novamente e exiba um relatório individual: "Nome: [X] | Média: [Y] | Situação: [Aprovado/Reprovado]".</li>
+            </ul>
+            
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">💡 Dica sobre Vetores Paralelos</summary>
+                <p style="margin-top: 8px; font-size: 0.95em;">
+                    A "mágica" dos vetores paralelos é que o índice <code>i</code> é a ponte entre eles. Se você encontrar a maior média no índice <code>3</code>, o nome do melhor aluno estará exatamente em <code>nomes[3]</code>.
+                </p>
+            </details>
+        </div>
+    </section>
+    
+    
+    
+<!-- ================= CAPÍTULO 7 ================= -->
+    <section id="funcao" class="section">
+        <h2>🧩 Funções e Procedimentos</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Modularização, passagem de parâmetros (valor vs referência), retorno de valores e reutilização de código.</div>
+
+        <div class="svg-center">
+            <svg width="260" height="100" viewBox="0 0 260 100" aria-hidden="true" role="presentation">
+                <text x="10" y="60" font-size="32" class="anim-bounce">🪙</text>
+                <text x="55" y="55" font-size="24" class="anim-pulse">➡️</text>
+                <rect x="90" y="25" width="70" height="50" rx="10" fill="#fde68a" stroke="#f59e0b" stroke-width="2" class="anim-pulse"/>
+                <text x="125" y="58" text-anchor="middle" font-size="26">🎰</text>
+                <text x="170" y="55" font-size="24" class="anim-pulse">➡️</text>
+                <text x="205" y="60" font-size="32" class="anim-bounce" style="animation-delay:.3s">🥤</text>
+                <text x="125" y="92" text-anchor="middle" font-size="10" fill="#64748b">Entrada → processa → saída (retorno)</text>
+            </svg>
+        </div>
+
+        <p>A medida que o teu programa cresce, ele começa a ficar confuso e difícil de manter. As <strong>funções</strong> resolvem isso através da <strong>modularização</strong>: dividir um problema grande em pequenos problemas (blocos de código) que podem ser reutilizados. 🏗️ Analogia: em vez de construir um carro inteiro de uma vez, constróis o motor, as rodas e o chassis separadamente e depois juntas tudo.</p>
+
+        <h3>📊 Função vs Procedimento</h3>
+        <p>Em Portugol, a palavra-chave é sempre <code>funcao</code>, mas o comportamento muda consoante ela <strong>retorna</strong> um valor ou não:</p>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Tipo</th><th>Retorna valor?</th><th>Palavra-chave</th><th>Exemplo de uso</th></tr>
+                <tr><td><strong>Função</strong> 🧮</td><td>✅ Sim (gera um resultado)</td><td><code>retorne</code></td><td>Cálculos, validações, conversões</td></tr>
+                <tr><td><strong>Procedimento</strong> 🖨️</td><td>❌ Não (apenas executa)</td><td>Nenhuma</td><td>Exibir menus, limpar tela, desenhar na tela</td></tr>
+            </table>
+        </div>
+
+        <h3>📝 Sintaxe no Portugol</h3>
+<pre><code><span class="com">// FUNÇÃO: Recebe dados, faz um cálculo e DEVOLVE o resultado</span>
+<span class="kw">funcao</span> <span class="fn">somar</span>(<span class="tp">inteiro</span> a, <span class="tp">inteiro</span> b): <span class="tp">inteiro</span> {
+    <span class="tp">inteiro</span> resultado = a + b
+    <span class="kw">retorne</span> resultado   <span class="com">// A palavra 'retorne' é obrigatória</span>
+}
+
+<span class="com">// PROCEDIMENTO: Apenas executa uma ação (imprimir, por ex.)</span>
+<span class="kw">funcao</span> <span class="fn">saudacao</span>(<span class="tp">cadeia</span> nome) {
+    <span class="fn">escreva</span>(<span class="str">"Olá, "</span>, nome, <span class="str">"! 👋"</span>)
+    <span class="com">// Não tem 'retorne' nem ': tipo' no cabeçalho</span>
+}</code></pre>
+
+        <h4>💡 Exemplo de Uso no Programa Principal</h4>
+<pre><code><span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">inteiro</span> x = <span class="num">5</span>, y = <span class="num">3</span>, total
+        
+        <span class="com">// 1. Chamando a FUNÇÃO (o resultado é GUARDADO numa variável)</span>
+        total = somar(x, y)
+        <span class="fn">escreval</span>(<span class="str">"Soma: "</span>, total)  <span class="com">// Saída: 8</span>
+        
+        <span class="com">// 2. Chamando o PROCEDIMENTO (apenas executa e imprime)</span>
+        saudacao(<span class="str">"Maria"</span>)  <span class="com">// Saída: Olá, Maria! 👋</span>
+    }
+}</code></pre>
+
+        <!-- NOVA SECÇÃO: ARMADILHAS -->
+        <div class="box warn">
+            <strong>💀 A Armadilha Mortal Nº 1: Imprimir vs Retornar</strong><br>
+            Muitos alunos escrevem <code>escreva(resultado)</code> dentro da função quando deveriam usar <code>retorne resultado</code>.
+            <ul style="margin-top: 8px; font-size: 0.95em;">
+                <li><strong>escreva()</strong>: Mostra algo na tela. O computador não pode usar esse valor depois.</li>
+                <li><strong>retorne</strong>: Entrega o valor nas mãos do programa principal. Ele pode guardá-lo numa variável e fazer mais cálculos com ele!</li>
+            </ul>
+            <p style="margin-top: 8px;"><em>Regra de ouro: Se precisas usar o resultado do cálculo noutro lugar, use <code>retorne</code>.</em></p>
+        </div>
+
+        <h3>🌐 Escopo de Variáveis (Onde elas vivem?)</h3>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Tipo</th><th>Onde é declarada</th><th>Onde pode ser usada</th></tr>
+                <tr><td>🏠 <strong>Local</strong></td><td>Dentro de uma função</td><td>Apenas dentro daquela função. "Morre" quando a função termina.</td></tr>
+                <tr><td>🌍 <strong>Global</strong></td><td>Fora de todas as funções (logo após <code>programa {</code>)</td><td>Em todo o programa. (Evite usar em excesso — polui o código!).</td></tr>
+            </table>
+        </div>
+
+        <h3>🔗 Passagem de Parâmetros: Por Valor vs Por Referência</h3>
+        <p>Quando passamos dados para uma função, podemos fazê-lo de duas formas:</p>
+
+        <div class="card">
+            <strong>1️⃣ Passagem por Valor (Padrão)</strong>
+            <p>A função recebe uma <strong>cópia</strong> do valor. Se a função modificar o parâmetro, a variável original <strong>NÃO</strong> é alterada.</p>
+<pre style="margin: 8px 0;"><code><span class="kw">funcao</span> <span class="fn">tentar_mudar</span>(<span class="tp">inteiro</span> num) {
+    num = <span class="num">100</span>  <span class="com">// Muda apenas a cópia local</span>
+}
+<span class="com">// A variável original continua com o valor dela.</span></code></pre>
+        </div>
+
+        <div class="card green">
+            <strong>2️⃣ Passagem por Referência</strong>
+            <p>A função recebe o <strong>endereço de memória</strong> da variável. Se a função modificar o parâmetro, a variável original <strong>SIM</strong> é alterada. Em Portugol, usamos <code>&</code> antes do tipo.</p>
+<pre style="margin: 8px 0;"><code><span class="kw">funcao</span> <span class="fn">dobrar</span>(<span class="tp">inteiro</span> &amp;num) {
+    num = num * <span class="num">2</span>  <span class="com">// Altera a variável original!</span>
+}
+<span class="tp">inteiro</span> x = <span class="num">5</span>
+dobrar(x)
+<span class="fn">escreva</span>(x)  <span class="com">// Agora x vale 10!</span></code></pre>
+        </div>
+
+        <h3>💻 Exemplo Completo: Verificador de Primo Modular</h3>
+        <p>Um programa bem estruturado usa funções para organizar a lógica:</p>
+<pre><code><span class="kw">programa</span> {
+    <span class="com">// FUNÇÃO: Recebe um número e retorna se é primo (logico)</span>
+    <span class="kw">funcao</span> <span class="fn">eh_primo</span>(<span class="tp">inteiro</span> n): <span class="tp">logico</span> {
+        <span class="kw">se</span> (n &lt;= <span class="num">1</span>) <span class="kw">retorne</span> <span class="kw">falso</span>
+        
+        <span class="kw">para</span> (<span class="tp">inteiro</span> i = <span class="num">2</span>; i &lt; n; i++) {
+            <span class="kw">se</span> (n % i == <span class="num">0</span>) <span class="kw">retorne</span> <span class="kw">falso</span>
+        }
+        <span class="kw">retorne</span> <span class="kw">verdadeiro</span>
+    }
+    
+    <span class="com">// PROCEDIMENTO: Apenas exibe o resultado formatado</span>
+    <span class="kw">funcao</span> <span class="fn">mostrar_resultado</span>(<span class="tp">inteiro</span> num, <span class="tp">logico</span> primo) {
+        <span class="kw">se</span> (primo) {
+            <span class="fn">escreva</span>(num, <span class="str">" é PRIMO! ✅"</span>)
+        } <span class="kw">senao</span> {
+            <span class="fn">escreva</span>(num, <span class="str">" NÃO é primo. ❌"</span>)
+        }
+    }
+    
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">inteiro</span> numero
+        <span class="tp">logico</span> resultado
+        
+        <span class="fn">escreva</span>(<span class="str">"Digite um número: "</span>)
+        <span class="fn">leia</span>(numero)
+        
+        resultado = eh_primo(numero)  <span class="com">// Chama e guarda o resultado</span>
+        mostrar_resultado(numero, resultado)  <span class="com">// Chama para exibir</span>
+    }
+}</code></pre>
+
+        <!-- EXERCÍCIOS CATEGORIZADOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            
+            <h4>🟢 Nível Básico</h4>
+            <ol>
+                <li>Crie um <strong>procedimento</strong> chamado <code>exibir_tabuada</code> que receba um número inteiro e exiba a sua tabuada de 1 a 10.</li>
+                <li>Crie uma <strong>função</strong> chamada <code>classificar_par</code> que receba um número e retorne a cadeia <code>"PAR"</code> ou <code>"IMPAR"</code>.</li>
+            </ol>
+
+            <h4>🟡 Nível Intermediário</h4>
+            <ol start="3">
+                <li>Crie uma <strong>função</strong> que receba <strong>três</strong> números inteiros e retorne o <strong>maior</strong> deles.</li>
+                <li>Crie uma <strong>função</strong> chamada <code>calcular_fatorial</code> que receba um número <code>n</code> e retorne <code>n!</code> (n × n-1 × ... × 1). ❗</li>
+            </ol>
+
+            <h4>🔴 Nível Avançado (Rastreamento e Referência)</h4>
+            <ol start="5">
+                <li><strong>Teste de Mesa:</strong> Qual será o valor final das variáveis <code>a</code> e <code>b</code> após a execução deste código?
+<pre style="margin: 8px 0; padding: 8px;"><code><span class="kw">funcao</span> <span class="fn">trocar</span>(<span class="tp">inteiro</span> &amp;x, <span class="tp">inteiro</span> &amp;y) {
+    <span class="tp">inteiro</span> temp = x
+    x = y
+    y = temp
+}
+<span class="tp">inteiro</span> a = <span class="num">5</span>, b = <span class="num">10</span>
+trocar(a, b)</code></pre>
+                </li>
+                <li>Escreva um programa completo que tenha um menu de opções (1-Somar, 2-Multiplicar, 3-Sair). Cada operação deve ser feita dentro da sua própria função. 🔍</li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: Calculadora Científica Modular</h3>
+            <p>Crie uma calculadora completa onde <strong>cada operação</strong> esteja isolada na sua própria função:</p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li><code>somar(a, b)</code>, <code>subtrair(a, b)</code>, <code>multiplicar(a, b)</code>, <code>dividir(a, b)</code></li>
+                <li><code>potencia(base, exp)</code>, <code>raiz_quadrada(n)</code>, <code>fatorial(n)</code></li>
+            </ul>
+            <p>O programa principal deve ter um loop <code>faca-enquanto</code> que exibe um menu, pede dois números ao usuário, chama a função correspondente (usando <code>escolha/caso</code>) e exibe o resultado retornado. O loop só termina quando o usuário escolher "Sair".</p>
+            
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">💡 Dica de Arquitetura</summary>
+                <p style="margin-top: 8px; font-size: 0.95em;">
+                    Todas as funções de cálculo devem ter a assinatura <code>funcao nome(tipo a, tipo b): real</code>, para que o programa principal possa sempre fazer <code>resultado = funcao(x, y)</code> e depois <code>escreva(resultado)</code>. A função de dividir deve validar internamente se <code>b != 0</code> e retornar um valor de erro (como -999) se for o caso.
+                </p>
+            </details>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+<!-- ================= CAPÍTULO 8 ================= -->
+    <section id="biblioteca" class="section">
+        <h2>📖 Bibliotecas e Funções Pré-definidas</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Como importar e utilizar funções prontas de matemática, texto, tempo e utilitários para enriquecer os seus programas.</div>
+
+        <div class="svg-center">
+            <svg width="240" height="90" viewBox="0 0 240 90" aria-hidden="true" role="presentation">
+                <text x="10" y="55" font-size="34" class="anim-bounce">🧰</text>
+                <text x="80" y="55" font-size="34" class="anim-bounce" style="animation-delay:.2s">🔨</text>
+                <text x="150" y="55" font-size="34" class="anim-bounce" style="animation-delay:.4s">🪚</text>
+                <text x="120" y="80" text-anchor="middle" font-size="10" fill="#64748b">Ferramentas prontas — não reinvente a roda!</text>
+            </svg>
+        </div>
+
+        <p>Imagine que precisa de pregar um prego. Você constrói um martelo do zero ou pega um que já existe na sua caixa de ferramentas? Na programação, as <strong>bibliotecas</strong> são essa caixa de ferramentas. Elas contêm funções já testadas e otimizadas para que você não precise "reinventar a roda".</p>
+        
+        <div class="box info">
+            <strong>💡 O Comando <code>inclua</code>:</strong> Para usar essas ferramentas, você deve "pedir" ao computador para carregar a biblioteca no início do seu programa, usando a sintaxe: <code>inclua biblioteca NomeDaBiblioteca</code>.
+        </div>
+
+        <h3>🔧 As 4 Bibliotecas Essenciais do Portugol</h3>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Biblioteca</th><th>Funções Principais</th><th>Exemplo de Uso</th></tr>
+                <tr>
+                    <td><strong>Matematica</strong> √</td>
+                    <td><code>raiz()</code>, <code>potencia()</code>, <code>abs()</code> (valor absoluto), <code>aleatorio(min, max)</code>, <code>PI</code></td>
+                    <td><code>Matematica.raiz(25)</code> → <code>5.0</code><br><code>Matematica.PI</code> → <code>3.14159...</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Texto</strong> 🔤</td>
+                    <td><code>caixa_alta()</code>, <code>caixa_baixa()</code>, <code>numero_caracteres()</code>, <code>posicao_texto()</code></td>
+                    <td><code>Texto.caixa_alta("oi")</code> → <code>"OI"</code><br><code>Texto.numero_caracteres("Ana")</code> → <code>3</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Tempo</strong> ⏰</td>
+                    <td><code>hora_atual()</code>, <code>data_atual()</code></td>
+                    <td><code>Tempo.hora_atual()</code> → <code>"14:30:05"</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Util</strong> 🛠️</td>
+                    <td><code>pausar(milissegundos)</code>, <code>limpar()</code></td>
+                    <td><code>Util.pausar(2000)</code> (espera 2 segundos)<br><code>Util.limpar()</code> (limpa o console)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- NOVA SECÇÃO: ARMADILHA DO ALEATÓRIO -->
+        <div class="box warn">
+            <strong>💀 A Armadilha Mortal do "Aleatório":</strong><br>
+            Os computadores não geram números verdadeiramente aleatórios; eles usam fórmulas matemáticas (geradores pseudoaleatórios). Se você não "semeiar" esse gerador com um valor único (como o relógio do sistema), ele gerará <strong>a exata mesma sequência de números</strong> toda vez que o programa for executado!<br><br>
+            ✅ <strong>Solução:</strong> Chame <code>Matematica.inicializarAleatorio()</code> <strong>uma única vez</strong>, logo no início da função <code>inicio()</code>, antes de qualquer chamada a <code>aleatorio()</code>.
+        </div>
+
+        <h3>🎲 Gerando Números Aleatórios na Prática</h3>
+<pre><code><span class="kw">inclua</span> biblioteca Matematica
+<span class="kw">inclua</span> biblioteca Util
+
+<span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="com">// 1. Inicializa o gerador (OBRIGATÓRIO!)</span>
+        Matematica.<span class="fn">inicializarAleatorio</span>()
+        
+        <span class="com">// 2. Gera número entre 1 e 100 (ambos inclusivos)</span>
+        <span class="tp">inteiro</span> sorteio = Matematica.<span class="fn">aleatorio</span>(<span class="num">1</span>, <span class="num">100</span>)
+        <span class="fn">escreval</span>(<span class="str">"Sorteando..."</span>)
+        Util.<span class="fn">pausar</span>(<span class="num">1000</span>) <span class="com">// Cria um suspense de 1 segundo</span>
+        <span class="fn">escreval</span>(<span class="str">"Número sorteado: "</span>, sorteio)
+    }
+}</code></pre>
+
+        <h3>🔤 Dica de Ouro: Higienização de Texto</h3>
+        <p>Um dos maiores problemas ao ler dados do usuário é que ele pode digitar "sim", "SIM", "Sim" ou "sIm". Para comparar corretamente, converta sempre o texto para um padrão único:</p>
+<pre><code><span class="kw">inclua</span> biblioteca Texto
+
+<span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">cadeia</span> resposta
+        <span class="fn">escreva</span>(<span class="str">"Deseja continuar? (sim/nao): "</span>)
+        <span class="fn">leia</span>(resposta)
+        
+        <span class="com">// Convertemos para minúsculas para facilitar a comparação</span>
+        <span class="tp">cadeia</span> resposta_limpa = Texto.<span class="fn">caixa_baixa</span>(resposta)
+        
+        <span class="kw">se</span> (resposta_limpa == <span class="str">"sim"</span>) {
+            <span class="fn">escreva</span>(<span class="str">"Continuando o programa... 🚀"</span>)
+        } <span class="kw">senao</span> {
+            <span class="fn">escreva</span>(<span class="str">"Programa encerrado. 👋"</span>)
+        }
+    }
+}</code></pre>
+
+        <h3>💻 Exemplo Completo: Jogo de Adivinhação com Limites</h3>
+<pre><code><span class="kw">inclua</span> biblioteca Matematica
+<span class="kw">inclua</span> biblioteca Texto
+
+<span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        Matematica.<span class="fn">inicializarAleatorio</span>()
+        <span class="tp">inteiro</span> segredo = Matematica.<span class="fn">aleatorio</span>(<span class="num">1</span>, <span class="num">50</span>)
+        <span class="tp">inteiro</span> palpite, tentativas = <span class="num">0</span>
+        <span class="tp">inteiro</span> max_tentativas = <span class="num">5</span>
+        <span class="tp">logico</span> acertou = <span class="kw">falso</span>
+        
+        <span class="fn">escreval</span>(<span class="str">"🎯 Adivinhe o número de 1 a 50. Você tem "</span>, max_tentativas, <span class="str">" tentativas!"</span>)
+        
+        <span class="kw">enquanto</span> (tentativas &lt; max_tentativas <span class="kw">e</span> <span class="kw">nao</span> acertou) {
+            <span class="fn">escreva</span>(<span class="str">"Tentativa "</span>, tentativas + <span class="num">1</span>, <span class="str">": "</span>)
+            <span class="fn">leia</span>(palpite)
+            tentativas++
+            
+            <span class="kw">se</span> (palpite == segredo) {
+                acertou = <span class="kw">verdadeiro</span>
+            } <span class="kw">senao se</span> (palpite &gt; segredo) {
+                <span class="fn">escreval</span>(<span class="str">"Muito alto! ⬇️"</span>)
+            } <span class="kw">senao</span> {
+                <span class="fn">escreval</span>(<span class="str">"Muito baixo! ⬆️"</span>)
+            }
+        }
+        
+        <span class="kw">se</span> (acertou) {
+            <span class="fn">escreval</span>(<span class="str">"🎉 Parabéns! Acertou em "</span>, tentativas, <span class="str">" tentativas!"</span>)
+        } <span class="kw">senao</span> {
+            <span class="fn">escreval</span>(<span class="str">"💀 Game Over! O número era: "</span>, segredo)
+        }
+    }
+}</code></pre>
+
+        <!-- EXERCÍCIOS CATEGORIZADOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            
+            <h4>🟢 Nível Básico</h4>
+            <ol>
+                <li>Escreva um programa que simule o lançamento de <strong>dois dados</strong> de 6 faces e mostre a soma dos resultados 🎲.</li>
+                <li>Peça ao usuário para digitar uma frase. Use as funções de texto para exibir essa mesma frase em <strong>CAIXA ALTA</strong> e em <strong>caixa baixa</strong>.</li>
+            </ol>
+
+            <h4>🟡 Nível Intermediário</h4>
+            <ol start="3">
+                <li>Crie um programa que leia dois números e exiba a <strong>média das raízes quadradas</strong> desses dois números. (Ex: para 9 e 16, as raízes são 3 e 4, a média é 3.5).</li>
+                <li>Faça uma <strong>contagem regressiva</strong> de 10 até 0. A cada número, o programa deve esperar 1 segundo (use <code>Util.pausar(1000)</code>) e, idealmente, limpar a tela (use <code>Util.limpar()</code>) para criar um efeito de cronômetro digital ⏱️.</li>
+            </ol>
+
+            <h4>🔴 Nível Avançado (Validação Robusta)</h4>
+            <ol start="5">
+                <li>Crie um sistema de <strong>cadastro de senha</strong>. O programa deve pedir uma senha e usar <code>Texto.numero_caracteres()</code> para verificar se ela tem pelo menos 8 caracteres. Se não tiver, o programa deve insistir (usando um loop <code>enquanto</code>) até que o usuário digite uma senha válida.</li>
+                <li><strong>Desafio de Lógica:</strong> Crie um programa que gere um número aleatório entre 1 e 100. O usuário deve adivinhar, mas o programa deve dar dicas além de "maior/menor", como: "Está muito longe" (diferença > 20) ou "Está quente" (diferença <= 5). 🔥</li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: O Caça-Níqueis (Slot Machine) 🎰</h3>
+            <p>Crie um jogo de apostas simples com as seguintes regras:</p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li>O jogador começa com um <strong>saldo de R$ 100</strong>.</li>
+                <li>Cada jogada custa <strong>R$ 5</strong>. Se o saldo acabar, o jogo termina.</li>
+                <li>O jogo deve sortear <strong>3 números aleatórios</strong> entre 1 e 7 (representando os símbolos).</li>
+                <li><strong>Efeito Visual:</strong> Use <code>Util.limpar()</code> e <code>Util.pausar(500)</code> para mostrar os números sendo sorteados um por um, criando suspense.</li>
+                <li><strong>Prêmios:</strong> 
+                    <br>• 3 números iguais = Ganha <strong>R$ 50</strong> (Jackpot! 🎉)
+                    <br>• 2 números iguais = Ganha <strong>R$ 10</strong> (Pequeno prêmio 🪙)
+                    <br>• Todos diferentes = Perde a aposta.
+                </li>
+                <li>Após cada rodada, mostre o novo saldo e pergunte se deseja jogar novamente (use a técnica de <code>caixa_baixa</code> para validar a resposta "sim").</li>
+            </ul>
+            
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">💡 Dica de Implementação da Lógica de Vitória</summary>
+                <p style="margin-top: 8px; font-size: 0.95em;">
+                    Para verificar se há 2 ou 3 números iguais sem complicar, você pode usar uma estrutura <code>escolha</code> ou múltiplos <code>se</code>:<br>
+                    <code>se (n1 == n2 e n2 == n3) { premio = 50 }</code><br>
+                    <code>senao se (n1 == n2 ou n1 == n3 ou n2 == n3) { premio = 10 }</code><br>
+                    <code>senao { premio = 0 }</code>
+                </p>
+            </details>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+<!-- ================= CAPÍTULO 9 ================= -->
+    <section id="fluxograma" class="section">
+        <h2>📊 Fluxogramas</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Representação gráfica de algoritmos com símbolos padronizados (ISO 5807) e tradução para código.</div>
+
+        <div class="svg-center">
+            <svg width="240" height="340" viewBox="0 0 240 340" role="img" aria-label="Fluxograma mostrando início, leitura de número, decisão se é maior que zero, e resultados positivo ou não positivo, terminando em fim">
+                <!-- Terminal INÍCIO -->
+                <rect x="75" y="10" width="90" height="36" rx="18" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" class="anim-pulse"/>
+                <text x="120" y="33" text-anchor="middle" font-size="11" font-weight="bold">🚀 INÍCIO</text>
+                
+                <line x1="120" y1="46" x2="120" y2="68" stroke="#334155" stroke-width="2"/>
+                
+                <!-- Entrada -->
+                <polygon points="90,68 150,68 160,98 80,98" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="120" y="87" text-anchor="middle" font-size="10">📥 Leia número</text>
+                
+                <line x1="120" y1="98" x2="120" y2="125" stroke="#334155" stroke-width="2"/>
+                
+                <!-- Decisão -->
+                <polygon points="120,125 175,160 120,195 65,160" fill="#fee2e2" stroke="#ef4444" stroke-width="2" class="anim-pulse"/>
+                <text x="120" y="164" text-anchor="middle" font-size="10">num &gt; 0 ?</text>
+                
+                <!-- Caminhos -->
+                <line x1="65" y1="160" x2="40" y2="220" stroke="#10b981" stroke-width="2"/>
+                <line x1="175" y1="160" x2="200" y2="220" stroke="#ef4444" stroke-width="2"/>
+                
+                <text x="45" y="195" font-size="10" fill="#10b981" font-weight="bold">Sim</text>
+                <text x="185" y="195" font-size="10" fill="#ef4444" font-weight="bold">Não</text>
+                
+                <!-- Resultado positivo -->
+                <rect x="5" y="220" width="70" height="40" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+                <text x="40" y="240" text-anchor="middle" font-size="16">✅</text>
+                <text x="40" y="254" text-anchor="middle" font-size="8">Positivo</text>
+                
+                <!-- Resultado negativo -->
+                <rect x="165" y="220" width="70" height="40" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                <text x="200" y="240" text-anchor="middle" font-size="16">❌</text>
+                <text x="200" y="254" text-anchor="middle" font-size="8">Não positivo</text>
+                
+                <!-- Linhas para FIM -->
+                <line x1="40" y1="260" x2="85" y2="295" stroke="#334155" stroke-width="2"/>
+                <line x1="200" y1="260" x2="155" y2="295" stroke="#334155" stroke-width="2"/>
+                
+                <!-- Terminal FIM -->
+                <rect x="75" y="295" width="90" height="36" rx="18" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" class="anim-pulse"/>
+                <text x="120" y="318" text-anchor="middle" font-size="11" font-weight="bold">🏁 FIM</text>
+            </svg>
+        </div>
+
+        <p>Antes de escrever uma única linha de código, um bom programador <strong>planeja</strong>. O fluxograma é a planta baixa do seu programa. Ele permite visualizar a lógica, encontrar falhas e explicar o funcionamento para outras pessoas sem que elas precisem saber programar.</p>
+
+        <h3>🔣 Símbolos Padrão (ISO 5807) e sua Tradução</h3>
+        <p>Cada forma geométrica tem um significado específico e corresponde diretamente a um comando no Portugol:</p>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Símbolo</th><th>Nome</th><th>Função no Algoritmo</th><th>Equivalente em Portugol</th></tr>
+                <tr>
+                    <td>⬭ <strong>Oval</strong></td>
+                    <td><strong>Terminal</strong> 🚀/🏁</td>
+                    <td>Indica o ponto de partida ou de chegada do fluxo.</td>
+                    <td><code>programa {</code> e <code>}</code></td>
+                </tr>
+                <tr>
+                    <td>▱ <strong>Paralelogramo</strong></td>
+                    <td><strong>Entrada/Saída</strong> 📥📤</td>
+                    <td>Recebe dados do exterior ou exibe resultados.</td>
+                    <td><code>leia()</code> ou <code>escreva()</code></td>
+                </tr>
+                <tr>
+                    <td>▭ <strong>Retângulo</strong></td>
+                    <td><strong>Processo</strong> ⚙️</td>
+                    <td>Cálculos, atribuições ou manipulação de dados.</td>
+                    <td><code>media = (n1 + n2) / 2</code></td>
+                </tr>
+                <tr>
+                    <td>◇ <strong>Losango</strong></td>
+                    <td><strong>Decisão</strong> ❓</td>
+                    <td>Testa uma condição. O fluxo se divide em caminhos.</td>
+                    <td><code>se (condicao) { ... } senao { ... }</code></td>
+                </tr>
+                <tr>
+                    <td>◯ <strong>Círculo</strong></td>
+                    <td><strong>Conector</strong> 🔗</td>
+                    <td>Une partes do fluxograma que estão em páginas ou áreas diferentes (evita linhas cruzadas).</td>
+                    <td>(Continuação lógica do código)</td>
+                </tr>
+                <tr>
+                    <td>→ <strong>Seta</strong></td>
+                    <td><strong>Linha de Fluxo</strong> ➡️</td>
+                    <td>Indica a direção e a ordem de execução das operações.</td>
+                    <td>A ordem sequencial das linhas de código.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- NOVA SECÇÃO: DO DESENHO AO CÓDIGO -->
+        <h3>🌉 A Ponte: Do Fluxograma para o Código</h3>
+        <p>Veja como o fluxograma acima se traduz diretamente em Portugol. Note a correspondência exata entre as formas e os comandos:</p>
+        <div class="example-box">
+<pre><code><span class="kw">programa</span> {                           <span class="com">// ⬭ Terminal: INÍCIO</span>
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">inteiro</span> num
+        
+        <span class="fn">leia</span>(num)                    <span class="com">// ▱ Entrada: Leia número</span>
+        
+        <span class="kw">se</span> (num &gt; <span class="num">0</span>) {               <span class="com">// ◇ Decisão: num > 0 ?</span>
+            <span class="fn">escreva</span>(<span class="str">"Positivo ✅"</span>)    <span class="com">// ▱ Saída (Caminho Sim)</span>
+        } <span class="kw">senao</span> {
+            <span class="fn">escreva</span>(<span class="str">"Não positivo ❌"</span>)<span class="com">// ▱ Saída (Caminho Não)</span>
+        }
+    }                                <span class="com">// ⬭ Terminal: FIM</span>
+}</code></pre>
+        </div>
+
+        <!-- NOVA SECÇÃO: ARMADILHAS -->
+        <div class="box warn">
+            <strong>💀 As 3 Armadilhas Mortais ao Desenhar Fluxogramas:</strong>
+            <ol style="margin-top: 8px; font-size: 0.95em;">
+                <li><strong>O Losango de Três Saídas:</strong> Em programação básica, uma condição é sempre binária (Verdadeiro ou Falso). Nunca desenhe um losango com 3 setas saindo (ex: "Maior", "Menor", "Igual"). Divida em dois losangos encadeados (<code>se / senao se</code>).</li>
+                <li><strong>O Loop Infinito no Papel:</strong> Ao desenhar uma repetição, a seta que volta para cima <strong>deve</strong> passar por um losango de condição. Se não houver uma saída possível (ex: "Fim"), o fluxograma está errado.</li>
+                <li><strong>Símbolos Trocados:</strong> Usar um retângulo para <code>leia</code> ou um paralelogramo para um cálculo <code>x = x + 1</code>. Lembre-se: Retângulo = processamento interno; Paralelogramo = comunicação com o mundo exterior.</li>
+            </ol>
+        </div>
+
+        <div class="card yellow">
+            <strong>🎨 Dicas de Ouro para um Fluxograma Profissional:</strong>
+            <ul>
+                <li>📏 Sempre comece com <strong>INÍCIO</strong> e termine com <strong>FIM</strong> (nunca deixe um caminho "pendurado").</li>
+                <li>⬇️ O fluxo geral deve ser de <strong>cima para baixo</strong> ou da <strong>esquerda para a direita</strong>.</li>
+                <li>📝 O texto dentro dos símbolos deve ser <strong>curto e direto</strong> (ex: "Leia idade", não "Pergunte ao usuário qual é a idade dele").</li>
+                <li>🚫 Evite cruzar linhas. Se ficar confuso, use o símbolo de <strong>Conector</strong> (círculo com uma letra dentro, como "A").</li>
+            </ul>
+        </div>
+
+        <!-- EXERCÍCIOS CATEGORIZADOS -->
+        <div class="exercicios">
+            <h3>📝 Exercícios de Fixação</h3>
+            
+            <h4>🟢 Nível Básico (Desenho)</h4>
+            <ol>
+                <li>Desenhe o fluxograma de um programa que lê dois números, calcula a soma e exibe o resultado 📊.</li>
+                <li>Desenhe o fluxograma que verifica se um número inteiro é <strong>múltiplo de 5</strong> (Dica: use o operador <code>%</code> no losango).</li>
+            </ol>
+
+            <h4>🟡 Nível Intermediário (Fluxo com Repetição)</h4>
+            <ol start="3">
+                <li>Desenhe o fluxograma de um programa que exibe os números <strong>pares de 1 a 10</strong>. (Lembre-se de incluir o retângulo de inicialização do contador e o losango de condição do loop).</li>
+                <li>Desenhe o fluxograma que valida a entrada de uma senha: o programa deve pedir a senha e, se ela for diferente de "1234", voltar a pedir (loop) até que esteja correta 🔐.</li>
+            </ol>
+
+            <h4>🔴 Nível Avançado (Tradução Reversa)</h4>
+            <ol start="5">
+                <li><strong>Engenharia Reversa:</strong> Observe o código abaixo e descreva (ou desenhe mentalmente) quais seriam os símbolos do fluxograma correspondente e em que ordem eles apareceriam:
+<pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> i = <span class="num">1</span>
+<span class="kw">enquanto</span> (i &lt;= <span class="num">3</span>) {
+    <span class="fn">escreva</span>(i)
+    i = i + <span class="num">1</span>
+}</code></pre>
+                </li>
+                <li>Desenhe o fluxograma completo para a lógica do <strong>ano bissexto</strong> (divisível por 4, mas não por 100, exceto se for por 400). Quantos losangos são necessários no mínimo?</li>
+            </ol>
+        </div>
+        
+        <div class="desafio">
+            <h3>🚀 Desafio Principal: O Caixa Eletrônico 🏧</h3>
+            <p>Este é o "chefão" dos fluxogramas. Desenhe o fluxograma completo de um sistema bancário simples com as seguintes regras:</p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li>Saldo inicial de <strong>R$ 1000,00</strong>.</li>
+                <li>Exibir um menu com 4 opções: 1) Consultar Saldo, 2) Sacar, 3) Depositar, 4) Sair.</li>
+                <li>O sistema deve usar um <strong>loop</strong> para voltar ao menu após cada operação, até que o usuário escolha "4) Sair".</li>
+                <li><strong>Regra de Negócio Crítica:</strong> Na opção "Sacar", o sistema deve verificar se o valor do saque é <strong>maior que o saldo atual</strong>. Se for, exibir "Saldo insuficiente" e <strong>não</strong> realizar o saque, voltando ao menu.</li>
+            </ul>
+            
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary);">💡 Dica de Arquitetura do Fluxo</summary>
+                <p style="margin-top: 8px; font-size: 0.95em;">
+                    1. Comece com um losango principal para o loop do menu (ex: <code>opcao != 4</code>).<br>
+                    2. Dentro dele, coloque um losango grande de <code>escolha/caso</code> (ou vários <code>se/senao se</code> encadeados) para direcionar para as ações 1, 2, 3 ou 4.<br>
+                    3. No ramo do "Saque", insira um losango de validação: <code>valor_saque <= saldo</code>. O caminho "Sim" vai para o retângulo de <code>saldo = saldo - valor_saque</code>. O caminho "Não" vai para um paralelogramo de erro.<br>
+                    4. Todos os caminhos de ação devem ter uma seta que <strong>retorna</strong> à condição do loop principal, exceto a opção "Sair", que vai direto para o Terminal FIM.
+                </p>
+            </details>
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    <!-- ================= CAPÍTULO 10 ================= -->
+    <section id="linguagem" class="section">
+    <h2>🌍 Linguagens de Programação Reais</h2>
+    <div class="aula-tag">🎯 <strong>Aula:</strong> Visão geral do ecossistema, diferenças de execução e o guia de transição do Portugol para o mundo real.</div>
+    
+    <div class="svg-center">
+    <svg width="280" height="90" viewBox="0 0 280 90" aria-hidden="true" role="presentation">
+    <text x="10" y="50" font-size="30" class="anim-bounce">🐍</text>
+    <text x="60" y="50" font-size="30" class="anim-bounce" style="animation-delay:.15s">☕</text>
+    <text x="110" y="50" font-size="30" class="anim-bounce" style="animation-delay:.3s">🌐</text>
+    <text x="160" y="50" font-size="30" class="anim-bounce" style="animation-delay:.45s">⚙️</text>
+    <text x="210" y="50" font-size="30" class="anim-bounce" style="animation-delay:.6s">🎮</text>
+    <text x="140" y="80" text-anchor="middle" font-size="10" fill="#64748b">A lógica é universal, a sintaxe é que muda 🛠️</text>
+    </svg>
+    </div>
+    
+    <p>Parabéns! Se chegaste até aqui, já dominas a <strong>lógica de programação</strong>. Agora, vamos aprender a "falar" com as máquinas usando as línguas que o mercado de trabalho realmente utiliza. A boa notícia? A lógica (sequência, condição, repetição) é <strong>exatamente a mesma</strong> que aprendeste no Portugol.</p>
+    
+    <h3>⚙️ Como o Código vira Ação? (Compilado vs. Interpretado)</h3>
+    <div class="table-wrap">
+    <table>
+    <tr><th>Tipo</th><th>Como funciona</th><th>Analogia</th><th>Exemplos</th></tr>
+    <tr>
+    <td><strong>Compilada</strong></td>
+    <td>O código inteiro é traduzido de uma vez para linguagem de máquina, gerando um ficheiro executável (.exe).</td>
+    <td>Traduzir um livro inteiro para outro idioma antes de o publicar.</td>
+    <td>C, C++, Rust, Go</td>
+    </tr>
+    <tr>
+    <td><strong>Interpretada</strong></td>
+    <td>Um programa (interpretador) lê e executa o código linha por linha, em tempo real.</td>
+    <td>Um tradutor humano a traduzir simultaneamente durante uma conversa.</td>
+    <td>Python, JavaScript, PHP, Ruby</td>
+    </tr>
+    </table>
+    </div>
+    
+    <h3>📊 Mapa das Linguagens por Área de Atuação</h3>
+    <div class="table-wrap">
+    <table>
+    <tr><th>Área</th><th>Linguagens Principais</th><th>O que constrói?</th></tr>
+    <tr><td>🌐 <strong>Web (Front-end)</strong></td><td>HTML, CSS, JavaScript, TypeScript</td><td>A parte visual e interativa dos sites.</td></tr>
+    <tr><td>🖥️ <strong>Web (Back-end)</strong></td><td>Python, Node.js, PHP, Java, C#</td><td>O "cérebro" do site, bases de dados e servidores.</td></tr>
+    <tr><td>📱 <strong>Mobile</strong></td><td>Kotlin (Android), Swift (iOS), Flutter/Dart</td><td>Aplicações para telemóveis e tablets.</td></tr>
+    <tr><td>🎮 <strong>Jogos</strong></td><td>C++ (Unreal), C# (Unity), GDScript (Godot)</td><td>Motores de jogos e lógica de gameplay.</td></tr>
+    <tr><td>🤖 <strong>IA e Dados</strong></td><td>Python, R, Julia</td><td>Machine Learning, análise de dados e automação.</td></tr>
+    <tr><td>⚙️ <strong>Sistemas/Baixo Nível</strong></td><td>C, C++, Rust, Assembly</td><td>Sistemas operativos, drivers e hardware.</td></tr>
+    </table>
+    </div>
+    
+    <h3>🔄 A "Pedra de Roseta": Portugol vs. Python vs. JavaScript</h3>
+    <p>Veja como os conceitos que já dominas se traduzem nas duas linguagens mais populares para iniciantes:</p>
+    <div class="table-wrap">
+    <table>
+    <tr><th>Conceito</th><th>Portugol</th><th>Python 🐍</th><th>JavaScript 🌐</th></tr>
+    <tr><td><strong>Variável</strong></td><td><code>inteiro idade = 18</code></td><td><code>idade = 18</code> (Tipagem dinâmica)</td><td><code>let idade = 18;</code></td></tr>
+    <tr><td><strong>Entrada</strong></td><td><code>leia(nome)</code></td><td><code>nome = input("Nome: ")</code></td><td><code>let nome = prompt("Nome: ");</code></td></tr>
+    <tr><td><strong>Saída</strong></td><td><code>escreva("Olá")</code></td><td><code>print("Olá")</code></td><td><code>console.log("Olá");</code></td></tr>
+    <tr><td><strong>Condição</strong></td><td><code>se (x > 0) { ... }</code></td><td><code>if x > 0:</code> (Note os dois pontos!)</td><td><code>if (x > 0) { ... }</code></td></tr>
+    <tr><td><strong>Laço PARA</strong></td><td><code>para (i=1; i<=5; i++)</code></td><td><code>for i in range(1, 6):</code></td><td><code>for(let i=1; i<=5; i++) { }</code></td></tr>
+    <tr><td><strong>Função</strong></td><td><code>funcao somar(a, b)</code></td><td><code>def somar(a, b):</code></td><td><code>function somar(a, b) { }</code></td></tr>
+    </table>
+    </div>
+    
+    <h3>💻 Exemplos Práticos Lado a Lado</h3>
+    
+    <h4>🐍 Python: Simples e Legível</h4>
+    <p>Python é a linguagem nº 1 para iniciantes e IA. Repara como é próxima do inglês e do Portugol.</p>
+    <pre><code><span class="com"># 1. Entrada de dados (input sempre retorna texto, por isso usamos float())</span>
+    nota1 = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"Digite a primeira nota: "</span>))
+    nota2 = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"Digite a segunda nota: "</span>))
+    
+    <span class="com"># 2. Processamento</span>
+    media = (nota1 + nota2) / <span class="num">2</span>
+    
+    <span class="com"># 3. Saída formatada (f-string)</span>
+    <span class="fn">print</span>(<span class="str">f"A sua média é: </span>{media}<span class="str">"</span>)
+    
+    <span class="com"># 4. Condicional (atenção à indentação!)</span>
+    <span class="kw">if</span> media >= <span class="num">14</span>:
+    <span class="fn">print</span>(<span class="str">"Aprovado com Distinção! ✅"</span>)
+    <span class="kw">elif</span> media >= <span class="num">10</span>:
+    <span class="fn">print</span>(<span class="str">"Aprovado. ✅"</span>)
+    <span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Reprovado. ❌"</span>)</code></pre>
+    
+    <h4>🌐 JavaScript: A Língua da Web</h4>
+    <p>JavaScript roda em todos os navegadores. Podes testar este código agora mesmo pressionando <code>F12</code> no teu navegador e indo à aba "Console".</p>
+    <pre><code><span class="com">// 1. Entrada e conversão de dados</span>
+    <span class="kw">let</span> nota1 = <span class="fn">parseFloat</span>(<span class="fn">prompt</span>(<span class="str">"Digite a primeira nota:"</span>));
+    <span class="kw">let</span> nota2 = <span class="fn">parseFloat</span>(<span class="fn">prompt</span>(<span class="str">"Digite a segunda nota:"</span>));
+    
+    <span class="com">// 2. Processamento</span>
+    <span class="kw">let</span> media = (nota1 + nota2) / <span class="num">2</span>;
+    
+    <span class="com">// 3. Saída (Template String com crase ` `)</span>
+    <span class="fn">console.log</span>(<span class="str">`A sua média é: </span>${media}<span class="str">`</span>);
+    
+    <span class="com">// 4. Condicional (usa chavetas {} e parênteses ())</span>
+    <span class="kw">if</span> (media >= <span class="num">14</span>) {
+    <span class="fn">console.log</span>(<span class="str">"Aprovado com Distinção! ✅"</span>);
+    } <span class="kw">else if</span> (media >= <span class="num">10</span>) {
+    <span class="fn">console.log</span>(<span class="str">"Aprovado. ✅"</span>);
+    } <span class="kw">else</span> {
+    <span class="fn">console.log</span>(<span class="str">"Reprovado. ❌"</span>);
+    }</code></pre>
+    
+    <!-- NOVA SECÇÃO: ARMADILHAS DA TRANSIÇÃO -->
+    <div class="box warn">
+    <strong>💀 As 3 Armadilhas ao sair do Portugol:</strong>
+    <ol style="margin-top: 8px; font-size: 0.95em;">
+    <li><strong>Case Sensitive (Sensível a maiúsculas):</strong> Ao contrário do Portugol, em Python e JS, <code>Media</code>, <code>media</code> e <code>MEDIA</code> são <strong>três variáveis diferentes</strong>. Escreve sempre em minúsculas (ou segue o padrão camelCase).</li>
+    <li><strong>A Tirania da Indentação (Python):</strong> Em Python, os espaços no início da linha <strong>definem</strong> os blocos de código (o que está dentro do <code>if</code> ou do <code>for</code>). Se a indentação estiver errada, o programa dá erro.</li>
+    <li><strong>Ponto e Vírgula e Chavetas (JS/C/C++):</strong> Esquecer o <code>;</code> no final da linha ou as chavetas <code>{ }</code> que agrupam blocos é o erro de sintaxe mais comum em JavaScript.</li></ol>
+    </div>
+    
+    <div class="box tip">
+    <strong>🚀 Onde praticar agora mesmo (sem instalar nada):</strong>
+    <ul style="margin-top: 6px;">
+    <li><strong>Python:</strong> <a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank" style="color:var(--primary)">Programiz Python Compiler</a> ou <a href="https://replit.com/" target="_blank" style="color:var(--primary)">Replit.com</a></li>
+    <li><strong>JavaScript:</strong> Abre o teu navegador (Chrome/Firefox), clica com o botão direito → "Inspecionar" → aba <strong>"Console"</strong> e escreve o código lá!</li>
+    </ul>
+    </div>
+    
+    <!-- EXERCÍCIOS CATEGORIZADOS -->
+    <div class="exercicios">
+    <h3>📝 Exercícios de Transição</h3>
+    
+    <h4>🟢 Nível Básico (Reconhecimento)</h4>
+    <ol>
+    <li>Qual a diferença fundamental entre uma linguagem compilada e uma interpretada?</li>
+    <li>Por que é que <code>Nome</code> e <code>nome</code> são a mesma variável no Portugol, mas são diferentes em Python?</li>
+    </ol>
+    
+    <h4>🟡 Nível Intermediário (Tradução)</h4>
+    <ol start="3">
+    <li>Traduz o seguinte trecho de Portugol para <strong>Python</strong>:
+    <pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> idade
+    <span class="fn">leia</span>(idade)
+    <span class="kw">se</span> (idade >= <span class="num">18</span>) {
+    <span class="fn">escreva</span>(<span class="str">"Maior de idade"</span>)
+    }</code></pre>
+    </li>
+    <li>Traduz o seguinte trecho de Portugol para <strong>JavaScript</strong>:
+    <pre style="margin: 8px 0; padding: 8px;"><code><span class="tp">inteiro</span> i
+    <span class="kw">para</span> (i = <span class="num">1</span>; i &lt;= <span class="num">3</span>; i++) {
+    <span class="fn">escreva</span>(i)
+    }</code></pre>
+    </li>
+    </ol>
+    
+    <h4>🔴 Nível Avançado (Pesquisa e Aplicação)</h4>
+    <ol start="5">
+    <li>Pesquisa: O que é o <strong>React Native</strong> e por que é que empresas como Facebook e Instagram o utilizam em vez de criar duas apps separadas (uma para Android e outra para iOS)?</li>
+    <li>Desafio de Sintaxe: Escreve um pequeno script em Python que peça o ano de nascimento, calcule a idade atual (usando o ano de 2026) e diga se a pessoa é "Jovem" (< 30), "Adulto" (30-60) ou "Sênior" (> 60).</li>
+    </ol>
+    </div>
+    
+    <div class="desafio">
+    <h3>🚀 Desafio Final do Curso: O Portfólio de Tradução</h3>
+    <p>Chegou a hora de provar que a lógica é universal. Escolhe <strong>UMA</strong> linguagem real (Python ou JavaScript são as recomendadas) e implementa os seguintes 3 mini-projetos que já fizeste em Portugol:</p>
+    <ol style="margin-left: 20px; margin-top: 8px;">
+    <li><strong>Calculadora de IMC:</strong> Com validação de entrada (não aceitar números negativos).</li>
+    <li><strong>Jogo de Adivinhação:</strong> Com limite de tentativas e uso de números aleatórios.</li>
+    <li><strong>Verificador de Números Primos:</strong> Usando uma função/método separado.</li>
+    </ol>
+    <p style="margin-top: 12px;"><em>💡 Dica: Não tentes fazer tudo de memória. Usa a tabela de "Pedra de Roseta" deste capítulo e consulta a documentação oficial ou o ChatGPT quando esqueceres a sintaxe específica. Isso é o que os programadores profissionais fazem todos os dias!</em></p>
+    </div>
+    </section>
+    
+    
+    
+    
+    <!-- ================= CAPÍTULO 11 ================= -->
+    <section id="projetos" class="section">
+        <h2>🚀 50 Projetos para Fazer em Aula</h2>
+        <div class="aula-tag">🎯 <strong>Aula:</strong> Ideias de projetos integradores para praticar lógica e migrar para linguagens reais.</div>
+
+        <div class="svg-center">
+            <svg width="220" height="110" viewBox="0 0 220 110" aria-hidden="true" role="presentation">
+                <text x="90" y="70" font-size="48" class="anim-bounce">🚀</text>
+                <text x="30" y="45" font-size="20" class="anim-pulse">⭐</text>
+                <text x="170" y="35" font-size="16" class="anim-blink">✨</text>
+                <text x="185" y="80" font-size="18" class="anim-pulse" style="animation-delay:.5s">🌟</text>
+                <text x="110" y="100" text-anchor="middle" font-size="10" fill="#64748b">Do Portugol ao mundo real!</text>
+            </svg>
+        </div>
+
+        <div class="box tip">
+            <strong>📌 Como usar:</strong> Comece implementando no Portugol, depois converta para Python, JavaScript ou outra linguagem. Cada projeto reforça os conceitos aprendidos!
+        </div>
+
+        <h3>🟢 Iniciante (1–15)</h3>
+        <ul class="project-list">
+            <li><span class="num">1.</span> Calculadora básica 🧮</li>
+            <li><span class="num">2.</span> Conversão de temperatura 🌡️</li>
+            <li><span class="num">3.</span> Soma dos pares 🔢</li>
+            <li><span class="num">4.</span> Par ou ímpar</li>
+            <li><span class="num">5.</span> Número primo 🔍</li>
+            <li><span class="num">6.</span> Decimal → binário 🪙</li>
+            <li><span class="num">7.</span> Tabuada</li>
+            <li><span class="num">8.</span> IMC ⚖️</li>
+            <li><span class="num">9.</span> Maioridade 🎂</li>
+            <li><span class="num">10.</span> Fatorial ❗</li>
+            <li><span class="num">11.</span> Positivo/negativo/zero</li>
+            <li><span class="num">12.</span> Fibonacci 🌀</li>
+            <li><span class="num">13.</span> Área do triângulo 🔺</li>
+            <li><span class="num">14.</span> Soma de 1 a 100</li>
+            <li><span class="num">15.</span> Data válida 📅</li>
+        </ul>
+
+        <h3>🟡 Intermediário (16–35)</h3>
+        <ul class="project-list">
+            <li><span class="num">16.</span> Conta bancária 🏦</li>
+            <li><span class="num">17.</span> Idade em dias</li>
+            <li><span class="num">18.</span> Média de notas 🎓</li>
+            <li><span class="num">19.</span> Múltiplos</li>
+            <li><span class="num">20.</span> Volume da esfera ⚽</li>
+            <li><span class="num">21.</span> Número de Armstrong</li>
+            <li><span class="num">22.</span> Jogo de dados 🎲</li>
+            <li><span class="num">23.</span> Números perfeitos</li>
+            <li><span class="num">24.</span> Palíndromo 🔄</li>
+            <li><span class="num">25.</span> Anagramas 🔤</li>
+            <li><span class="num">26.</span> Calculadora com menu</li>
+            <li><span class="num">27.</span> Conversor C/F/K 🌡️</li>
+            <li><span class="num">28.</span> Média com recuperação</li>
+            <li><span class="num">29.</span> Jogo de adivinhação 🎯</li>
+            <li><span class="num">30.</span> Pares/ímpares em intervalo</li>
+            <li><span class="num">31.</span> Primos em intervalo</li>
+            <li><span class="num">32.</span> Bubble sort</li>
+            <li><span class="num">33.</span> Pedra, papel, tesoura ✊✋✌️</li>
+            <li><span class="num">34.</span> Negativos/positivos/nulos</li>
+            <li><span class="num">35.</span> Caixa eletrônico 🏧</li>
+        </ul>
+
+        <h3>🔴 Avançado (36–50)</h3>
+        <ul class="project-list">
+            <li><span class="num">36.</span> Fatorial com validação</li>
+            <li><span class="num">37.</span> Jogo da senha 🔐</li>
+            <li><span class="num">38.</span> Conversor de moedas 💱</li>
+            <li><span class="num">39.</span> Ano bissexto 📆</li>
+            <li><span class="num">40.</span> Pitágoras 📐</li>
+            <li><span class="num">41.</span> Palíndromos em frases</li>
+            <li><span class="num">42.</span> Juros compostos 💰</li>
+            <li><span class="num">43.</span> Xadrez (movimentos) ♟️</li>
+            <li><span class="num">44.</span> Impostos 🧾</li>
+            <li><span class="num">45.</span> Vogais/consoantes</li>
+            <li><span class="num">46.</span> Busca binária 🔎</li>
+            <li><span class="num">47.</span> Jogo da velha ⭕❌</li>
+            <li><span class="num">48.</span> Damas ⚫⚪</li>
+            <li><span class="num">49.</span> Divisão com resto</li>
+            <li><span class="num">50.</span> Maiúsculas/minúsculas 🔠</li>
+        </ul>
+
+        <h3>🎮 Exemplo — Pedra, Papel e Tesoura</h3>
+<pre><code><span class="kw">inclua</span> biblioteca Matematica
+
+<span class="kw">programa</span> {
+    <span class="kw">funcao</span> <span class="fn">inicio</span>() {
+        <span class="tp">inteiro</span> jogador, computador
+        
+        Matematica.<span class="fn">inicializarAleatorio</span>()
+        
+        <span class="fn">escreval</span>(<span class="str">"===== JOKENPÔ ✊✋✌️ ====="</span>)
+        <span class="fn">escreva</span>(<span class="str">"Sua escolha (1-Pedra 2-Papel 3-Tesoura): "</span>)
+        <span class="fn">leia</span>(jogador)
+        
+        computador = Matematica.<span class="fn">aleatorio</span>(<span class="num">1</span>, <span class="num">3</span>)
+        
+        <span class="kw">se</span> (jogador == computador) {
+            <span class="fn">escreval</span>(<span class="str">"EMPATE! 🤝"</span>)
+        } <span class="kw">senao</span> <span class="kw">se</span> ((jogador==<span class="num">1</span> <span class="kw">e</span> computador==<span class="num">3</span>) <span class="kw">ou</span> 
+                 (jogador==<span class="num">2</span> <span class="kw">e</span> computador==<span class="num">1</span>) <span class="kw">ou</span> 
+                 (jogador==<span class="num">3</span> <span class="kw">e</span> computador==<span class="num">2</span>)) {
+            <span class="fn">escreval</span>(<span class="str">"VOCÊ VENCEU! 🎉"</span>)
+        } <span class="kw">senao</span> {
+            <span class="fn">escreval</span>(<span class="str">"COMPUTADOR VENCEU! 🤖"</span>)
+        }
+    }
+}</code></pre>
+
+        <div class="desafio">
+            <h3>🏆 Desafio Final</h3>
+            <p>Escolha 3 projetos da lista e implemente-os numa linguagem real. Depois, crie um <strong>menu principal unificado</strong> para executar qualquer um deles! 💪</p>
+        </div>
+    </section>
+
+    <!-- ================= SLIDE FINAL — AGRADECIMENTO ================= -->
+    <section id="agradecimento" class="final-slide">
+        <div class="svg-center">
+            <svg width="240" height="90" viewBox="0 0 240 90" aria-hidden="true" role="presentation">
+                <text x="30" y="60" font-size="42" class="anim-bounce">🙏</text>
+                <text x="105" y="55" font-size="32" class="anim-pulse">💙</text>
+                <text x="170" y="60" font-size="42" class="anim-bounce" style="animation-delay:.3s">🎓</text>
+            </svg>
+        </div>
+        <h2>Obrigado! 🙌</h2>
+        <p style="font-size:.95rem;opacity:.95">
+            Chegamos ao fim desta jornada de <strong>Lógica de Programação com Portugol</strong>.<br>
+            Continue praticando — a programação é uma maratona, não uma corrida! 🏃‍♂️💨
+        </p>
+
+        <h3 style="color:#fff;margin-top:20px;font-size:1.05rem">📞 Qualquer dúvida? Entre em contato!</h3>
+        <div class="contact-cards">
+            <div class="contact-card">
+                <span class="ic">👨‍🏫</span>
+                <strong>Autor</strong>
+                <p>Nando Kissanga</p>
+            </div>
+            <div class="contact-card">
+                <span class="ic">📧</span>
+                <strong>Email</strong>
+                <p>nandokissanga@gmail.com</p>
+            </div>
+            <div class="contact-card">
+                <span class="ic">📱</span>
+                <strong>WhatsApp</strong>
+                <p>957 511 281</p>
+            </div>
+        </div>
+
+        <h3 style="color:#fff;margin-top:20px;font-size:1.05rem">💝 Apoio com Donativo</h3>
+        <p style="opacity:.9">Se este material lhe ajudou, considere apoiar o projeto:</p>
+        <div class="iban-box">
+            <span class="iban-text">🏦 IBAN: AO06 0055 0000 6101 3844 1012 4</span>
+            <button class="copy-btn" id="copyIbanBtn" aria-label="Copiar IBAN para área de transferência">📋 Copiar</button>
+        </div>
+        <p style="margin-top:14px;font-size:.85rem;opacity:.8">
+            Feito com ❤️ para todos que querem aprender a programar.<br>
+            © 2026 · Nando Kissanga · Lógica de Programação com Portugol 📘
+        </p>
+    </section>
+
+</div>
+
+<script>
+    // ====== THEME TOGGLE ======
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // ====== PROGRESS BAR ======
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+
+    // ====== BACK TO TOP ======
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+    
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ====== SMOOTH SCROLL FOR TOC ======
+    document.querySelectorAll('.toc a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ====== COPY IBAN ======
+    const copyIbanBtn = document.getElementById('copyIbanBtn');
+    const toast = document.getElementById('toast');
+    const ibanText = 'AO06 0055 0000 6101 3844 1012 4';
+    
+    copyIbanBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(ibanText);
+            // Feedback visual
+            copyIbanBtn.textContent = '✅ Copiado!';
+            copyIbanBtn.classList.add('copy-success');
+            
+            // Mostrar toast
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                copyIbanBtn.textContent = '📋 Copiar';
+                copyIbanBtn.classList.remove('copy-success');
+                toast.classList.remove('show');
+            }, 2000);
+        } catch (err) {
+            // Fallback para navegadores antigos
+            const textArea = document.createElement('textarea');
+            textArea.value = ibanText;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copyIbanBtn.textContent = '✅ Copiado!';
+                setTimeout(() => {
+                    copyIbanBtn.textContent = '📋 Copiar';
+                }, 2000);
+            } catch (fallbackErr) {
+                alert('IBAN: ' + ibanText);
+            }
+            document.body.removeChild(textArea);
+        }
+    });
+</script>
+
+</body>
+</html>
