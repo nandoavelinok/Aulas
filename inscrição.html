@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Formação - Ja Ta Ki</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            background: linear-gradient(145deg, #f0f7ff 0%, #dae9f5 100%);
+            padding: 20px 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 32px 30px;
+            box-shadow: 0 25px 50px -10px rgba(0, 30, 60, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b4f6c, #1b7a9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.5px;
+            border-bottom: 3px solid #9cc7e0;
+            padding-bottom: 14px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0e4b6e;
+            margin: 32px 0 16px 0;
+            padding: 6px 0 6px 18px;
+            border-left: 8px solid #1f8fc7;
+            border-radius: 0 8px 8px 0;
+            background: #f3f9ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #183b52;
+            letter-spacing: 0.2px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 13px 18px;
+            margin-top: 4px;
+            border: 1.8px solid #cddeec;
+            border-radius: 18px;
+            font-size: 1rem;
+            background: #fbfdff;
+            transition: 0.2s;
+            color: #0b2b3d;
+            font-weight: 500;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1b7fb0;
+            box-shadow: 0 0 0 5px rgba(27, 127, 176, 0.12);
+            background: white;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 22px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        fieldset {
+            border: 2px solid #c2d9eb;
+            border-radius: 22px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            background: #f8fcff;
+        }
+
+        legend {
+            font-weight: 700;
+            color: #0f5c83;
+            background: white;
+            padding: 0 16px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            border: 1px solid #b7d2e8;
+            letter-spacing: 0.3px;
+        }
+
+        .method-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px 30px;
+            padding: 6px 0;
+        }
+
+        .method-flex label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1f8fc7;
+            margin: 0;
+        }
+
+        .inline-check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            background: #f2f9fe;
+            padding: 10px 16px;
+            border-radius: 18px;
+        }
+
+        .note {
+            background: #e7f0f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: #245979;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 6px 0 12px;
+        }
+
+        button {
+            background: #0b5c88;
+            color: white;
+            border: none;
+            padding: 18px 28px;
+            width: 100%;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 50px;
+            margin-top: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            box-shadow: 0 12px 22px rgba(6, 66, 100, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            background: #09425e;
+            transform: scale(1.02);
+            box-shadow: 0 18px 28px rgba(6, 66, 100, 0.4);
+        }
+
+        .auto-filled {
+            background: #f0f7fe;
+            font-weight: 700;
+            color: #0d4c6b;
+            border: 2px dashed #2f8fbf;
+            cursor: not-allowed;
+        }
+
+        #methodCountDisplay {
+            font-size: 0.9rem;
+            background: #ffffff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #1a4a66;
+            margin-left: 10px;
+            border: 1px solid #b7d2e8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 650px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            .container {
+                padding: 20px 16px;
+                border-radius: 24px;
+            }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📋 FORMULÁRIO DE INSCRIÇÃO</h1>
+    <p class="note">🎓 Centro de Formação — <strong>Ja Ta Ki</strong></p>
+
+    <form id="registrationForm" novalidate>
+
+        <!-- 1. DADOS DO ALUNO -->
+        <h2>1. 👤 DADOS DO ALUNO</h2>
+        <div class="grid-2">
+            <div>
+                <label for="fullname">✍️ Nome completo *</label>
+                <input type="text" id="fullname" name="fullname" required placeholder="Ex: João Manuel">
+            </div>
+            <div>
+                <label for="surname">👤 Apelido *</label>
+                <input type="text" id="surname" name="surname" required placeholder="Ex: da Silva">
+            </div>
+            <div>
+                <label for="gender">⚧️ Gênero *</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Selecione...</option>
+                    <option value="Masculino">♂️ Masculino</option>
+                    <option value="Feminino">♀️ Feminino</option>
+                </select>
+            </div>
+            <div>
+                <label for="ageCategory">🎂 Categoria de idade *</label>
+                <select id="ageCategory" name="ageCategory" required>
+                    <option value="">Selecione...</option>
+                    <option value="Criança (5-11)">👶 Criança (5-11)</option>
+                    <option value="Adolescente (12-17)">🧑 Adolescente (12-17)</option>
+                    <option value="Jovem (18-24)">🧑‍🎓 Jovem (18-24)</option>
+                    <option value="Adulto (25-64)">👨‍💼 Adulto (25-64)</option>
+                    <option value="Idoso (+65)">👴 Idoso (+65)</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label for="educationLevel">🎓 Nível escolar/académico *</label>
+                <select id="educationLevel" name="educationLevel" required>
+                    <option value="">Selecione...</option>
+                    <option value="Primário">📚 Primário</option>
+                    <option value="Secundário">🏫 Secundário</option>
+                    <option value="Ensino Médio">🎒 Ensino Médio</option>
+                    <option value="Bacharel">🎓 Bacharel</option>
+                    <option value="Licenciado">🎖️ Licenciado</option>
+                    <option value="Mestre">🏅 Mestre</option>
+                    <option value="Doutor">👨‍🔬 Doutor</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label for="course">📖 Disciplina/Curso *</label>
+                <select id="course" name="course" required>
+                    <option value="">Selecione...</option>
+                    <option value="Matemática">🔢 Matemática</option>
+                    <option value="Física">⚛️ Física</option>
+                    <option value="Química">🧪 Química</option>
+                    <option value="Biologia">🧬 Biologia</option>
+                    <option value="Português">📝 Português</option>
+                    <option value="Inglês">🇬🇧 Inglês</option>
+                    <option value="Francês">🇫🇷 Francês</option>
+                    <option value="Programação">💻 Programação</option>
+                    <option value="Informática">🖥️ Informática</option>
+                    <option value="Contabilidade">📊 Contabilidade</option>
+                    <option value="Outro">📌 Outro</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 2. OBJETIVO -->
+        <h2>2. 🎯 OBJETIVO</h2>
+        <div class="grid-2">
+            <div class="full-width">
+                <label for="formationObjective">🎯 Objetivo da formação *</label>
+                <select id="formationObjective" name="formationObjective" required>
+                    <option value="">Selecione...</option>
+                    <option value="Reforço escolar">📚 Reforço escolar</option>
+                    <option value="Preparação para teste/exame">📝 Preparação para teste/exame</option>
+                    <option value="Aprender do zero">🌱 Aprender do zero</option>
+                    <option value="Melhorar conhecimentos">📈 Melhorar conhecimentos</option>
+                    <option value="Preparação profissional">💼 Preparação profissional</option>
+                    <option value="Outro">📌 Outro</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label for="currentLevel">📊 Nível atual *</label>
+                <select id="currentLevel" name="currentLevel" required>
+                    <option value="">Selecione...</option>
+                    <option value="Iniciante">🌱 Iniciante</option>
+                    <option value="Elementar">📘 Elementar</option>
+                    <option value="Intermediário">📙 Intermediário</option>
+                    <option value="Avançado">📕 Avançado</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 3. PLANO -->
+        <h2>3. 💳 PLANO</h2>
+        <label for="plan">💎 Escolha o seu plano *</label>
+        <select id="plan" name="plan" required>
+            <option value="">Selecione...</option>
+            <option value="Extensivo (até 3 dias/semana)">📅 Extensivo (até 3 dias/semana)</option>
+            <option value="Intensivo (até 5 dias/semana)">📆 Intensivo (até 5 dias/semana)</option>
+            <option value="VIP (até 7 dias/semana)">👑 VIP (até 7 dias/semana)</option>
+        </select>
+
+        <!-- 4. HORÁRIO -->
+        <h2>4. 📅 HORÁRIO</h2>
+        <label>🗓️ Dias disponíveis * <span class="note" id="planNote">Selecione um plano primeiro</span></label>
+        <fieldset>
+            <div class="method-flex" id="daysGroup">
+                <label><input type="checkbox" name="days" value="Segunda"> Segunda</label>
+                <label><input type="checkbox" name="days" value="Terça"> Terça</label>
+                <label><input type="checkbox" name="days" value="Quarta"> Quarta</label>
+                <label><input type="checkbox" name="days" value="Quinta"> Quinta</label>
+                <label><input type="checkbox" name="days" value="Sexta"> Sexta</label>
+                <label><input type="checkbox" name="days" value="Sábado"> Sábado</label>
+                <label><input type="checkbox" name="days" value="Domingo"> Domingo</label>
+            </div>
+        </fieldset>
+
+        <div class="grid-2" style="margin-top: 18px;">
+            <div class="full-width">
+                <label>🕐 Horário preferencial (Início e Término) *</label>
+                <div class="grid-2">
+                    <input type="time" id="prefStart" name="prefStart" required>
+                    <input type="time" id="prefEnd" name="prefEnd" required>
+                </div>
+            </div>
+            <div class="full-width">
+                <label>🕒 Segundo horário (Alternativa)</label>
+                <div class="grid-2">
+                    <input type="time" id="secStart" name="secStart">
+                    <input type="time" id="secEnd" name="secEnd">
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. AULAS (Automático) -->
+        <h2>5. ⏱️ AULAS <span class="note">⚡ Preenchimento automático</span></h2>
+        <div class="grid-2">
+            <div>
+                <label for="duration">⏳ Duração da aula</label>
+                <input type="text" id="duration" name="duration" class="auto-filled" readonly placeholder="Calculado automaticamente">
+            </div>
+            <div>
+                <label for="classesPerWeek">📚 Aulas por semana</label>
+                <input type="text" id="classesPerWeek" name="classesPerWeek" class="auto-filled" readonly placeholder="Calculado automaticamente">
+            </div>
+        </div>
+
+        <!-- 6. PLATAFORMA -->
+        <h2>6. 🖥️ PLATAFORMA</h2>
+        <label for="platform">💻 Plataforma de aulas *</label>
+        <select id="platform" name="platform" required>
+            <option value="">Selecione...</option>
+            <option value="WhatsApp">💬 WhatsApp</option>
+            <option value="Google Meet">📹 Google Meet</option>
+            <option value="Facebook">👍 Facebook</option>
+            <option value="Chamada telefónica">📞 Chamada telefónica</option>
+        </select>
+
+        <!-- 7. MÉTODO -->
+        <h2>7. 👨🏽‍🏫 MÉTODO</h2>
+        <fieldset>
+            <legend>🎯 Escolha exatamente 2 métodos <span id="methodCountDisplay">0/2</span></legend>
+            <div class="method-flex" id="methodsGroup">
+                <label><input type="checkbox" class="method" name="method" value="Videochamada"> 📹 Videochamada</label>
+                <label><input type="checkbox" class="method" name="method" value="Vídeo gravado"> 🎬 Vídeo gravado</label>
+                <label><input type="checkbox" class="method" name="method" value="Áudio chamada"> 🎙️ Áudio chamada</label>
+                <label><input type="checkbox" class="method" name="method" value="Áudio gravado"> 🎵 Áudio gravado</label>
+                <label><input type="checkbox" class="method" name="method" value="Texto"> 💬 Texto</label>
+            </div>
+        </fieldset>
+
+        <!-- 8. CONTACTO -->
+        <h2>8. 📱 CONTACTO</h2>
+        <label id="contactLabel" for="contact">📲 Contacto *</label>
+        <input type="text" id="contact" name="contact" required placeholder="Selecione a plataforma acima">
+
+        <!-- 9. MATRÍCULA -->
+        <h2>9. 📆 MATRÍCULA</h2>
+        <div class="grid-2">
+            <div>
+                <label for="registrationDate">🗓️ Data de inscrição</label>
+                <input type="text" id="registrationDate" name="registrationDate" class="auto-filled" readonly>
+            </div>
+            <div>
+                <label for="startDate">🚀 Data de início *</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+        </div>
+
+        <!-- 10. PAGAMENTO -->
+        <h2>10. 💰 PAGAMENTO</h2>
+        <div class="grid-2">
+            <div class="full-width">
+                <label for="paymentMethod">💳 Forma de pagamento *</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Selecione...</option>
+                    <option value="Transferência bancária">🏦 Transferência bancária</option>
+                    <option value="Multicaixa Express">📱 Multicaixa Express</option>
+                    <option value="Depósito">💵 Depósito</option>
+                    <option value="Outro">📌 Outro</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label for="paymentTime">🔄 Tempo de pagamento *</label>
+                <select id="paymentTime" name="paymentTime" required>
+                    <option value="">Selecione...</option>
+                    <option value="Mensal">🗓️ Mensal</option>
+                    <option value="Quinzenal">📆 Quinzenal</option>
+                    <option value="Semanal">📅 Semanal</option>
+                    <option value="Diário">☀️ Diário</option>
+                    <option value="Por hora">⏱️ Por hora</option>
+                </select>
+            </div>
+            <div class="full-width">
+                <label for="paymentAmount">💵 Valor a pagar *</label>
+                <div class="grid-2">
+                    <input type="number" id="paymentAmount" name="paymentAmount" required placeholder="Ex: 15000" step="0.01">
+                    <select id="currency" name="currency" required>
+                        <option value="AOA">🇦🇴 AOA (Kwanza)</option>
+                        <option value="BRL">🇧🇷 BRL (Real)</option>
+                        <option value="USD">🇺🇸 USD (Dólar)</option>
+                        <option value="EUR">🇪🇺 EUR (Euro)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. RESPONSÁVEL -->
+        <h2 id="guardianTitle" class="hidden">11. 👨‍👩‍👧 RESPONSÁVEL</h2>
+        <div id="guardianSection" class="hidden">
+            <p class="note">👶 Obrigatório para Crianças e Adolescentes.</p>
+            <label for="guardian">👨 Nome do responsável *</label>
+            <input type="text" id="guardian" name="guardian" placeholder="Ex: Maria da Silva">
+        </div>
+
+        <!-- 12. INFORMAÇÕES ADICIONAIS -->
+        <h2>12. 📝 INFORMAÇÕES ADICIONAIS</h2>
+        <div class="grid-2">
+            <div class="full-width">
+                <label for="observations">💭 Observações</label>
+                <textarea id="observations" name="observations" rows="3" placeholder="Alguma informação relevante..."></textarea>
+            </div>
+            <div class="full-width">
+                <label for="needs">🆘 Necessidades/dificuldades</label>
+                <textarea id="needs" name="needs" rows="3" placeholder="Ex: Dificuldade em álgebra..."></textarea>
+            </div>
+            <div class="full-width">
+                <label for="referral">🔍 Como conheceu as aulas?</label>
+                <select id="referral" name="referral">
+                    <option value="">Selecione...</option>
+                    <option value="Facebook">👍 Facebook</option>
+                    <option value="WhatsApp">💬 WhatsApp</option>
+                    <option value="Indicação">🤝 Indicação</option>
+                    <option value="Outro">📌 Outro</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 13. CONFIRMAÇÃO -->
+        <h2>13. ✅ CONFIRMAÇÃO</h2>
+        <div class="inline-check">
+            <input type="checkbox" id="confirmInfo" name="confirmInfo" required>
+            <label for="confirmInfo" style="margin:0; cursor:pointer;">✅ Confirmo que as informações estão corretas</label>
+        </div>
+
+        <button type="submit" id="submitBtn">📤 Gerar e Enviar Inscrição</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Data de inscrição automática
+        document.getElementById('registrationDate').value = new Date().toLocaleDateString('pt-PT');
+        document.getElementById('startDate').min = new Date().toISOString().split('T')[0];
+
+        // 2. Lógica do Plano -> Dias Disponíveis
+        const planSelect = document.getElementById('plan');
+        const dayCheckboxes = document.querySelectorAll('input[name="days"]');
+        const planNote = document.getElementById('planNote');
+        const classesPerWeekInput = document.getElementById('classesPerWeek');
+
+        const planLimits = {
+            'Extensivo (até 3 dias/semana)': 3,
+            'Intensivo (até 5 dias/semana)': 5,
+            'VIP (até 7 dias/semana)': 7
+        };
+
+        function updateDaysLogic() {
+            const selectedPlan = planSelect.value;
+            const limit = planLimits[selectedPlan] || 0;
+            
+            if (limit === 0) {
+                planNote.textContent = '⚠️ Selecione um plano primeiro';
+                dayCheckboxes.forEach(cb => { cb.disabled = true; cb.checked = false; });
+            } else {
+                planNote.textContent = `📌 Máximo de ${limit} dias permitidos para o plano ${selectedPlan.split(' ')[0]}`;
+                dayCheckboxes.forEach(cb => cb.disabled = false);
+            }
+
+            let checkedCount = 0;
+            dayCheckboxes.forEach(cb => { if(cb.checked) checkedCount++; });
+            
+            dayCheckboxes.forEach(cb => {
+                if (!cb.checked && checkedCount >= limit) {
+                    cb.disabled = true;
+                } else {
+                    cb.disabled = false;
+                }
+            });
+
+            classesPerWeekInput.value = checkedCount > 0 ? `${checkedCount} dia(s)/semana` : '';
+        }
+
+        planSelect.addEventListener('change', updateDaysLogic);
+        dayCheckboxes.forEach(cb => cb.addEventListener('change', updateDaysLogic));
+        updateDaysLogic();
+
+        // 3. Cálculo automático da Duração da Aula
+        const prefStart = document.getElementById('prefStart');
+        const prefEnd = document.getElementById('prefEnd');
+        const durationInput = document.getElementById('duration');
+
+        function calcDuration() {
+            if (prefStart.value && prefEnd.value) {
+                const [h1, m1] = prefStart.value.split(':').map(Number);
+                const [h2, m2] = prefEnd.value.split(':').map(Number);
+                let diff = (h2 * 60 + m2) - (h1 * 60 + m1);
+                if (diff < 0) diff += 24 * 60;
+                
+                const h = Math.floor(diff / 60);
+                const m = diff % 60;
+                durationInput.value = `${h}h ${m}min`;
+            } else {
+                durationInput.value = '';
+            }
+        }
+
+        prefStart.addEventListener('change', calcDuration);
+        prefEnd.addEventListener('change', calcDuration);
+
+        // 4. Lógica dos Métodos (Máximo 2)
+        const methodCheckboxes = document.querySelectorAll('.method');
+        const methodCountDisplay = document.getElementById('methodCountDisplay');
+
+        methodCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const checked = document.querySelectorAll('.method:checked');
+                methodCountDisplay.textContent = `${checked.length}/2`;
+                
+                if (checked.length >= 2) {
+                    methodCheckboxes.forEach(box => {
+                        if (!box.checked) box.disabled = true;
+                    });
+                } else {
+                    methodCheckboxes.forEach(box => box.disabled = false);
+                }
+            });
+        });
+
+        // 5. Contacto Dinâmico baseado na Plataforma
+        const platformSelect = document.getElementById('platform');
+        const contactInput = document.getElementById('contact');
+        const contactLabel = document.getElementById('contactLabel');
+
+        platformSelect.addEventListener('change', function() {
+            const platform = this.value;
+            if (platform === 'WhatsApp' || platform === 'Chamada telefónica') {
+                contactLabel.textContent = '📱 Telefone / WhatsApp *';
+                contactInput.type = 'tel';
+                contactInput.placeholder = 'Ex: 957 511 281';
+            } else if (platform === 'Google Meet' || platform === 'Facebook') {
+                contactLabel.textContent = '📧 E-mail ou Link do Perfil *';
+                contactInput.type = 'email';
+                contactInput.placeholder = 'Ex: aluno@email.com';
+            } else {
+                contactInput.type = 'text';
+                contactInput.placeholder = 'Selecione a plataforma acima';
+            }
+        });
+
+        // 6. Responsável (Apenas para Crianças e Adolescentes)
+        const ageCategory = document.getElementById('ageCategory');
+        const guardianSection = document.getElementById('guardianSection');
+        const guardianTitle = document.getElementById('guardianTitle');
+        const guardianInput = document.getElementById('guardian');
+
+        ageCategory.addEventListener('change', function() {
+            if (this.value.includes('Criança') || this.value.includes('Adolescente')) {
+                guardianSection.classList.remove('hidden');
+                guardianTitle.classList.remove('hidden');
+                guardianInput.required = true;
+            } else {
+                guardianSection.classList.add('hidden');
+                guardianTitle.classList.add('hidden');
+                guardianInput.required = false;
+                guardianInput.value = '';
+            }
+        });
+
+// 7. Submissão e Envio Inteligente (MODIFICADO PARA BANCO DE DADOS)
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const checkedMethods = document.querySelectorAll('.method:checked');
+            if (checkedMethods.length !== 2) {
+                alert('⚠️ Por favor, selecione exatamente 2 métodos de ensino.');
+                return;
+            }
+
+            const checkedDays = document.querySelectorAll('input[name="days"]:checked');
+            if (checkedDays.length === 0) {
+                alert('⚠️ Por favor, selecione pelo menos 1 dia disponível.');
+                return;
+            }
+
+            // Coletar todos os dados do formulário (lida corretamente com checkboxes múltiplos)
+            const formData = new FormData(this);
+            const dadosObj = {};
+            formData.forEach((value, key) => {
+                if (dadosObj[key]) {
+                    if (!Array.isArray(dadosObj[key])) dadosObj[key] = [dadosObj[key]];
+                    dadosObj[key].push(value);
+                } else {
+                    dadosObj[key] = value;
+                }
+            });
+
+            // 1. Salvar no Banco de Dados (Python/Flask)
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Salvando no sistema...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/salvar_inscricao', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosObj)
+                });
+                const result = await response.json();
+                
+                if (result.status !== 'sucesso') {
+                    alert('❌ Erro ao salvar: ' + result.mensagem);
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+            } catch (error) {
+                console.error(error);
+                alert('❌ Erro de conexão com o servidor. Verifique se o Python está rodando.');
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // 2. Gerar texto para WhatsApp/Email (Lógica original mantida)
+            let txtData = `📋 *NOVA INSCRIÇÃO - JA TA KI*\n\n`;
+            txtData += `👤 *DADOS DO ALUNO*\n• Nome: ${dadosObj.fullname} ${dadosObj.surname}\n• Gênero: ${dadosObj.gender}\n• Idade: ${dadosObj.ageCategory}\n• Nível: ${dadosObj.educationLevel}\n• Curso: ${dadosObj.course}\n\n`;
+            txtData += `🎯 *OBJETIVO*\n• Objetivo: ${dadosObj.formationObjective}\n• Nível Atual: ${dadosObj.currentLevel}\n\n`;
+            txtData += `💳 *PLANO & HORÁRIO*\n• Plano: ${dadosObj.plan}\n• Dias: ${Array.isArray(dadosObj.days) ? dadosObj.days.join(', ') : dadosObj.days}\n• Horário Pref: ${dadosObj.prefStart} às ${dadosObj.prefEnd}\n`;
+            if(dadosObj.secStart) txtData += `• 2º Horário: ${dadosObj.secStart} às ${dadosObj.secEnd}\n`;
+            txtData += `\n⏱️ *AULAS*\n• Duração: ${dadosObj.duration}\n• Frequência: ${dadosObj.classesPerWeek}\n\n`;
+            txtData += `🖥️ *PLATAFORMA & MÉTODOS*\n• Plataforma: ${dadosObj.platform}\n• Métodos: ${Array.isArray(dadosObj.method) ? dadosObj.method.join(' e ') : dadosObj.method}\n• Contacto: ${dadosObj.contact}\n\n`;
+            txtData += `📆 *MATRÍCULA*\n• Data Inscrição: ${dadosObj.registrationDate}\n• Data Início: ${dadosObj.startDate}\n\n`;
+            txtData += `💰 *PAGAMENTO*\n• Forma: ${dadosObj.paymentMethod}\n• Periodicidade: ${dadosObj.paymentTime}\n• Valor: ${dadosObj.paymentAmount} ${dadosObj.currency}\n\n`;
+            
+            if (dadosObj.guardian) {
+                txtData += `👨‍👩‍👧 *RESPONSÁVEL*\n• Nome: ${dadosObj.guardian}\n\n`;
+            }
+
+            txtData += `📝 *INFO ADICIONAL*\n`;
+            if(dadosObj.observations) txtData += `• Obs: ${dadosObj.observations}\n`;
+            if(dadosObj.needs) txtData += `• Dificuldades: ${dadosObj.needs}\n`;
+            txtData += `• Origem: ${dadosObj.referral || 'Não informado'}\n`;
+
+            const platform = dadosObj.platform;
+            const phoneNando = "244957511281";
+            const emailNando = "nandokissanga@gmail.com";
+            const encodedText = encodeURIComponent(txtData);
+
+            alert('✅ Inscrição salva no banco de dados com sucesso! Redirecionando para envio...');
+
+            if (platform === 'WhatsApp' || platform === 'Chamada telefónica') {
+                window.open(`https://wa.me/${phoneNando}?text=${encodedText}`, '_blank');
+            } else {
+                window.location.href = `mailto:${emailNando}?subject=Nova Inscrição - Ja Ta Ki&body=${encodedText}`;
+            }
+            
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        });
+    });
+</script>
+
+</body>
+</html>
