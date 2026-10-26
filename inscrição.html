@@ -1,522 +1,649 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-AO">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro de Formação - Ja Ta Ki</title>
+    <title>Inscrição - Centro de Formação Ja Ta Ki</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary: #c8102e;
+            --primary-dark: #9b0d22;
+            --secondary: #006633;
+            --secondary-dark: #004d26;
+            --accent: #fdb913;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --border: #e0e0e0;
+            --shadow: 0 10px 40px rgba(0,0,0,.08);
+            --radius: 16px;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
-            background: linear-gradient(145deg, #f0f7ff 0%, #dae9f5 100%);
-            padding: 20px 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            padding: 24px 12px;
+            color: var(--dark);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 36px;
-            padding: 32px 30px;
-            box-shadow: 0 25px 50px -10px rgba(0, 30, 60, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            max-width: 920px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
         }
 
-        h1 {
-            font-size: 2.4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0b4f6c, #1b7a9e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: #fff;
+            padding: 44px 30px 38px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,.05) 12px, rgba(255,255,255,.05) 24px);
+            animation: slide 24s linear infinite;
+        }
+        @keyframes slide { to { transform: translate(60px, 60px); } }
+
+        .header-content { position: relative; z-index: 1; }
+        .header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 8px; letter-spacing: -.5px; }
+        .header p { font-size: 1.05rem; opacity: .95; font-weight: 300; }
+
+        /* FORM */
+        .form-container { padding: 36px 30px 40px; }
+
+        .section {
+            margin-bottom: 28px;
+            padding: 26px 24px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 5px solid var(--secondary);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .section:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
-            letter-spacing: -0.5px;
-            border-bottom: 3px solid #9cc7e0;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-title i {
+            background: var(--primary);
+            color: #fff;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .85rem;
+            flex-shrink: 0;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #0e4b6e;
-            margin: 32px 0 16px 0;
-            padding: 6px 0 6px 18px;
-            border-left: 8px solid #1f8fc7;
-            border-radius: 0 8px 8px 0;
-            background: #f3f9ff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group.full-width { grid-column: 1 / -1; }
 
         label {
             display: block;
-            margin-top: 18px;
-            margin-bottom: 6px;
             font-weight: 600;
-            font-size: 1rem;
-            color: #183b52;
-            letter-spacing: 0.2px;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-size: .9rem;
         }
+        .required::after { content: ' *'; color: var(--danger); }
 
         input, select, textarea {
             width: 100%;
-            padding: 13px 18px;
-            margin-top: 4px;
-            border: 1.8px solid #cddeec;
-            border-radius: 18px;
-            font-size: 1rem;
-            background: #fbfdff;
-            transition: 0.2s;
-            color: #0b2b3d;
-            font-weight: 500;
+            padding: 13px 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: .95rem;
+            font-family: inherit;
+            transition: all .25s ease;
+            background: #fff;
+            color: var(--dark);
         }
-
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #1b7fb0;
-            box-shadow: 0 0 0 5px rgba(27, 127, 176, 0.12);
-            background: white;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(0,102,51,.12);
+        }
+        
+        /* Estilo especial para campos automáticos (parece um badge) */
+        .auto-filled {
+            background-color: #e8f5e9 !important;
+            border-color: var(--secondary) !important;
+            color: var(--secondary-dark) !important;
+            font-weight: 600;
+            cursor: default;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px 22px;
-        }
-
-        .full-width {
-            grid-column: span 2;
-        }
-
-        fieldset {
-            border: 2px solid #c2d9eb;
-            border-radius: 22px;
-            padding: 16px 20px;
-            margin-top: 12px;
-            background: #f8fcff;
-        }
-
-        legend {
-            font-weight: 700;
-            color: #0f5c83;
-            background: white;
-            padding: 0 16px;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            border: 1px solid #b7d2e8;
-            letter-spacing: 0.3px;
-        }
-
-        .method-flex {
+        .checkbox-group, .method-flex {
             display: flex;
             flex-wrap: wrap;
-            gap: 18px 30px;
-            padding: 6px 0;
+            gap: 12px;
+            margin-top: 8px;
         }
-
-        .method-flex label {
+        .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            margin: 0;
+            gap: 10px;
+            padding: 10px 16px;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1rem;
+            transition: all .25s ease;
+            font-size: .9rem;
+            user-select: none;
+        }
+        .checkbox-item:hover { border-color: var(--secondary); background: #f0f7f4; }
+        .checkbox-item input {
+            width: 18px; height: 18px;
+            cursor: pointer;
+            accent-color: var(--secondary);
+            flex-shrink: 0;
+        }
+        .checkbox-item.selected {
+            background: #e8f5e9;
+            border-color: var(--secondary);
+            color: var(--secondary-dark);
+            font-weight: 600;
+        }
+        .checkbox-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f8f9fa;
         }
 
-        input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #1f8fc7;
-            margin: 0;
+        .note {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-left: 4px solid var(--warning);
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: .85rem;
+            color: #6b5300;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .inline-check {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
-            margin-top: 12px;
-            background: #f2f9fe;
-            padding: 10px 16px;
-            border-radius: 18px;
+            margin-top: 24px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
         }
-
-        .note {
-            background: #e7f0f9;
-            padding: 8px 18px;
-            border-radius: 30px;
-            color: #245979;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin: 6px 0 12px;
-        }
-
-        button {
-            background: #0b5c88;
-            color: white;
-            border: none;
-            padding: 18px 28px;
-            width: 100%;
-            font-size: 1.3rem;
-            font-weight: 800;
-            border-radius: 50px;
-            margin-top: 40px;
+        .inline-check:hover { border-color: var(--secondary); }
+        .inline-check input[type="checkbox"] {
+            width: 20px; height: 20px;
+            margin-top: 2px;
             cursor: pointer;
-            transition: 0.3s;
-            letter-spacing: 1px;
-            box-shadow: 0 12px 22px rgba(6, 66, 100, 0.3);
+            accent-color: var(--secondary);
+            flex-shrink: 0;
+        }
+        .inline-check label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .25s ease;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-top: 24px;
             display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 10px;
+            font-family: inherit;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            box-shadow: 0 5px 18px rgba(200,16,46,.35);
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(200,16,46,.45);
+        }
+        .btn:disabled { opacity: .7; cursor: not-allowed; transform: none !important; }
+
+        .hidden { display: none !important; }
+        
+        /* Animação suave para aparecer/esconder */
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            top: 20px; right: 20px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn .3s ease;
+            box-shadow: 0 5px 24px rgba(0,0,0,.2);
+            display: flex;
             align-items: center;
             gap: 10px;
+            max-width: 90vw;
+            font-size: .92rem;
+        }
+        .toast.hiding {
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast.warning { background: var(--warning); color: var(--dark); }
+
+        .loading {
+            display: inline-block;
+            width: 18px; height: 18px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body { padding: 12px 8px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .form-container { padding: 24px 16px 32px; }
+            .section { padding: 20px 16px; }
+            .checkbox-group, .method-flex { flex-direction: column; }
+            .checkbox-item { width: 100%; }
+            .header { padding: 32px 18px 28px; }
         }
 
-        button:hover {
-            background: #09425e;
-            transform: scale(1.02);
-            box-shadow: 0 18px 28px rgba(6, 66, 100, 0.4);
-        }
-
-        .auto-filled {
-            background: #f0f7fe;
-            font-weight: 700;
-            color: #0d4c6b;
-            border: 2px dashed #2f8fbf;
-            cursor: not-allowed;
-        }
-
-        #methodCountDisplay {
-            font-size: 0.9rem;
-            background: #ffffff;
-            padding: 4px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            color: #1a4a66;
-            margin-left: 10px;
-            border: 1px solid #b7d2e8;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 650px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 8px;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
             }
-            .full-width {
-                grid-column: span 1;
-            }
-            .container {
-                padding: 20px 16px;
-                border-radius: 24px;
-            }
-            h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📋 FORMULÁRIO DE INSCRIÇÃO</h1>
-    <p class="note">🎓 Centro de Formação — <strong>Ja Ta Ki</strong></p>
-
-    <form id="registrationForm" novalidate>
-
-        <!-- 1. DADOS DO ALUNO -->
-        <h2>1. 👤 DADOS DO ALUNO</h2>
-        <div class="grid-2">
-            <div>
-                <label for="fullname">✍️ Nome completo *</label>
-                <input type="text" id="fullname" name="fullname" required placeholder="Ex: João Manuel">
-            </div>
-            <div>
-                <label for="surname">👤 Apelido *</label>
-                <input type="text" id="surname" name="surname" required placeholder="Ex: da Silva">
-            </div>
-            <div>
-                <label for="gender">⚧️ Gênero *</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Selecione...</option>
-                    <option value="Masculino">♂️ Masculino</option>
-                    <option value="Feminino">♀️ Feminino</option>
-                </select>
-            </div>
-            <div>
-                <label for="ageCategory">🎂 Categoria de idade *</label>
-                <select id="ageCategory" name="ageCategory" required>
-                    <option value="">Selecione...</option>
-                    <option value="Criança (5-11)">👶 Criança (5-11)</option>
-                    <option value="Adolescente (12-17)">🧑 Adolescente (12-17)</option>
-                    <option value="Jovem (18-24)">🧑‍🎓 Jovem (18-24)</option>
-                    <option value="Adulto (25-64)">👨‍💼 Adulto (25-64)</option>
-                    <option value="Idoso (+65)">👴 Idoso (+65)</option>
-                </select>
-            </div>
-            <div class="full-width">
-                <label for="educationLevel">🎓 Nível escolar/académico *</label>
-                <select id="educationLevel" name="educationLevel" required>
-                    <option value="">Selecione...</option>
-                    <option value="Primário">📚 Primário</option>
-                    <option value="Secundário">🏫 Secundário</option>
-                    <option value="Ensino Médio">🎒 Ensino Médio</option>
-                    <option value="Bacharel">🎓 Bacharel</option>
-                    <option value="Licenciado">🎖️ Licenciado</option>
-                    <option value="Mestre">🏅 Mestre</option>
-                    <option value="Doutor">👨‍🔬 Doutor</option>
-                </select>
-            </div>
-            <div class="full-width">
-                <label for="course">📖 Disciplina/Curso *</label>
-<select id="course" name="course" required>
-    <option value="">Selecione...</option>
-    
-    <!-- Idiomas e Ciências Exatas -->
-    <option value="Inglês">🇬🇧 Língua Inglesa</option>
-    <option value="Matemática">🔢 Matemática</option>
-    <option value="Física">⚛️ Física</option>
-    <option value="Química">🧪 Química</option>
-
-    <!-- Informática e Produtividade -->
-    <option value="Informática Geral">🖥️ Informática Geral (PC/Celular)</option>
-    <option value="Excel Geral">📊 Excel Geral (PC/Celular)</option>
-    <option value="Office Geral">📁 Microsoft Office Geral (PC/Celular)</option>
-
-    <!-- Programação e Desenvolvimento de Software -->
-    <option value="Lógica de Programação">🧠 Lógica de Programação (PC/Celular)</option>
-    <option value="Algoritmo e Estruturas">🧬 Algoritmo e Estruturas de Dados (PC/Celular)</option>
-    <option value="Linguagem de Programação">💻 Linguagem de Programação (PC/Celular)</option>
-    
-    <!-- Outras Opções -->
-    <option value="Outro">📌 Outro</option>
-</select>
-
-            </div>
+    <div class="header">
+        <div class="header-content">
+            <h1>📋 FORMULÁRIO DE INSCRIÇÃO</h1>
+            <p>🎓 Centro de Formação — <strong>Ja Ta Ki</strong></p>
         </div>
+    </div>
 
-        <!-- 2. OBJETIVO -->
-        <h2>2. 🎯 OBJETIVO</h2>
-        <div class="grid-2">
-            <div class="full-width">
-                <label for="formationObjective">🎯 Objetivo da formação *</label>
-                <select id="formationObjective" name="formationObjective" required>
-                    <option value="">Selecione...</option>
-                    <option value="Reforço escolar">📚 Reforço escolar</option>
-                    <option value="Preparação para teste/exame">📝 Preparação para teste/exame</option>
-                    <option value="Aprender do zero">🌱 Aprender do zero</option>
-                    <option value="Melhorar conhecimentos">📈 Melhorar conhecimentos</option>
-                    <option value="Preparação profissional">💼 Preparação profissional</option>
-                    <option value="Outro">📌 Outro</option>
-                </select>
-            </div>
-            <div class="full-width">
-                <label for="currentLevel">📊 Nível atual *</label>
-                <select id="currentLevel" name="currentLevel" required>
-                    <option value="">Selecione...</option>
-                    <option value="Iniciante">🌱 Iniciante</option>
-                    <option value="Elementar">📘 Elementar</option>
-                    <option value="Intermediário">📙 Intermediário</option>
-                    <option value="Avançado">📕 Avançado</option>
-                </select>
-            </div>
-        </div>
+    <div class="form-container">
+        <form id="registrationForm" novalidate>
 
-        <!-- 3. PLANO -->
-        <h2>3. 💳 PLANO</h2>
-        <label for="plan">💎 Escolha o seu plano *</label>
-        <select id="plan" name="plan" required>
-            <option value="">Selecione...</option>
-            <option value="Extensivo (até 3 dias/semana)">📅 Extensivo (até 3 dias/semana)</option>
-            <option value="Intensivo (até 5 dias/semana)">📆 Intensivo (até 5 dias/semana)</option>
-            <option value="VIP (até 7 dias/semana)">👑 VIP (até 7 dias/semana)</option>
-        </select>
-
-        <!-- 4. HORÁRIO -->
-        <h2>4. 📅 HORÁRIO</h2>
-        <label>🗓️ Dias disponíveis * <span class="note" id="planNote">Selecione um plano primeiro</span></label>
-        <fieldset>
-            <div class="method-flex" id="daysGroup">
-                <label><input type="checkbox" name="days" value="Segunda"> Segunda</label>
-                <label><input type="checkbox" name="days" value="Terça"> Terça</label>
-                <label><input type="checkbox" name="days" value="Quarta"> Quarta</label>
-                <label><input type="checkbox" name="days" value="Quinta"> Quinta</label>
-                <label><input type="checkbox" name="days" value="Sexta"> Sexta</label>
-                <label><input type="checkbox" name="days" value="Sábado"> Sábado</label>
-                <label><input type="checkbox" name="days" value="Domingo"> Domingo</label>
-            </div>
-        </fieldset>
-
-        <div class="grid-2" style="margin-top: 18px;">
-            <div class="full-width">
-                <label>🕐 Horário preferencial (Início e Término) *</label>
+            <!-- 1. DADOS DO ALUNO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-user"></i> 1. DADOS DO ALUNO</div>
                 <div class="grid-2">
-                    <input type="time" id="prefStart" name="prefStart" required>
-                    <input type="time" id="prefEnd" name="prefEnd" required>
+                    <div class="form-group">
+                        <label for="fullname" class="required">Nome</label>
+                        <input type="text" id="fullname" name="fullname" required placeholder="Ex: João Manuel" autocomplete="given-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="surname" class="required">Apelido</label>
+                        <input type="text" id="surname" name="surname" required placeholder="Ex: da Silva" autocomplete="family-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender" class="required">Gênero</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Selecione...</option>
+                            <option value="Masculino">♂️ Masculino</option>
+                            <option value="Feminino">♀️ Feminino</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageCategory" class="required">Categoria de idade</label>
+                        <select id="ageCategory" name="ageCategory" required>
+                            <option value="">Selecione...</option>
+                            <option value="Criança (5-11)">👶 Criança (5-11)</option>
+                            <option value="Adolescente (12-17)">🧑 Adolescente (12-17)</option>
+                            <option value="Jovem (18-24)">🧑‍🎓 Jovem (18-24)</option>
+                            <option value="Adulto (25-64)">👨‍💼 Adulto (25-64)</option>
+                            <option value="Idoso (+65)">👴 Idoso (+65)</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="educationLevel" class="required">Nível escolar/académico</label>
+                        <select id="educationLevel" name="educationLevel" required>
+                            <option value="">Selecione...</option>
+                            <option value="Primário">📚 Primário</option>
+                            <option value="Secundário">🏫 Secundário</option>
+                            <option value="Ensino Médio">🎒 Ensino Médio</option>
+                            <option value="Bacharel">🎓 Bacharel</option>
+                            <option value="Licenciado">🎖️ Licenciado</option>
+                            <option value="Mestre">🏅 Mestre</option>
+                            <option value="Doutor">👨‍🔬 Doutor</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="course" class="required">Disciplina/Curso</label>
+                        <select id="course" name="course" required>
+                            <option value="">Selecione...</option>
+                            <option value="Inglês">🇬🇧 Língua Inglesa</option>
+                            <option value="Matemática">🔢 Matemática</option>
+                            <option value="Física">⚛️ Física</option>
+                            <option value="Química">🧪 Química</option>
+                            <option value="Informática Geral">🖥️ Informática Geral</option>
+                            <option value="Excel Geral">📊 Excel Geral</option>
+                            <option value="Office Geral">📁 Microsoft Office Geral</option>
+                            <option value="Lógica de Programação">🧠 Lógica de Programação</option>
+                            <option value="Algoritmo e Estruturas">🧬 Algoritmo e Estruturas de Dados</option>
+                            <option value="Linguagem de Programação">💻 Linguagem de Programação</option>
+                            <option value="Outro">📌 Outro</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="full-width">
-                <label>🕒 Segundo horário (Alternativa)</label>
+
+            <!-- 2. OBJETIVO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-bullseye"></i> 2. OBJETIVO</div>
                 <div class="grid-2">
-                    <input type="time" id="secStart" name="secStart">
-                    <input type="time" id="secEnd" name="secEnd">
+                    <div class="form-group full-width">
+                        <label for="formationObjective" class="required">Objetivo da formação</label>
+                        <select id="formationObjective" name="formationObjective" required>
+                            <option value="">Selecione...</option>
+                            <option value="Reforço escolar">📚 Reforço escolar</option>
+                            <option value="Preparação para teste/exame">📝 Preparação para teste/exame</option>
+                            <option value="Aprender do zero">🌱 Aprender do zero</option>
+                            <option value="Melhorar conhecimentos">📈 Melhorar conhecimentos</option>
+                            <option value="Preparação profissional">💼 Preparação profissional</option>
+                            <option value="Outro">📌 Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="currentLevel" class="required">Nível atual</label>
+                        <select id="currentLevel" name="currentLevel" required>
+                            <option value="">Selecione...</option>
+                            <option value="Iniciante">🌱 Iniciante</option>
+                            <option value="Elementar">📘 Elementar</option>
+                            <option value="Intermediário">📙 Intermediário</option>
+                            <option value="Avançado">📕 Avançado</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 5. AULAS (Automático) -->
-        <h2>5. ⏱️ AULAS <span class="note">⚡ Preenchimento automático</span></h2>
-        <div class="grid-2">
-            <div>
-                <label for="duration">⏳ Duração da aula</label>
-                <input type="text" id="duration" name="duration" class="auto-filled" readonly placeholder="Calculado automaticamente">
-            </div>
-            <div>
-                <label for="classesPerWeek">📚 Aulas por semana</label>
-                <input type="text" id="classesPerWeek" name="classesPerWeek" class="auto-filled" readonly placeholder="Calculado automaticamente">
-            </div>
-        </div>
-
-        <!-- 6. PLATAFORMA -->
-        <h2>6. 🖥️ PLATAFORMA</h2>
-        <label for="platform">💻 Plataforma de aulas *</label>
-        <select id="platform" name="platform" required>
-            <option value="">Selecione...</option>
-            <option value="WhatsApp">💬 WhatsApp</option>
-            <option value="Google Meet">📹 Google Meet</option>
-            <option value="Facebook">👍 Facebook</option>
-            <option value="Chamada telefónica">📞 Chamada telefónica</option>
-        </select>
-
-        <!-- 7. MÉTODO -->
-        <h2>7. 👨🏽‍🏫 MÉTODO</h2>
-        <fieldset>
-            <legend>🎯 Escolha exatamente 2 métodos <span id="methodCountDisplay">0/2</span></legend>
-            <div class="method-flex" id="methodsGroup">
-                <label><input type="checkbox" class="method" name="method" value="Videochamada"> 📹 Videochamada</label>
-                <label><input type="checkbox" class="method" name="method" value="Vídeo gravado"> 🎬 Vídeo gravado</label>
-                <label><input type="checkbox" class="method" name="method" value="Áudio chamada"> 🎙️ Áudio chamada</label>
-                <label><input type="checkbox" class="method" name="method" value="Áudio gravado"> 🎵 Áudio gravado</label>
-                <label><input type="checkbox" class="method" name="method" value="Texto"> 💬 Texto</label>
-            </div>
-        </fieldset>
-
-        <!-- 8. CONTACTO -->
-        <h2>8. 📱 CONTACTO</h2>
-        <label id="contactLabel" for="contact">📲 Contacto *</label>
-        <input type="text" id="contact" name="contact" required placeholder="Selecione a plataforma acima">
-
-        <!-- 9. MATRÍCULA -->
-        <h2>9. 📆 MATRÍCULA</h2>
-        <div class="grid-2">
-            <div>
-                <label for="registrationDate">🗓️ Data de inscrição</label>
-                <input type="text" id="registrationDate" name="registrationDate" class="auto-filled" readonly>
-            </div>
-            <div>
-                <label for="startDate">🚀 Data de início *</label>
-                <input type="date" id="startDate" name="startDate" required>
-            </div>
-        </div>
-
-        <!-- 10. PAGAMENTO -->
-        <h2>10. 💰 PAGAMENTO</h2>
-        <div class="grid-2">
-            <div class="full-width">
-                <label for="paymentMethod">💳 Forma de pagamento *</label>
-                <select id="paymentMethod" name="paymentMethod" required>
-                    <option value="">Selecione...</option>
-                    <option value="Transferência bancária">🏦 Transferência bancária</option>
-                    <option value="Multicaixa Express">📱 Multicaixa Express</option>
-                    <option value="Depósito">💵 Depósito</option>
-                    <option value="Outro">📌 Outro</option>
-                </select>
-            </div>
-            <div class="full-width">
-                <label for="paymentTime">🔄 Tempo de pagamento *</label>
-                <select id="paymentTime" name="paymentTime" required>
-                    <option value="">Selecione...</option>
-                    <option value="Mensal">🗓️ Mensal</option>
-                    <option value="Quinzenal">📆 Quinzenal</option>
-                    <option value="Semanal">📅 Semanal</option>
-                    <option value="Diário">☀️ Diário</option>
-                    <option value="Por hora">⏱️ Por hora</option>
-                </select>
-            </div>
-            <div class="full-width">
-                <label for="paymentAmount">💵 Valor a pagar *</label>
-                <div class="grid-2">
-                    <input type="number" id="paymentAmount" name="paymentAmount" required placeholder="Ex: 15000" step="0.01">
-                    <select id="currency" name="currency" required>
-                        <option value="AOA">🇦🇴 AOA (Kwanza)</option>
-                        <option value="BRL">🇧🇷 BRL (Real)</option>
-                        <option value="USD">🇺🇸 USD (Dólar)</option>
-                        <option value="EUR">🇪🇺 EUR (Euro)</option>
+            <!-- 3. PLANO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-gem"></i> 3. PLANO</div>
+                <div class="form-group full-width">
+                    <label for="plan" class="required">Escolha o seu plano</label>
+                    <select id="plan" name="plan" required>
+                        <option value="">Selecione...</option>
+                        <option value="Extensivo (até 3 dias/semana)">📅 Extensivo (até 3 dias/semana)</option>
+                        <option value="Intensivo (até 5 dias/semana)">📆 Intensivo (até 5 dias/semana)</option>
+                        <option value="VIP (até 7 dias/semana)">👑 VIP (até 7 dias/semana)</option>
                     </select>
                 </div>
             </div>
-        </div>
 
-        <!-- 11. RESPONSÁVEL -->
-        <h2 id="guardianTitle" class="hidden">11. 👨‍👩‍👧 RESPONSÁVEL</h2>
-        <div id="guardianSection" class="hidden">
-            <p class="note">👶 Obrigatório para Crianças e Adolescentes.</p>
-            <label for="guardian">👨 Nome do responsável *</label>
-            <input type="text" id="guardian" name="guardian" placeholder="Ex: Maria da Silva">
-        </div>
+            <!-- 4. HORÁRIO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-calendar-alt"></i> 4. HORÁRIO</div>
+                <div class="form-group full-width">
+                    <label class="required">Dias disponíveis <span class="note" id="planNote">Selecione um plano primeiro</span></label>
+                    <div class="method-flex" id="daysGroup">
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Segunda"> <span>Segunda</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Terça"> <span>Terça</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Quarta"> <span>Quarta</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Quinta"> <span>Quinta</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Sexta"> <span>Sexta</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Sábado"> <span>Sábado</span></label>
+                        <label class="checkbox-item day-item"><input type="checkbox" name="days" value="Domingo"> <span>Domingo</span></label>
+                    </div>
+                </div>
 
-        <!-- 12. INFORMAÇÕES ADICIONAIS -->
-        <h2>12. 📝 INFORMAÇÕES ADICIONAIS</h2>
-        <div class="grid-2">
-            <div class="full-width">
-                <label for="observations">💭 Observações</label>
-                <textarea id="observations" name="observations" rows="3" placeholder="Alguma informação relevante..."></textarea>
+                <div class="grid-2" style="margin-top: 18px;">
+                    <div class="form-group full-width">
+                        <label class="required">Horário preferencial (Início e Término)</label>
+                        <div class="grid-2">
+                            <input type="time" id="prefStart" name="prefStart" required>
+                            <input type="time" id="prefEnd" name="prefEnd" required>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Segundo horário (Alternativa)</label>
+                        <div class="grid-2">
+                            <input type="time" id="secStart" name="secStart">
+                            <input type="time" id="secEnd" name="secEnd">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="full-width">
-                <label for="needs">🆘 Necessidades/dificuldades</label>
-                <textarea id="needs" name="needs" rows="3" placeholder="Ex: Dificuldade em álgebra..."></textarea>
-            </div>
-            <div class="full-width">
-                <label for="referral">🔍 Como conheceu as aulas?</label>
-                <select id="referral" name="referral">
-                    <option value="">Selecione...</option>
-                    <option value="Facebook">👍 Facebook</option>
-                    <option value="WhatsApp">💬 WhatsApp</option>
-                    <option value="Indicação">🤝 Indicação</option>
-                    <option value="Outro">📌 Outro</option>
-                </select>
-            </div>
-        </div>
 
-        <!-- 13. CONFIRMAÇÃO -->
-        <h2>13. ✅ CONFIRMAÇÃO</h2>
-        <div class="inline-check">
-            <input type="checkbox" id="confirmInfo" name="confirmInfo" required>
-            <label for="confirmInfo" style="margin:0; cursor:pointer;">✅ Confirmo que as informações estão corretas</label>
-        </div>
+            <!-- 5. AULAS (Automático) -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-clock"></i> 5. AULAS <span class="note" style="margin:0; font-size:.8rem; padding:4px 10px;">⚡ Cálculo automático</span></div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="duration">Duração por aula</label>
+                        <input type="text" id="duration" name="duration" class="auto-filled" readonly placeholder="--">
+                    </div>
+                    <div class="form-group">
+                        <label for="classesPerWeek">Frequência semanal</label>
+                        <input type="text" id="classesPerWeek" name="classesPerWeek" class="auto-filled" readonly placeholder="--">
+                    </div>
+                </div>
+            </div>
 
-        <button type="submit" id="submitBtn">📤 Gerar e Enviar Inscrição</button>
-    </form>
+            <!-- 6. PLATAFORMA -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-laptop"></i> 6. PLATAFORMA</div>
+                <div class="form-group full-width">
+                    <label for="platform" class="required">Plataforma de aulas</label>
+                    <select id="platform" name="platform" required>
+                        <option value="">Selecione...</option>
+                        <option value="WhatsApp">💬 WhatsApp</option>
+                        <option value="Google Meet">📹 Google Meet</option>
+                        <option value="Facebook">👍 Facebook</option>
+                        <option value="Chamada telefónica">📞 Chamada telefónica</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 7. MÉTODO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-chalkboard-teacher"></i> 7. MÉTODO</div>
+                <div class="form-group full-width">
+                    <label class="required">Escolha exatamente 2 métodos <span id="methodCountDisplay" style="color: var(--primary); font-weight: 700; background: #fff; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--border);">0/2</span></label>
+                    <div class="method-flex" id="methodsGroup">
+                        <label class="checkbox-item method-item"><input type="checkbox" class="method" name="method" value="Videochamada"> <span>📹 Videochamada</span></label>
+                        <label class="checkbox-item method-item"><input type="checkbox" class="method" name="method" value="Vídeo gravado"> <span>🎬 Vídeo gravado</span></label>
+                        <label class="checkbox-item method-item"><input type="checkbox" class="method" name="method" value="Áudio chamada"> <span>🎙️ Áudio chamada</span></label>
+                        <label class="checkbox-item method-item"><input type="checkbox" class="method" name="method" value="Áudio gravado"> <span>🎵 Áudio gravado</span></label>
+                        <label class="checkbox-item method-item"><input type="checkbox" class="method" name="method" value="Texto"> <span>💬 Texto</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. CONTACTO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-address-book"></i> 8. CONTACTO</div>
+                <div class="form-group full-width">
+                    <label id="contactLabel" for="contact" class="required">Contacto</label>
+                    <input type="text" id="contact" name="contact" required placeholder="Selecione a plataforma acima" autocomplete="off">
+                </div>
+            </div>
+
+            <!-- 9. MATRÍCULA -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-file-signature"></i> 9. MATRÍCULA</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="registrationDate">Data de inscrição</label>
+                        <input type="text" id="registrationDate" name="registrationDate" class="auto-filled" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate" class="required">Data de início</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. PAGAMENTO -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-credit-card"></i> 10. PAGAMENTO</div>
+                <div class="grid-2">
+                    <div class="form-group full-width">
+                        <label for="paymentMethod" class="required">Forma de pagamento</label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Selecione...</option>
+                            <option value="Transferência bancária">🏦 Transferência bancária</option>
+                            <option value="Multicaixa Express">📱 Multicaixa Express</option>
+                            <option value="Depósito">💵 Depósito</option>
+                            <option value="Outro">📌 Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="paymentTime" class="required">Periodicidade de pagamento</label>
+                        <select id="paymentTime" name="paymentTime" required>
+                            <option value="">Selecione...</option>
+                            <option value="Mensal">🗓️ Mensal</option>
+                            <option value="Quinzenal">📆 Quinzenal</option>
+                            <option value="Semanal">📅 Semanal</option>
+                            <option value="Diário">☀️ Diário</option>
+                            <option value="Por hora">⏱️ Por hora</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="paymentAmount" class="required">Valor a pagar</label>
+                        <div class="grid-2">
+                            <input type="number" id="paymentAmount" name="paymentAmount" required placeholder="Ex: 15000" step="0.01" min="0">
+                            <select id="currency" name="currency" required>
+                                <option value="AOA">🇦🇴 AOA (Kwanza)</option>
+                                <option value="BRL">🇧🇷 BRL (Real)</option>
+                                <option value="USD">🇺🇸 USD (Dólar)</option>
+                                <option value="EUR">🇪🇺 EUR (Euro)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. RESPONSÁVEL -->
+            <div id="guardianSection" class="section hidden">
+                <div class="section-title" id="guardianTitle"><i class="fas fa-user-shield"></i> 11. RESPONSÁVEL</div>
+                <p class="note">👶 Obrigatório para categorias: Criança e Adolescente.</p>
+                <div class="form-group full-width">
+                    <label for="guardian" class="required">Nome completo do responsável</label>
+                    <input type="text" id="guardian" name="guardian" placeholder="Ex: Maria da Silva" autocomplete="name">
+                </div>
+            </div>
+
+            <!-- 12. INFORMAÇÕES ADICIONAIS -->
+            <div class="section">
+                <div class="section-title"><i class="fas fa-comment-dots"></i> 12. INFORMAÇÕES ADICIONAIS</div>
+                <div class="grid-2">
+                    <div class="form-group full-width">
+                        <label for="observations">Observações</label>
+                        <textarea id="observations" name="observations" rows="3" placeholder="Alguma informação relevante..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="needs">Necessidades ou dificuldades</label>
+                        <textarea id="needs" name="needs" rows="3" placeholder="Ex: Dificuldade em álgebra..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="referral">Como conheceu as aulas?</label>
+                        <select id="referral" name="referral">
+                            <option value="">Selecione...</option>
+                            <option value="Facebook">👍 Facebook</option>
+                            <option value="WhatsApp">💬 WhatsApp</option>
+                            <option value="Indicação">🤝 Indicação de amigo</option>
+                            <option value="Outro">📌 Outro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. CONFIRMAÇÃO -->
+            <div class="inline-check">
+                <input type="checkbox" id="confirmInfo" name="confirmInfo" required>
+                <label for="confirmInfo">✅ Confirmo que as informações acima estão corretas e autorizo o processamento desta inscrição.</label>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn">
+                <i class="fas fa-paper-plane"></i> Gerar e Enviar Inscrição
+            </button>
+        </form>
+    </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 1. Data de inscrição automática
+        // 1. Data de inscrição automática e mínimo para data de início
         document.getElementById('registrationDate').value = new Date().toLocaleDateString('pt-PT');
         document.getElementById('startDate').min = new Date().toISOString().split('T')[0];
 
@@ -538,20 +665,43 @@
             
             if (limit === 0) {
                 planNote.textContent = '⚠️ Selecione um plano primeiro';
-                dayCheckboxes.forEach(cb => { cb.disabled = true; cb.checked = false; });
+                dayCheckboxes.forEach(cb => { 
+                    cb.disabled = true; 
+                    cb.checked = false; 
+                    cb.closest('.day-item').classList.remove('selected', 'disabled');
+                });
             } else {
-                planNote.textContent = `📌 Máximo de ${limit} dias permitidos para o plano ${selectedPlan.split(' ')[0]}`;
-                dayCheckboxes.forEach(cb => cb.disabled = false);
+                planNote.textContent = `📌 Máx. ${limit} dias para o plano ${selectedPlan.split(' ')[0]}`;
+                dayCheckboxes.forEach(cb => {
+                    cb.disabled = false;
+                    cb.closest('.day-item').classList.remove('disabled');
+                });
             }
 
             let checkedCount = 0;
             dayCheckboxes.forEach(cb => { if(cb.checked) checkedCount++; });
             
+            // Se o usuário mudou para um plano com limite menor, desmarca os excedentes
+            if (checkedCount > limit && limit > 0) {
+                let toUncheck = checkedCount - limit;
+                dayCheckboxes.forEach(cb => {
+                    if (cb.checked && toUncheck > 0) {
+                        cb.checked = false;
+                        cb.closest('.day-item').classList.remove('selected');
+                        toUncheck--;
+                    }
+                });
+                checkedCount = limit;
+            }
+
             dayCheckboxes.forEach(cb => {
-                if (!cb.checked && checkedCount >= limit) {
+                const label = cb.closest('.day-item');
+                if (!cb.checked && checkedCount >= limit && limit > 0) {
                     cb.disabled = true;
+                    label.classList.add('disabled');
                 } else {
                     cb.disabled = false;
+                    label.classList.remove('disabled');
                 }
             });
 
@@ -559,7 +709,12 @@
         }
 
         planSelect.addEventListener('change', updateDaysLogic);
-        dayCheckboxes.forEach(cb => cb.addEventListener('change', updateDaysLogic));
+        dayCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                this.closest('.day-item').classList.toggle('selected', this.checked);
+                updateDaysLogic();
+            });
+        });
         updateDaysLogic();
 
         // 3. Cálculo automático da Duração da Aula
@@ -594,13 +749,18 @@
                 const checked = document.querySelectorAll('.method:checked');
                 methodCountDisplay.textContent = `${checked.length}/2`;
                 
-                if (checked.length >= 2) {
-                    methodCheckboxes.forEach(box => {
-                        if (!box.checked) box.disabled = true;
-                    });
-                } else {
-                    methodCheckboxes.forEach(box => box.disabled = false);
-                }
+                this.closest('.method-item').classList.toggle('selected', this.checked);
+
+                methodCheckboxes.forEach(box => {
+                    const label = box.closest('.method-item');
+                    if (checked.length >= 2 && !box.checked) {
+                        box.disabled = true;
+                        label.classList.add('disabled');
+                    } else {
+                        box.disabled = false;
+                        label.classList.remove('disabled');
+                    }
+                });
             });
         });
 
@@ -612,55 +772,69 @@
         platformSelect.addEventListener('change', function() {
             const platform = this.value;
             if (platform === 'WhatsApp' || platform === 'Chamada telefónica') {
-                contactLabel.textContent = '📱 Telefone / WhatsApp *';
+                contactLabel.innerHTML = 'Telefone / WhatsApp <span class="required">*</span>';
                 contactInput.type = 'tel';
                 contactInput.placeholder = 'Ex: 957 511 281';
             } else if (platform === 'Google Meet' || platform === 'Facebook') {
-                contactLabel.textContent = '📧 E-mail ou Link do Perfil *';
-                contactInput.type = 'email';
-                contactInput.placeholder = 'Ex: aluno@email.com';
+                contactLabel.innerHTML = 'E-mail ou Link do Perfil <span class="required">*</span>';
+                contactInput.type = 'text';
+                contactInput.placeholder = 'Ex: aluno@email.com ou facebook.com/...';
             } else {
+                contactLabel.innerHTML = 'Contacto <span class="required">*</span>';
                 contactInput.type = 'text';
                 contactInput.placeholder = 'Selecione a plataforma acima';
             }
         });
 
-        // 6. Responsável (Apenas para Crianças e Adolescentes)
+        // 6. Responsável (Apenas para Crianças e Adolescentes) com animação
         const ageCategory = document.getElementById('ageCategory');
         const guardianSection = document.getElementById('guardianSection');
-        const guardianTitle = document.getElementById('guardianTitle');
         const guardianInput = document.getElementById('guardian');
 
         ageCategory.addEventListener('change', function() {
             if (this.value.includes('Criança') || this.value.includes('Adolescente')) {
                 guardianSection.classList.remove('hidden');
-                guardianTitle.classList.remove('hidden');
+                guardianSection.classList.add('fade-in');
                 guardianInput.required = true;
             } else {
                 guardianSection.classList.add('hidden');
-                guardianTitle.classList.add('hidden');
+                guardianSection.classList.remove('fade-in');
                 guardianInput.required = false;
                 guardianInput.value = '';
             }
         });
 
-// 7. Submissão e Envio Inteligente (MODIFICADO PARA BANCO DE DADOS)
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+        // 7. Sistema de Notificação Toast
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check-circle' : (type === 'error' ? 'exclamation-circle' : 'info-circle');
+            toast.innerHTML = `<i class="fas fa-${icon}"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('hiding');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // 8. Submissão e Envio Inteligente (COM FORMATAÇÃO "DADO 1 | DADO 2")
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const checkedMethods = document.querySelectorAll('.method:checked');
             if (checkedMethods.length !== 2) {
-                alert('⚠️ Por favor, selecione exatamente 2 métodos de ensino.');
+                showToast('⚠️ Por favor, selecione exatamente 2 métodos de ensino.', 'error');
                 return;
             }
 
             const checkedDays = document.querySelectorAll('input[name="days"]:checked');
             if (checkedDays.length === 0) {
-                alert('⚠️ Por favor, selecione pelo menos 1 dia disponível.');
+                showToast('⚠️ Por favor, selecione pelo menos 1 dia disponível.', 'error');
                 return;
             }
 
-            // Coletar todos os dados do formulário (lida corretamente com checkboxes múltiplos)
+            // Coletar todos os dados do formulário
             const formData = new FormData(this);
             const dadosObj = {};
             formData.forEach((value, key) => {
@@ -672,72 +846,74 @@
                 }
             });
 
-            // 1. Salvar no Banco de Dados (Python/Flask)
-            const submitBtn = document.getElementById('submitBtn');
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Salvando no sistema...';
-            submitBtn.disabled = true;
+            // Formatação compacta "Dado 1 | Dado 2"
+            const nomeCompleto = `${dadosObj.fullname} | ${dadosObj.surname}`;
+            const perfilAluno = `${dadosObj.ageCategory} | ${dadosObj.educationLevel}`;
+            const horarioInfo = `${dadosObj.prefStart} às ${dadosObj.prefEnd} | Duração: ${dadosObj.duration}`;
+            const diasSelecionados = Array.isArray(dadosObj.days) ? dadosObj.days.join(', ') : dadosObj.days;
+            const metodosSelecionados = Array.isArray(dadosObj.method) ? dadosObj.method.join(' e ') : dadosObj.method;
+            const valorFormatado = `${dadosObj.paymentAmount} ${dadosObj.currency}`;
 
-            try {
-                const response = await fetch('/salvar_inscricao', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dadosObj)
-                });
-                const result = await response.json();
-                
-                if (result.status !== 'sucesso') {
-                    alert('❌ Erro ao salvar: ' + result.mensagem);
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                    return;
-                }
-            } catch (error) {
-                console.error(error);
-                alert('❌ Erro de conexão com o servidor. Verifique se o Python está rodando.');
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-                return;
-            }
-
-            // 2. Gerar texto para WhatsApp/Email (Lógica original mantida)
+            // Gerar texto formatado para WhatsApp/Email
             let txtData = `📋 *NOVA INSCRIÇÃO - JA TA KI*\n\n`;
-            txtData += `👤 *DADOS DO ALUNO*\n• Nome: ${dadosObj.fullname} ${dadosObj.surname}\n• Gênero: ${dadosObj.gender}\n• Idade: ${dadosObj.ageCategory}\n• Nível: ${dadosObj.educationLevel}\n• Curso: ${dadosObj.course}\n\n`;
-            txtData += `🎯 *OBJETIVO*\n• Objetivo: ${dadosObj.formationObjective}\n• Nível Atual: ${dadosObj.currentLevel}\n\n`;
-            txtData += `💳 *PLANO & HORÁRIO*\n• Plano: ${dadosObj.plan}\n• Dias: ${Array.isArray(dadosObj.days) ? dadosObj.days.join(', ') : dadosObj.days}\n• Horário Pref: ${dadosObj.prefStart} às ${dadosObj.prefEnd}\n`;
-            if(dadosObj.secStart) txtData += `• 2º Horário: ${dadosObj.secStart} às ${dadosObj.secEnd}\n`;
-            txtData += `\n⏱️ *AULAS*\n• Duração: ${dadosObj.duration}\n• Frequência: ${dadosObj.classesPerWeek}\n\n`;
-            txtData += `🖥️ *PLATAFORMA & MÉTODOS*\n• Plataforma: ${dadosObj.platform}\n• Métodos: ${Array.isArray(dadosObj.method) ? dadosObj.method.join(' e ') : dadosObj.method}\n• Contacto: ${dadosObj.contact}\n\n`;
-            txtData += `📆 *MATRÍCULA*\n• Data Inscrição: ${dadosObj.registrationDate}\n• Data Início: ${dadosObj.startDate}\n\n`;
-            txtData += `💰 *PAGAMENTO*\n• Forma: ${dadosObj.paymentMethod}\n• Periodicidade: ${dadosObj.paymentTime}\n• Valor: ${dadosObj.paymentAmount} ${dadosObj.currency}\n\n`;
+            txtData += `👤 *ALUNO*\n• Nome: ${nomeCompleto}\n• Gênero: ${dadosObj.gender}\n• Perfil: ${perfilAluno}\n• Curso: ${dadosObj.course}\n\n`;
+            txtData += `🎯 *OBJETIVO*\n• Meta: ${dadosObj.formationObjective} | Nível: ${dadosObj.currentLevel}\n\n`;
+            txtData += `💳 *PLANO & HORÁRIO*\n• Plano: ${dadosObj.plan}\n• Dias: ${diasSelecionados}\n• Horário: ${horarioInfo}\n`;
+            if(dadosObj.secStart) txtData += `• Alternativa: ${dadosObj.secStart} às ${dadosObj.secEnd}\n`;
+            txtData += `\n🖥️ *PLATAFORMA & MÉTODOS*\n• Via: ${dadosObj.platform} | Contacto: ${dadosObj.contact}\n• Métodos: ${metodosSelecionados}\n\n`;
+            txtData += `📆 *MATRÍCULA*\n• Inscrição: ${dadosObj.registrationDate} | Início: ${dadosObj.startDate}\n\n`;
+            txtData += `💰 *PAGAMENTO*\n• Forma: ${dadosObj.paymentMethod} | Periodicidade: ${dadosObj.paymentTime}\n• Valor: ${valorFormatado}\n\n`;
             
             if (dadosObj.guardian) {
                 txtData += `👨‍👩‍👧 *RESPONSÁVEL*\n• Nome: ${dadosObj.guardian}\n\n`;
             }
 
-            txtData += `📝 *INFO ADICIONAL*\n`;
-            if(dadosObj.observations) txtData += `• Obs: ${dadosObj.observations}\n`;
+            txtData += `📝 *OBSERVAÇÕES*\n`;
+            if(dadosObj.observations) txtData += `• Info: ${dadosObj.observations}\n`;
             if(dadosObj.needs) txtData += `• Dificuldades: ${dadosObj.needs}\n`;
             txtData += `• Origem: ${dadosObj.referral || 'Não informado'}\n`;
 
             const platform = dadosObj.platform;
-            const phoneNando = "244957511281";
+            const phoneNando = "244957511281"; // Ajuste o número conforme necessário
             const emailNando = "nandokissanga@gmail.com";
             const encodedText = encodeURIComponent(txtData);
 
-            alert('✅ Inscrição salva no banco de dados com sucesso! Redirecionando para envio...');
+            // Efeito de carregamento no botão
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading"></span> Processando...';
+            submitBtn.disabled = true;
 
-            if (platform === 'WhatsApp' || platform === 'Chamada telefónica') {
-                window.open(`https://wa.me/${phoneNando}?text=${encodedText}`, '_blank');
-            } else {
-                window.location.href = `mailto:${emailNando}?subject=Nova Inscrição - Ja Ta Ki&body=${encodedText}`;
-            }
-            
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
+            // Redirecionar diretamente para WhatsApp ou E-mail
+            setTimeout(() => {
+                if (platform === 'WhatsApp' || platform === 'Chamada telefónica') {
+                    window.open(`https://wa.me/${phoneNando}?text=${encodedText}`, '_blank');
+                } else {
+                    window.location.href = `mailto:${emailNando}?subject=Nova Inscrição - Ja Ta Ki&body=${encodedText}`;
+                }
+                
+                showToast('✅ Inscrição gerada com sucesso! O aplicativo de envio será aberto.', 'success');
+                
+                // Limpar formulário e resetar campos automáticos
+                this.reset();
+                document.getElementById('registrationDate').value = new Date().toLocaleDateString('pt-PT');
+                updateDaysLogic(); 
+                methodCountDisplay.textContent = '0/2';
+                
+                // Disparar eventos para restaurar estado visual inicial
+                ageCategory.dispatchEvent(new Event('change'));
+                platformSelect.dispatchEvent(new Event('change'));
+                
+                // Restaurar botão
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }, 1500); // Pequeno delay para o usuário ver o loading
         });
     });
 </script>
 
 </body>
 </html>
+
+
+
