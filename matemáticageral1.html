@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="pt-AO" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática Elementar Intensivo - Nando Kissanga</title>
+    <style>
+        :root {
+            --primary: #ce1126;     /* vermelho da bandeira */
+            --primary-dark: #8b0000;
+            --secondary: #1a1a1a;   /* preto */
+            --accent: #ffcd00;      /* amarelo */
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --bg: #faf7f2;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #5a5a5a;
+            --border: #e8e2d5;
+            --shadow: 0 2px 10px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+            --radius: 14px;
+            --transition: all 0.25s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary: #ff5252;
+            --accent: #ffd54f;
+            --success: #4db6ac;
+            --bg: #121212;
+            --card: #1c1c1c;
+            --text: #f0ece2;
+            --text-light: #a8a29e;
+            --border: #2e2e2e;
+            --shadow: 0 2px 10px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 12px;
+            transition: var(--transition);
+            min-height: 100vh;
+            font-size: 15px;
+        }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%; z-index: 1000;
+        }
+
+        .theme-toggle {
+            position: fixed; top: 12px; right: 12px;
+            background: var(--card); border: 1.5px solid var(--border);
+            color: var(--text); width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; font-size: 1.1em;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 100; box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .theme-toggle:hover { transform: rotate(20deg); }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 24px 22px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        header {
+            text-align: center;
+            padding: 12px 0 24px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 24px;
+        }
+        header .badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 3px 12px;
+            border-radius: 16px;
+            font-size: 0.72em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+        header h1 {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        header h1 .emoji { font-size: 1em; }
+        header .subtitle {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+        header .greeting {
+            margin-top: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95em;
+        }
+
+        .toc {
+            background: linear-gradient(135deg, rgba(206, 17, 38, 0.04), rgba(255, 205, 0, 0.04));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            margin-bottom: 26px;
+        }
+        .toc h3 {
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: toc;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
+        .toc li { counter-increment: toc; }
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: block;
+            font-size: 0.9em;
+            transition: var(--transition);
+        }
+        .toc a::before {
+            content: counter(toc) ".";
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        .toc a:hover {
+            background: var(--primary);
+            color: white;
+            padding-left: 14px;
+        }
+
+        h2 {
+            font-size: 1.35em;
+            font-weight: 700;
+            margin: 28px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+        h2 .icon {
+            background: var(--secondary);
+            color: var(--accent);
+            width: 34px; height: 34px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95em;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        h3 {
+            color: var(--text);
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 16px 18px;
+            margin: 14px 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+        .card.green { border-left-color: var(--success); }
+        .card.yellow { border-left-color: var(--accent); }
+        .card.black { border-left-color: var(--secondary); }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(206,17,38,0.04), rgba(255,205,0,0.04));
+            border: 1.5px solid var(--border);
+            padding: 16px 18px;
+            border-radius: var(--radius);
+            margin: 14px 0;
+        }
+
+        .result {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--success), #20b2aa);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+
+        .formula-block {
+            background: var(--bg);
+            border: 1.5px dashed var(--primary);
+            padding: 14px;
+            border-radius: var(--radius);
+            margin: 12px 0;
+            text-align: center;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95em;
+        }
+        [data-theme="dark"] .formula-block {
+            background: #0a0a0a;
+        }
+
+        .rule-tag {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8em;
+            margin-top: 6px;
+        }
+
+        .exercise {
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 14px 0;
+            transition: var(--transition);
+        }
+        .exercise:hover { border-color: var(--primary); }
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.98em;
+        }
+        .exercise-number {
+            background: var(--secondary);
+            color: var(--accent);
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+        .exercise-question {
+            margin-bottom: 12px;
+            font-size: 0.93em;
+            line-height: 1.6;
+        }
+        .answer-input-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .answer-input {
+            flex: 1 1 120px;
+            min-width: 0;
+            padding: 9px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9em;
+            background: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+        }
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn:hover { background: var(--primary-dark); }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.88em;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct {
+            background: rgba(42, 157, 143, 0.12);
+            border-left: 3px solid var(--success);
+            color: var(--success);
+        }
+        .feedback.incorrect {
+            background: rgba(206, 17, 38, 0.10);
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 24px 20px;
+            border-radius: var(--radius);
+            margin-top: 30px;
+            text-align: center;
+        }
+        .footer h3 { color: var(--accent); margin-bottom: 10px; font-size: 1.05em; }
+        .footer p { font-size: 0.9em; margin: 6px 0; color: #d4d4d4; }
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin: 14px 0;
+            text-align: left;
+        }
+        .contact-item {
+            background: rgba(255,255,255,0.06);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88em;
+        }
+        .contact-item strong { color: var(--accent); }
+        .iban-box {
+            background: rgba(0,0,0,0.4);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92em;
+            letter-spacing: 1px;
+            border: 1px dashed var(--accent);
+            margin-top: 10px;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 16px; right: 16px;
+            background: var(--primary);
+            color: white;
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: var(--shadow-lg);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+
+        @media (max-width: 480px) {
+            body { padding: 8px; font-size: 14px; }
+            .container { padding: 18px 14px; border-radius: 10px; }
+            header h1 { font-size: 1.5em; }
+            h2 { font-size: 1.15em; margin-top: 22px; }
+            h2 .icon { width: 28px; height: 28px; font-size: 0.85em; }
+            .card, .example-box, .exercise { padding: 14px; }
+            .formula-block { padding: 10px; font-size: 0.9em; }
+            .btn { padding: 8px 12px; font-size: 0.82em; }
+            .answer-input { flex: 1 1 100%; }
+            .theme-toggle { width: 36px; height: 36px; font-size: 1em; }
+            .footer { padding: 18px 14px; }
+        }
+
+        @media (min-width: 481px) and (max-width: 640px) {
+            .toc ol { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (min-width: 641px) {
+            .toc ol { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar"></div>
+    <button class="theme-toggle" aria-label="Alternar tema">🌙</button>
+    
+    <div class="container">
+        <header>
+            <span class="badge">MATEMÁTICA ELEMENTAR INTENSIVO</span>
+            <h1><span class="emoji">📐</span> Guia Completo para Iniciantes</h1>
+            <p class="subtitle">Do básico ao cálculo: conceitos, exemplos e exercícios interativos.</p>
+            <p class="greeting">Bem-vindo(a) à sua jornada de aprendizado! 🇦🇴</p>
+        </header>
+
+        <nav class="toc">
+            <h3>📑 Sumário do Conteúdo</h3>
+            <ol>
+                <li><a href="#topico1">Expressões Numéricas</a></li>
+                <li><a href="#topico2">Números Decimais e Frações</a></li>
+                <li><a href="#topico3">Potência, Radiciação e Logaritmo</a></li>
+                <li><a href="#topico4">Polinômios</a></li>
+                <li><a href="#topico5">Equação e Inequação</a></li>
+                <li><a href="#topico6">Geometria Plana e dos Sólidos</a></li>
+                <li><a href="#topico7">Funções Trigonométricas</a></li>
+                <li><a href="#topico8">Álgebra Linear e Geometria Analítica</a></li>
+                <li><a href="#topico9">Números Complexos</a></li>
+                <li><a href="#topico10">Progressões (PA e PG)</a></li>
+                <li><a href="#topico11">Conjunto e Lógica</a></li>
+                <li><a href="#topico12">Estatística e Probabilidade</a></li>
+                <li><a href="#topico13">Funções e Limites</a></li>
+                <li><a href="#topico14">Derivadas e Diferencial</a></li>
+                <li><a href="#topico15">Integrais Indefinidas e Definidas</a></li>
+            </ol>
+        </nav>
+
+        <!-- Tópico 1 -->
+        <section id="topico1">
+            <h2><span class="icon">1</span> Expressões Numéricas</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p>Uma expressão numérica é uma sequência de números e operações. Seguimos a <strong>hierarquia das operações</strong> (PEMDAS):</p>
+                <ol style="margin-left: 20px; margin-top: 8px;">
+                    <li><strong>P</strong>arênteses, colchetes e chaves.</li>
+                    <li><strong>E</strong>xpoentes (potências e raízes).</li>
+                    <li><strong>M</strong>ultiplicação e <strong>D</strong>ivisão (da esquerda para a direita).</li>
+                    <li><strong>A</strong>dição e <strong>S</strong>ubtração (da esquerda para a direita).</li>
+                </ol>
+                <span class="rule-tag">Dica: (+) com (+) = + | (-) com (-) = + | (+) com (-) = -</span>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Calcule: <strong>10 + 2 × (6 - 4)</strong></p>
+                <p>1. Parênteses: (6 - 4) = 2</p>
+                <p>2. Multiplicação: 2 × 2 = 4</p>
+                <p>3. Adição: 10 + 4 = 14</p>
+                <div class="result">✅ Resultado: 14</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">1</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é o resultado da expressão <strong>5 + 3 × 2</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input1" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(1, ['11'])">Verificar</button>
+                </div>
+                <div id="feedback1" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 2 -->
+        <section id="topico2">
+            <h2><span class="icon">2</span> Números Decimais e Frações</h2>
+            <div class="card green">
+                <h3>📚 Conceito</h3>
+                <p><strong>Frações</strong> representam partes de um todo (numerador/denominador). <strong>Decimais</strong> são frações com denominador 10, 100, 1000... Para converter, basta dividir o numerador pelo denominador. <strong>Porcentagem</strong> é uma fração com denominador 100.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Quanto é 20% de 150?</p>
+                <p>20% = 20/100 = 0,2</p>
+                <p>0,2 × 150 = 30</p>
+                <div class="result">✅ Resultado: 30</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">2</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Quanto é <strong>10%</strong> de <strong>200</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input2" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(2, ['20'])">Verificar</button>
+                </div>
+                <div id="feedback2" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 3 -->
+        <section id="topico3">
+            <h2><span class="icon">3</span> Potência, Radiciação e Logaritmo</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p><strong>Potência:</strong> Multiplicação repetida (aⁿ). <strong>Radiciação:</strong> Operação inversa da potência (√a). <strong>Logaritmo:</strong> O expoente que a base deve ter para resultar no logaritmando (logₐ(b) = c ↔ aᶜ = b).</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>log₂(8) = ?</p>
+                <p>Pergunta: 2 elevado a qual número resulta em 8?</p>
+                <p>2³ = 8, logo log₂(8) = 3.</p>
+                <div class="result">✅ Resultado: 3</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">3</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é o valor de <strong>3 ao quadrado</strong> (3²)? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input3" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(3, ['9'])">Verificar</button>
+                </div>
+                <div id="feedback3" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 4 -->
+        <section id="topico4">
+            <h2><span class="icon">4</span> Polinômios</h2>
+            <div class="card yellow">
+                <h3>📚 Conceito</h3>
+                <p>Expressões algébricas com variáveis e coeficientes. O <strong>grau</strong> é o maior expoente da variável. <strong>Produtos notáveis</strong> são multiplicações frequentes, como (a+b)² = a² + 2ab + b².</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Qual o grau de P(x) = 4x³ + 2x - 1?</p>
+                <p>O maior expoente de x é 3.</p>
+                <div class="result">✅ Grau: 3</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">4</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é o <strong>grau</strong> do polinômio <strong>5x⁴ + 2x² + 1</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input4" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(4, ['4'])">Verificar</button>
+                </div>
+                <div id="feedback4" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 5 -->
+        <section id="topico5">
+            <h2><span class="icon">5</span> Equação e Inequação</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p><strong>Equação:</strong> Igualdade com incógnita (ex: 2x + 4 = 10). <strong>Inequação:</strong> Desigualdade (>, <, ≥, ≤). No 2º grau (ax²+bx+c=0), usamos a fórmula de Bhaskara ou fatoração.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Resolva: 3x - 6 = 0</p>
+                <p>3x = 6 → x = 6/3 → x = 2</p>
+                <div class="result">✅ Raiz: x = 2</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">5</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é a raiz da equação <strong>4x - 12 = 0</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input5" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(5, ['3'])">Verificar</button>
+                </div>
+                <div id="feedback5" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 6 -->
+        <section id="topico6">
+            <h2><span class="icon">6</span> Geometria Plana e dos Sólidos</h2>
+            <div class="card green">
+                <h3>📚 Conceito</h3>
+                <p>Estuda formas, áreas, perímetros e volumes. <strong>Teorema de Tales:</strong> Feixes de retas paralelas cortadas por transversais geram segmentos proporcionais. Sólidos: Cubo (V = L³), Cilindro (V = π·r²·h).</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Área de um quadrado de lado 5 cm:</p>
+                <p>A = L² = 5² = 25 cm²</p>
+                <div class="result">✅ Área: 25</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">6</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é a área de um quadrado de <strong>lado 4</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input6" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(6, ['16'])">Verificar</button>
+                </div>
+                <div id="feedback6" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 7 -->
+        <section id="topico7">
+            <h2><span class="icon">7</span> Funções Trigonométricas</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p>Relacionam ângulos e lados de triângulos retângulos:</p>
+                <ul style="margin-left: 20px; margin-top: 8px;">
+                    <li><strong>Seno (sen):</strong> Cateto Oposto / Hipotenusa</li>
+                    <li><strong>Cosseno (cos):</strong> Cateto Adjacente / Hipotenusa</li>
+                    <li><strong>Tangente (tg):</strong> Cateto Oposto / Cateto Adjacente</li>
+                </ul>
+            </div>
+            <svg viewBox="0 0 200 150" style="max-width: 200px; margin: 15px auto; display: block;">
+                <polygon points="20,130 180,130 20,30" fill="rgba(206, 17, 38, 0.1)" stroke="#ce1126" stroke-width="3"/>
+                <text x="90" y="145" font-size="12" fill="var(--text)">Cateto Adjacente</text>
+                <text x="5" y="85" font-size="12" fill="var(--text)" transform="rotate(-90, 10, 85)">Oposto</text>
+                <text x="100" y="70" font-size="12" fill="var(--text)">Hipotenusa</text>
+                <rect x="20" y="110" width="20" height="20" fill="none" stroke="#ce1126" stroke-width="2"/>
+            </svg>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>sen(30°) = 1/2 = 0,5</p>
+                <div class="result">✅ Valor: 1/2</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">7</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">O seno de 30 graus é igual a 1 dividido por... (digite o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input7" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(7, ['2'])">Verificar</button>
+                </div>
+                <div id="feedback7" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 8 -->
+        <section id="topico8">
+            <h2><span class="icon">8</span> Álgebra Linear e Geometria Analítica</h2>
+            <div class="card yellow">
+                <h3>📚 Conceito</h3>
+                <p><strong>Matrizes:</strong> Tabelas de números organizados em linhas e colunas. <strong>Vetores:</strong> Grandeza com direção, sentido e módulo. <strong>Geometria Analítica:</strong> Estuda pontos, retas e circunferências no plano cartesiano.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Uma matriz 2x3 tem 2 linhas e 3 colunas.</p>
+                <div class="result">✅ Dimensão: 2x3</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">8</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Quantas <strong>linhas</strong> tem uma matriz <strong>3x2</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input8" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(8, ['3'])">Verificar</button>
+                </div>
+                <div id="feedback8" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 9 -->
+        <section id="topico9">
+            <h2><span class="icon">9</span> Números Complexos</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p>Números da forma <strong>z = a + bi</strong>, onde "a" é a parte real, "b" é a parte imaginária e <strong>i</strong> é a unidade imaginária, definida pela propriedade fundamental: <strong>i² = -1</strong>.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Calcule: i⁴</p>
+                <p>i⁴ = (i²)² = (-1)² = 1</p>
+                <div class="result">✅ Resultado: 1</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">9</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Complete: i ao quadrado é igual a menos... (digite o número que falta)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input9" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(9, ['1'])">Verificar</button>
+                </div>
+                <div id="feedback9" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 10 -->
+        <section id="topico10">
+            <h2><span class="icon">10</span> Progressões (PA e PG)</h2>
+            <div class="card green">
+                <h3>📚 Conceito</h3>
+                <p><strong>PA (Aritmética):</strong> Soma constante entre termos (ex: 2, 4, 6...). Razão = r. <strong>PG (Geométrica):</strong> Multiplicação constante (ex: 2, 4, 8...). Razão = q.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>PA: (5, 10, 15, ...)</p>
+                <p>Razão (r) = 10 - 5 = 5</p>
+                <div class="result">✅ Próximo termo: 20</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">10</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é o próximo número da PA: <strong>5, 10, 15, ...</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input10" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(10, ['20'])">Verificar</button>
+                </div>
+                <div id="feedback10" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 11 -->
+        <section id="topico11">
+            <h2><span class="icon">11</span> Conjunto e Lógica</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p><strong>União (∪):</strong> Junta todos os elementos. <strong>Interseção (∩):</strong> Elementos comuns. <strong>Lógica:</strong> Proposições (V ou F), conectivos (e, ou, se...então) e tabelas-verdade.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>A = {1, 2}, B = {2, 3}</p>
+                <p>A ∩ B = {2} (elemento comum)</p>
+                <div class="result">✅ Interseção: {2}</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">11</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual operação de conjuntos representa os elementos <strong>comuns</strong> a A e B? (digite: intersecao ou uniao)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input11" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(11, ['intersecao'])">Verificar</button>
+                </div>
+                <div id="feedback11" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 12 -->
+        <section id="topico12">
+            <h2><span class="icon">12</span> Estatística e Probabilidade</h2>
+            <div class="card yellow">
+                <h3>📚 Conceito</h3>
+                <p><strong>Média:</strong> Soma dos valores dividida pela quantidade. <strong>Mediana:</strong> Valor central. <strong>Moda:</strong> Valor mais frequente. <strong>Probabilidade:</strong> Casos favoráveis / Casos totais.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Média de 10, 20, 30:</p>
+                <p>(10 + 20 + 30) / 3 = 60 / 3 = 20</p>
+                <div class="result">✅ Média: 20</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">12</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é a <strong>média</strong> aritmética de <strong>10, 20 e 30</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input12" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(12, ['20'])">Verificar</button>
+                </div>
+                <div id="feedback12" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 13 -->
+        <section id="topico13">
+            <h2><span class="icon">13</span> Funções e Limites</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p><strong>Função:</strong> Relação onde cada entrada (x) tem uma única saída (y). <strong>Domínio:</strong> Valores possíveis de x. <strong>Limite:</strong> Valor que a função se aproxima quando x tende a um número.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Se f(x) = 2x + 1, qual é f(3)?</p>
+                <p>f(3) = 2(3) + 1 = 6 + 1 = 7</p>
+                <div class="result">✅ Resultado: 7</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">13</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Se <strong>f(x) = 2x</strong>, qual é o valor de <strong>f(5)</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input13" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(13, ['10'])">Verificar</button>
+                </div>
+                <div id="feedback13" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 14 -->
+        <section id="topico14">
+            <h2><span class="icon">14</span> Derivadas e Diferencial</h2>
+            <div class="card green">
+                <h3>📚 Conceito</h3>
+                <p>A derivada mede a <strong>taxa de variação</strong> de uma função (inclinação da reta tangente). Regra da potência: a derivada de xⁿ é n·xⁿ⁻¹. A derivada de uma constante é zero.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Derivada de f(x) = x³</p>
+                <p>f'(x) = 3x²</p>
+                <div class="result">✅ Derivada: 3x²</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">14</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">Qual é a derivada de <strong>f(x) = 7x</strong>? (Digite apenas o número)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input14" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(14, ['7'])">Verificar</button>
+                </div>
+                <div id="feedback14" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Tópico 15 -->
+        <section id="topico15">
+            <h2><span class="icon">15</span> Integrais Indefinidas e Definidas</h2>
+            <div class="card">
+                <h3>📚 Conceito</h3>
+                <p>A integral é a <strong>operação inversa da derivada</strong> (primitiva). A integral definida calcula a <strong>área sob a curva</strong> de uma função entre dois pontos, conforme o Teorema Fundamental do Cálculo.</p>
+            </div>
+            <div class="example-box">
+                <h3>💡 Exemplo</h3>
+                <p>Integral de 2x dx</p>
+                <p>∫ 2x dx = x² + C</p>
+                <div class="result">✅ Primitiva: x² + C</div>
+            </div>
+            <div class="exercise" id="exercicios">
+                <div class="exercise-header">
+                    <span class="exercise-number">15</span>
+                    <span>Exercício Prático</span>
+                </div>
+                <div class="exercise-question">A integral é a operação inversa da... (digite: derivada ou soma)</div>
+                <div class="answer-input-group">
+                    <input type="text" id="input15" class="answer-input" placeholder="Sua resposta...">
+                    <button class="btn" onclick="checkAnswer(15, ['derivada'])">Verificar</button>
+                </div>
+                <div id="feedback15" class="feedback"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <footer class="footer">
+            <h3>🙏 Agradecimento e Apoio</h3>
+            <p>Qualquer dúvida, estou à disposição para ajudar no seu aprendizado!</p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <strong>👨‍🏫 Autor:</strong> Nando Kissanga
+                </div>
+                <div class="contact-item">
+                    <strong>📧 Email:</strong> <a href="mailto:nandokissanga@gmail.com">nandokissanga@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>📱 WhatsApp:</strong> <a href="https://wa.me/244957511281">+244 957 511 281</a>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-weight: 600; color: var(--accent);">Apoie este projeto educacional com um donativo:</p>
+            <div class="iban-box">
+                IBAN: AO06 0055 0000 6101 3844 1012 4
+            </div>
+            <p style="margin-top: 15px; font-size: 0.8em; color: #888;">© 2026 Nando Kissanga. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" aria-label="Voltar ao topo">↑</button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Progress Bar & Back to Top
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + '%';
+            
+            const backToTop = document.querySelector('.back-to-top');
+            if (winScroll > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // EXERCÍCIOS
+        function normalize(str) {
+            return str.toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^\w\s\u4e00-\u9fff]/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function checkAnswer(num, validAnswers) {
+            const input = document.getElementById('input' + num);
+            const feedback = document.getElementById('feedback' + num);
+            const userAnswer = normalize(input.value);
+            const isValid = validAnswers.some(ans => normalize(ans) === userAnswer);
+
+            feedback.classList.remove('show', 'correct', 'incorrect');
+            void feedback.offsetWidth; // Força reflow para reiniciar animação
+            feedback.classList.add('show');
+
+            if (isValid) {
+                feedback.classList.add('correct');
+                feedback.textContent = '✅ Correto! Muito bem! 很好 (hěn hǎo)!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = '❌ Tente novamente. Dica: reveja a matéria e as definições acima.';
+            }
+        }
+
+        // Permitir verificação ao pressionar Enter
+        document.querySelectorAll('.answer-input').forEach((input, idx) => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const num = idx + 1;
+                    const btns = document.querySelectorAll('.exercise .btn');
+                    if (btns[idx]) btns[idx].click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
